@@ -1,0 +1,3 @@
+{
+	"dbUrl" : "mongodb://localhost:27017/urban_farming" // looks like mongodb://<user>:<pass>@mongo.onmodulus.net:27017/Mikha4ot
+}
