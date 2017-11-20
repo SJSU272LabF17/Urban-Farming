@@ -1,0 +1,7 @@
+.page-wrapper {
+  height: 100%;
+}
+
+.page-wrapper .inner-page-wrapper {
+  padding-top: 50px;
+}

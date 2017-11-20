@@ -1,0 +1,94 @@
+.header-wrapper {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 50px;
+  z-index: 1050;
+  padding: 0px 15px;
+  background: #333;
+  border-bottom: 2px solid rgba(255,255,255,0.2);
+}
+
+.header-wrapper .logo-container {
+  padding: 10px 0px;
+  float: left;
+}
+
+.header-wrapper .logo-container a {
+  color: #fff;
+  background: none;
+  outline: none;
+  text-decoration: none;
+}
+
+.header-wrapper .logo-container a img {
+  height: 30px;
+}
+
+.header-wrapper .nav-container {
+  float: left;
+  padding: 0px 15px;
+}
+
+.header-wrapper .nav-container .nav {
+  list-style: none;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  line-height: 50px;
+}
+
+.header-wrapper .nav-container .nav .nav-item {
+  padding: 0px 15px;
+  outline: none;
+}
+
+.header-wrapper .nav-container .nav .nav-item a {
+  padding: 0px;
+  color: #fff;
+  background: none;
+  outline: none;
+  text-decoration: none;
+}
+
+.header-wrapper .nav-container .nav .nav-item a:hover, .header-wrapper .nav-container .nav .nav-item a:focus {
+  background: none;
+  outline: none;
+  text-decoration: none;
+}
+
+.header-wrapper .nav-container .nav .nav-item a.active:after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: #fff;
+}
+
+.header-wrapper .menu-container {
+  float: right;
+  text-align: right;
+  line-height: 50px;
+}
+
+.header-wrapper .menu-container a {
+  cursor: pointer;
+  color: #fff;
+  background: none;
+  outline: none;
+  text-decoration: none;
+}
+
+.header-wrapper .menu-container a:hover, .header-wrapper .menu-container a:focus {
+  background: none;
+  outline: none;
+  text-decoration: none;
+}
+
+.header-wrapper .menu-container a i {
+  margin-right: 10px;
+}

@@ -1,1 +1,59 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  background-color: #fff;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.btn-uf {
+  color: #fff;
+  background: #ff690f;
+  background-image: linear-gradient(135deg,#ff690f 0%,#ff4f3a 100%);
+  border: none;
+  text-decoration: none;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.04);
+  border-radius: 0px;
+  height: 34px;
+}
+
+.btn-uf:hover {
+  background-image: linear-gradient(135deg,#db5200 0%,#ff2107 100%);
+}
+
+.btn-uf:active {
+  background-image: linear-gradient(135deg,#db5200 0%,#ff2107 100%);
+  background: #d15500;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+.btn-uf:focus {
+  outline: none;
+}
+
+.btn-uf:active:focus {
+  outline: none;
+  background-image: linear-gradient(135deg,#db5200 0%,#ff2107 100%);
+  background: #d15500;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+input, select {
+  box-shadow: none !important;
+  border-radius: 0px !important;
+}
+
+input:focus, select:focus {
+  border-color: #ff690f !important;
+}
+
+.error {
+  color: #e82110;
+  font-size: 12px;
+  float: left;
+}
+
+
+
