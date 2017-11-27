@@ -9,7 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
-import { EducationComponent } from './components/education/education.component';
+import { FaqComponent } from './components/faq/faq.component';
 
 
 @NgModule({
@@ -19,7 +19,7 @@ import { EducationComponent } from './components/education/education.component';
     LandingComponent,
     AboutUsComponent,
     ContactUsComponent,
-    EducationComponent
+    FaqComponent
   ],
   imports: [
     BrowserModule,
