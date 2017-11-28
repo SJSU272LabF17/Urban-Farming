@@ -29,6 +29,7 @@
 </div>
 
 <app-modal [blocking]='true' modalId="auth-modal" class="auth-modal">
+  <span class="close-button" (click)="closeAuthModal()"><i class="fa fa-times" aria-hidden="true"></i></span>
   <div *ngIf="isSigninForm" class="signin-form">
     <div class="form-body">
       <div class="form-group">

@@ -102,6 +102,14 @@
   padding: 60px 60px 30px 60px !important;
 }
 
+.auth-modal ::ng-deep .modal .body .close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #7b7b7b;
+  cursor: pointer;
+}
+
 .auth-modal ::ng-deep .modal .body .form-body {
   margin-bottom: 60px;
 }
