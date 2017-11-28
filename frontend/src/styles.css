@@ -10,8 +10,7 @@ body {
 
 .btn-uf {
   color: #fff;
-  background: #ff690f;
-  background-image: linear-gradient(135deg,#ff690f 0%,#ff4f3a 100%);
+  background: #668226;
   border: none;
   text-decoration: none;
   box-shadow: 0 5px 8px 0 rgba(0,0,0,0.04);
@@ -20,33 +19,28 @@ body {
 }
 
 .btn-uf:hover {
-  background-image: linear-gradient(135deg,#db5200 0%,#ff2107 100%);
+  background: #668226;
 }
 
 .btn-uf:active {
-  background-image: linear-gradient(135deg,#db5200 0%,#ff2107 100%);
-  background: #d15500;
+  background: #668226;
   box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
 }
 
 .btn-uf:focus {
   outline: none;
+  background: #668226;
 }
 
 .btn-uf:active:focus {
   outline: none;
-  background-image: linear-gradient(135deg,#db5200 0%,#ff2107 100%);
-  background: #d15500;
+  background: #4b6119;
   box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
 }
 
 input, select {
   box-shadow: none !important;
   border-radius: 0px !important;
-}
-
-input:focus, select:focus {
-  border-color: #ff690f !important;
 }
 
 .error {
