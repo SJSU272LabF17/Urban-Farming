@@ -7,6 +7,7 @@
   body {font-family: "Lato", sans-serif}
   .mySlides {display: none}
 </style>
+
 <div class="contact-us-page">
   <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="contact">
     <h2 class="w3-wide w3-center">CONTACT</h2>
@@ -33,5 +34,26 @@
       </div>
     </div>
   </div>
-</div>
 
+
+  <!-- Add Google Maps -->
+  <div id="googleMap" style="height:400px;" class="w3-grayscale-max"></div>
+  <script>
+    function myMap() {
+      myCenter=new google.maps.LatLng(37.334202,-121.882536);
+      var mapOptions= {
+        center:myCenter,
+        zoom:12, scrollwheel: false, draggable: false,
+        mapTypeId:google.maps.MapTypeId.ROADMAP
+      };
+      var map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
+
+      var marker = new google.maps.Marker({
+        position: myCenter,
+      });
+      marker.setMap(map);
+    }
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxFOcfD44xdsO0zRhust7lFMKvV5AdfkM&callback=myMap"
+          type="text/javascript"></script>
+</div>
