@@ -4,6 +4,7 @@
 
 .landing-page .banner-section {
   height: 100vh;
+  position: relative;
 }
 
 .landing-page .banner-section img {
@@ -12,11 +13,57 @@
 }
 
 .landing-page .banner-section .banner-overlay {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
 
+.landing-page .banner-section .banner-overlay:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.55);
+}
+
+.landing-page .banner-section .banner-overlay .title-text {
+  max-width: 768px;
+  margin: 0px auto;
+  right: 0px;
+  left: 0px;
+  position: absolute;
+  top: 25%;
+  transform: translateY(-50%);
+}
+
+.landing-page .banner-section .banner-overlay .title-text p {
+  font-size: 36px;
+  color: #fff;
+  line-height: 72px;
+  margin: 0px;
 }
 
 .landing-page .banner-section .banner-overlay .buttons {
+  display: flex;
+  justify-content: space-around;
+  max-width: 768px;
+  margin: 0px auto;
+  right: 0px;
+  left: 0px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
+.landing-page .banner-section .banner-overlay .buttons .btn-uf {
+  font-size: 28px;
+  height: auto;
+  padding: 15px 60px;
 }
 
 .landing-page .content-section {

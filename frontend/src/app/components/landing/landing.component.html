@@ -1,13 +1,17 @@
 <div class="landing-page">
   <div class="banner-section">
-    <img src="/assets/bg.jpg" alt="banner">
+    <img src="/assets/bg2.jpg" alt="banner">
     <div class="banner-overlay">
+      <div class="title-text">
+        <p>URBAN FARMING NETWORK</p>
+      </div>
       <div class="buttons">
-
+        <button class="btn btn-primary btn-uf" (click)="scrollToFarmListings(farmListings)">Find a farm</button>
+        <button class="btn btn-primary btn-uf">List a farm</button>
       </div>
     </div>
   </div>
-  <div class="content-section">
+  <div class="content-section" #farmListings>
     <div class="input-container">
       <input type="text" class="form-control" placeholder="Enter location...">
       <button (click)="toggleView()">

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AgmMap } from '@agm/core';
 import { ModalService } from '../../modal/modal.service';
 
@@ -14,6 +14,7 @@ export class LandingComponent implements OnInit {
   mapView: boolean = false;
 
   @ViewChild('farmMap') map: AgmMap;
+  @ViewChild('farmListings') private farmListings: ElementRef;
 
   constructor(private modalService:ModalService) { }
 
@@ -27,6 +28,10 @@ export class LandingComponent implements OnInit {
   viewInMap(): void {
     this.modalService.open('farm-location');
     this.map.triggerResize();
+  }
+
+  scrollToFarmListings(el): void {
+    el.scrollIntoView({behavior:"smooth", block:"start"});
   }
 
 }
