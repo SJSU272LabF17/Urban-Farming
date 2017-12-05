@@ -16,7 +16,7 @@ module.exports = function(passport) {
 
 	module.signup = function(req,res){
 		passport.authenticate('local-signup', function(err,result) {
-			if(err) {
+            if(err) {
 	            return res.status(500).json({status:500,statusText:"Internal server error"});
 	        }
 	        if(result.code === 200) {

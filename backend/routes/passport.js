@@ -29,7 +29,7 @@ module.exports = function(passport) {
                                         if(result) {
                                             res.code = 200;
                                             res.message = "Success";
-                                            res.data = {_id:user._id,uname:user.first_name+" "+user.last_name};
+                                            res.data = {_id:user._id,uname:user.firstName+" "+user.lastName};
                                         } else {
                                             res.code = 401;
                                             res.message = "Invalid password";
@@ -66,8 +66,8 @@ module.exports = function(passport) {
                 var res = {};
                 if(req.body.email && req.body.email !== '' 
                     && req.body.password && req.body.password !== ''
-                    && req.body.first_name && msg.first_name !== ''
-                    && req.body.last_name && req.body.last_name !== '') {
+                    && req.body.firstName && req.body.firstName !== ''
+                    && req.body.lastName && req.body.lastName !== '') {
                     mongo.getCollection('user', function(err,coll){
                         coll.findOne({email:req.body.email}, function(err,user){
                             if(err) {
@@ -82,11 +82,11 @@ module.exports = function(passport) {
                                 } else {
                                     bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
                                         coll.insert({
-                                            first_name:req.body.first_name,
-                                            last_name:req.body.last_name,
+                                            firstName:req.body.firstName,
+                                            lastName:req.body.lastName,
                                             email:req.body.email,
                                             password:hash,
-                                            is_verified:true
+                                            isVerified:true
                                         },function(err, user){
                                             if (err) {
                                                 res.code = 500;
@@ -94,7 +94,7 @@ module.exports = function(passport) {
                                             } else {
                                                 res.code = 200;
                                                 res.message = "Success";
-                                                res.data = {_id:user.insertedIds[0],uname:req.body.first_name+" "+req.body.last_name};
+                                                res.data = {_id:user.insertedIds[0],uname:req.body.firstName+" "+req.body.lastName};
                                             }
                                             done(null, res);
                                         });

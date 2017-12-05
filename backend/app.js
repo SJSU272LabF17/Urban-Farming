@@ -25,7 +25,7 @@ var router = express.Router();
 require('./routes/router')(router,passport);
 
 var corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: 'http://localhost:4200',
     credentials: true
 }
 app.use(cors(corsOptions))
