@@ -1,3 +1,8 @@
+.page-title {
+  font-size: 28px;
+  line-height: 2;
+}
+
 .input-container {
   margin-bottom: 30px;
   display: flex;
@@ -45,4 +50,65 @@
 
 .farm-location ::ng-deep .modal agm-map {
   height: 400px;
+}
+
+.new-proposal ::ng-deep .modal {
+  width: 75%;
+  min-width: 767px;
+}
+
+.new-proposal ::ng-deep .modal .body {
+  padding: 60px 60px 30px 60px !important;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.new-proposal ::ng-deep .modal .body .close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #7b7b7b;
+  cursor: pointer;
+}
+
+.new-proposal ::ng-deep .modal .body .form-body {
+  margin-bottom: 60px;
+  flex: 1;
+  overflow-y: auto;
+  padding: 0px 15px;
+}
+
+.new-proposal ::ng-deep .modal .body .form-body .section-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.new-proposal ::ng-deep .modal .body .form-body .section {
+  margin: 0px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.new-proposal ::ng-deep .modal .body .form-body .farm-section {
+
+}
+
+.new-proposal ::ng-deep .modal .body .form-body .farm-section .farm-info {
+
+}
+
+.new-proposal ::ng-deep .modal .body .form-body .farm-section .farm-info .location-text {
+  font-size: 22px;
+}
+
+.new-proposal ::ng-deep .modal .body .form-body .farm-section .location-map agm-map {
+  height: 300px;
+}
+
+.new-proposal ::ng-deep .modal .body .form-footer {
+  text-align: right;
+  flex: none;
 }

@@ -87,7 +87,7 @@ export class MyFarmsComponent implements OnInit {
 
   saveFarm() : void {
     if(this.currentCountry === 'US'){
-      //TODO: create or update based on if id is present or not
+      //TODO: validation, create or update based on if id is present or not
     } else {
       //TODO: show error
       console.log("Not in USA");

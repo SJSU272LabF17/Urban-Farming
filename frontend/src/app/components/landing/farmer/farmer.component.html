@@ -1,3 +1,6 @@
+<div class="page-title">
+  <p>Search for the farms near you</p>
+</div>
 <div class="input-container">
   <input type="text" class="form-control" placeholder="Enter location...">
   <button (click)="toggleView()">
@@ -46,7 +49,7 @@
         </div>
       </div>
       <div class="action-info">
-        <button class="btn btn-primary btn-uf">Submit proposal</button>
+        <button class="btn btn-primary btn-uf" (click)="openSubmitProposal()">New proposal</button>
       </div>
     </div>
     <div class="card">
@@ -83,7 +86,7 @@
         </div>
       </div>
       <div class="action-info">
-        <button class="btn btn-primary btn-uf">Submit proposal</button>
+        <button class="btn btn-primary btn-uf" (click)="openSubmitProposal()">New proposal</button>
       </div>
     </div>
     <div class="card">
@@ -120,9 +123,10 @@
         </div>
       </div>
       <div class="action-info">
-        <button class="btn btn-primary btn-uf">Submit proposal</button>
+        <button class="btn btn-primary btn-uf" (click)="openSubmitProposal()">New proposal</button>
       </div>
     </div>
+    <p class="empty-message">No farms found</p>
   </div>
 </div>
 
@@ -130,4 +134,69 @@
   <agm-map #farmMap [latitude]="lat" [longitude]="lng">
     <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
   </agm-map>
+</app-modal>
+
+<app-modal [blocking]='true' modalId="new-proposal" class="new-proposal">
+  <span class="close-button" (click)="closeNewProposal()"><i class="fa fa-times" aria-hidden="true"></i></span>
+  <div class="form-body">
+    <p class="section-title">Farm details</p>
+    <div class="row section farm-section">
+      <div class="row">
+        <div class="col-xs-6 farm-info">
+          <div class="row">
+            <div class="col-xs-12">
+              <p class="location-text">One Washington Square, San Jose, CA 95192</p>
+            </div>
+            <div class="col-xs-6">
+              <label>Owner</label>
+              <p>John Doe</p>
+            </div>
+            <div class="col-xs-6">
+              <label>Surface area</label>
+              <p>1280 Sqft.</p>
+            </div>
+            <div class="col-xs-6">
+              <label>Existing structures</label>
+              <p>Patthar, Jhaad</p>
+            </div>
+            <div class="col-xs-6">
+              <label>Water connection?</label>
+              <p>Yes</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 location-map">
+          <agm-map #farmMap2 [latitude]="lat" [longitude]="lng">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+          </agm-map>
+        </div>
+      </div>
+    </div>
+    <p class="section-title">Proposal details</p>
+    <div class="row section proposal-section">
+      <div class="row">
+        <div class="col-xs-12 form-group">
+          <label>Invite other farmers</label>
+          <input type="text" class="form-control" placeholder="Search farmers...">
+        </div>
+        <div class="col-xs-12 form-group">
+          <label>Cover letter</label>
+          <textarea class="form-control" rows="4" [(ngModel)]="proposalData.coverLetter"></textarea>
+        </div>
+        <div class="col-xs-12 form-group">
+          <label>Proposed uses</label>
+          <textarea class="form-control" rows="4" [(ngModel)]="proposalData.proposedUses"></textarea>
+        </div>
+        <div class="col-xs-12 form-group">
+          <label>Planned operations</label>
+          <textarea class="form-control" rows="4" [(ngModel)]="proposalData.plannerOperations"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-footer">
+    <button class="btn btn-default btn-uf btn-uf-default" (click)="closeNewProposal()">Cancel</button>
+    <button class="btn btn-primary btn-uf" (click)="saveProposal(true)">Save as draft</button>
+    <button class="btn btn-primary btn-uf" (click)="saveProposal(false)">Submit</button>
+  </div>
 </app-modal>

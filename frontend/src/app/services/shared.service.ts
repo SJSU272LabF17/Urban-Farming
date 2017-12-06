@@ -60,6 +60,7 @@ export class SharedService {
   }
 
   signin() : void {
+    //TODO: validation
     this.authService.signin(this.signinData).subscribe((data: any) => {
       this.authService.checkSession();
       this.closeAuthModal();
@@ -71,6 +72,7 @@ export class SharedService {
   }
 
   signup() : void {
+    //TODO: validation
     this.authService.signup(this.signupData).subscribe((data: any) => {
       this.authService.checkSession();
       this.closeAuthModal();

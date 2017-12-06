@@ -81,4 +81,9 @@ textarea {
   margin: 0px !important;
 }
 
+.empty-message {
+  text-align: center;
+  margin: 30px 0px;
+  font-style: italic;
+}
 

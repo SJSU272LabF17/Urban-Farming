@@ -17,7 +17,8 @@ export class ProposalComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    //TODO: fetch proposal info by param id
+    //TODO: fetch proposal info by param id,
+    //TODO: API should check if this user is allowed to view this proposal or not, show content on UI accordingly
   }
 
 }
