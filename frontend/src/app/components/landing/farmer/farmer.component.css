@@ -3,6 +3,10 @@
   line-height: 2;
 }
 
+.page-title p {
+  margin: 0px;
+}
+
 .input-container {
   margin-bottom: 30px;
   display: flex;

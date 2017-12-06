@@ -50,6 +50,10 @@
 
 }
 
+.proposal-page .content-section .proposal-section p a, .proposal-page .content-section .proposal-section label a {
+  margin-left: 5px;
+}
+
 .proposal-page .content-section .action-section {
   padding-top: 15px;
 }
@@ -87,4 +91,55 @@
 .proposal-page .content-section .discussion-section .compose-message .btn-uf {
   width: 100%;
   height: 54px;
+}
+
+
+.edit-proposal ::ng-deep .modal {
+  width: 50%;
+  height: fit-content;
+}
+
+.edit-proposal ::ng-deep .modal .body {
+  padding: 60px 60px 30px 60px !important;
+}
+
+.edit-proposal ::ng-deep .modal .body .close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #7b7b7b;
+  cursor: pointer;
+}
+
+.edit-proposal ::ng-deep .modal .body .form-body {
+
+}
+
+.edit-proposal ::ng-deep .modal .body .form-footer {
+  text-align: right;
+}
+
+.delete-proposal ::ng-deep .modal {
+  width: 50%;
+  height: fit-content;
+}
+
+.delete-proposal ::ng-deep .modal .body {
+  padding: 60px 60px 30px 60px !important;
+}
+
+.delete-proposal ::ng-deep .modal .body .close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #7b7b7b;
+  cursor: pointer;
+}
+
+.delete-proposal ::ng-deep .modal .body .form-body {
+
+}
+
+.delete-proposal ::ng-deep .modal .body .form-footer {
+  text-align: right;
 }

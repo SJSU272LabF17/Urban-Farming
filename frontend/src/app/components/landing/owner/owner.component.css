@@ -3,6 +3,10 @@
   line-height: 2;
 }
 
+.page-title p {
+  margin: 0px;
+}
+
 .data-container {
   min-height: 600px;
 }

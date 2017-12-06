@@ -13,7 +13,7 @@ export class FarmerComponent implements OnInit {
 
   lat: number = 51.678418;
   lng: number = 7.809007;
-  mapView: boolean = false;
+  mapView: boolean = true;
 
   @ViewChild('farmMap') map: AgmMap;
   @ViewChild('farmMap2') map2: AgmMap;

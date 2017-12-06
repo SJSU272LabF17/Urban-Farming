@@ -11,7 +11,7 @@
 <div class="data-container">
   <div *ngIf="mapView" class="map-view">
     <agm-map [latitude]="lat" [longitude]="lng">
-      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+      <agm-marker [latitude]="lat" [longitude]="lng" (markerClick)="openSubmitProposal()"></agm-marker>
     </agm-map>
   </div>
   <div *ngIf="!mapView" class="list-view">
