@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-owner',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OwnerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
+  }
+
+  viewProposal(id: any) : void {
+    this.router.navigate(['/proposal',id]);
   }
 
 }

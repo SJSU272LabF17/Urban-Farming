@@ -21,10 +21,11 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
 import { MyFarmsComponent } from './components/my-farms/my-farms.component';
-import { ProposalsComponent } from './components/proposals/proposals.component';
 import { OwnerComponent } from './components/landing/owner/owner.component';
 import { FarmerComponent } from './components/landing/farmer/farmer.component';
 import { SharedService } from './services/shared.service';
+import { MyProposalsComponent } from './components/my-proposals/my-proposals.component';
+import { ProposalComponent } from './components/proposal/proposal.component';
 
 export function authServiceFactory(authService: AuthService): Function {
   return () => authService.checkSession();
@@ -39,9 +40,10 @@ export function authServiceFactory(authService: AuthService): Function {
     ContactUsComponent,
     HowItWorksComponent,
     MyFarmsComponent,
-    ProposalsComponent,
     OwnerComponent,
-    FarmerComponent
+    FarmerComponent,
+    MyProposalsComponent,
+    ProposalComponent
   ],
   imports: [
     BrowserModule,

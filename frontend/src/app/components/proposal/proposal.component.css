@@ -1,0 +1,90 @@
+.proposal-page .content-section {
+  padding: 80px 60px;
+}
+
+.proposal-page .content-section .section-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 15px 0px;
+}
+
+.proposal-page .content-section .section {
+  margin: 0px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 15px;
+}
+
+.proposal-page .content-section .status-section {
+
+}
+
+.proposal-page .content-section .status-section label {
+  float: left;
+  margin: 0px;
+}
+
+.proposal-page .content-section .status-section p {
+  float: left;
+  font-style: italic;
+  margin: 0px;
+  margin-left: 5px;
+}
+
+.proposal-page .content-section .farm-section {
+
+}
+
+.proposal-page .content-section .farm-section .farm-info {
+
+}
+
+.proposal-page .content-section .farm-section .farm-info .location-text {
+  font-size: 22px;
+}
+
+.proposal-page .content-section .farm-section .location-map agm-map {
+  height: 300px;
+}
+
+.proposal-page .content-section .proposal-section {
+
+}
+
+.proposal-page .content-section .action-section {
+  padding-top: 15px;
+}
+
+.proposal-page .content-section .discussion-section {
+
+}
+
+.proposal-page .content-section .discussion-section .message-item .user-name {
+  font-weight: bold;
+}
+
+.proposal-page .content-section .discussion-section .message-item .user-name .timestamp {
+  font-size: 12px;
+  font-weight: lighter;
+  margin-left: 15px;
+}
+
+.proposal-page .content-section .discussion-section .message-item {
+  margin-bottom: 15px;
+}
+
+.proposal-page .content-section .discussion-section .message-item .message-text {
+
+}
+
+.proposal-page .content-section .discussion-section .compose-message {
+
+}
+
+.proposal-page .content-section .discussion-section .compose-message textarea {
+  resize: none;
+}
+
+.proposal-page .content-section .discussion-section .compose-message .btn-uf {
+  width: 100%;
+  height: 54px;
+}

@@ -8,12 +8,14 @@ import { HowItWorksComponent } from "./components/how-it-works/how-it-works.comp
 import { AboutUsComponent } from "./components/about-us/about-us.component";
 import { ContactUsComponent } from "./components/contact-us/contact-us.component";
 import { MyFarmsComponent } from "./components/my-farms/my-farms.component";
-import { ProposalsComponent } from "./components/proposals/proposals.component";
+import { MyProposalsComponent } from "./components/my-proposals/my-proposals.component";
+import { ProposalComponent } from "./components/proposal/proposal.component";
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
   { path: 'my-farms', component: MyFarmsComponent, canActivate: [AuthGuard], data: { role: 'OWNER' } },
-  { path: 'proposals', component: ProposalsComponent, canActivate: [AuthGuard], data: { role: 'FARMER' } },
+  { path: 'my-proposals', component: MyProposalsComponent, canActivate: [AuthGuard], data: { role: 'FARMER' } },
+  { path: 'proposal/:id', component: ProposalComponent, canActivate: [AuthGuard] },
   { path: 'how-it-works', component: HowItWorksComponent },
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'contactus', component: ContactUsComponent }

@@ -1,0 +1,113 @@
+<div class="proposal-page">
+  <div class="content-section">
+    <div class="row section status-section">
+      <label>Status:</label>
+      <p>Submitted</p>
+    </div>
+    <p class="section-title">Farm details</p>
+    <div class="row section farm-section">
+      <div class="row">
+        <div class="col-xs-6 farm-info">
+          <div class="row">
+            <div class="col-xs-12">
+              <p class="location-text">One Washington Square, San Jose, CA 95192</p>
+            </div>
+            <div class="col-xs-6">
+              <label>Owner</label>
+              <p>John Doe</p>
+            </div>
+            <div class="col-xs-6">
+              <label>Surface area</label>
+              <p>1280 Sqft.</p>
+            </div>
+            <div class="col-xs-6">
+              <label>Existing structures</label>
+              <p>Patthar, Jhaad</p>
+            </div>
+            <div class="col-xs-6">
+              <label>Water connection?</label>
+              <p>Yes</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 location-map">
+          <agm-map #farmMap [latitude]="lat" [longitude]="lng">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+          </agm-map>
+        </div>
+      </div>
+    </div>
+    <p class="section-title">Proposal details</p>
+    <div class="row section proposal-section">
+      <div class="row">
+        <div class="col-xs-6">
+          <label>Proposal by</label>
+          <p>John Doe</p>
+        </div>
+        <div class="col-xs-6">
+          <label>Other farmers invited</label>
+          <p>Jon Snow</p>
+          <p>Json Momoa</p>
+          <a>Invite more</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <label>Cover letter
+            <a href="javascript:void(0)"><i class="fa fa-edit" aria-hidden="true"></i></a>
+          </label>
+          <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+            took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+            but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+        </div>
+        <div class="col-xs-12">
+          <label>Proposed uses
+            <a href="javascript:void(0)"><i class="fa fa-edit" aria-hidden="true"></i></a>
+          </label>
+          <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+            took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+            but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+        </div>
+        <div class="col-xs-12">
+          <label>Planned operations
+            <a href="javascript:void(0)"><i class="fa fa-edit" aria-hidden="true"></i></a>
+          </label>
+          <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+            took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+            but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row section action-section">
+      <button class="btn btn-primary btn-uf">Save proposal</button>
+      <button class="btn btn-primary btn-uf">Submit proposal</button>
+      <button class="btn btn-default btn-uf btn-uf-default">Delete proposal</button>
+      <button class="btn btn-primary btn-uf">Take action</button>
+    </div>
+    <p class="section-title">Discussions</p>
+    <div class="row section discussion-section">
+      <div class="row">
+        <div class="col-xs-12 message-item">
+          <p class="user-name">Jon Doe<span class="timestamp">12/05/2017 08:30:00</span></p>
+          <p class="message-text">Hi, I'm interested in this farm. Let me know what you think about my proposal.
+            You can review my profile here.</p>
+        </div>
+        <div class="col-xs-12 message-item">
+          <p class="user-name">Jon Doe<span class="timestamp">12/05/2017 08:30:00</span></p>
+          <p class="message-text">Hi, I'm interested in this farm. Let me know what you think about my proposal.
+            You can review my profile here.</p>
+        </div>
+        <div class="col-xs-12 compose-message">
+          <div class="row">
+              <div class="col-xs-10">
+                <textarea placeholder="Write a comment..." rows="2" class="form-control"></textarea>
+              </div>
+              <div class="col-xs-2">
+                <button class="btn btn-primary btn-uf">Send</button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

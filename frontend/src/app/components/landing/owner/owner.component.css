@@ -1,0 +1,23 @@
+.data-container {
+  min-height: 600px;
+}
+
+.data-container .list-view .card {
+  background: #fff;
+  padding: 30px;
+  border-bottom: 1px solid #ccc;
+}
+
+.data-container .list-view .card:last-child {
+  margin-bottom: 0px;
+}
+
+.data-container .list-view .card .proposal-info .farm-location {
+  font-size: 22px;
+}
+
+.data-container .list-view .card .proposal-info .status {
+  font-style: italic;
+  font-weight: bold;
+  float: right;
+}
