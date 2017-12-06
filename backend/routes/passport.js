@@ -29,7 +29,7 @@ module.exports = function(passport) {
                                         if(result) {
                                             res.code = 200;
                                             res.message = "Success";
-                                            res.data = {_id:user._id,uname:user.firstName+" "+user.lastName};
+                                            res.data = {_id:user._id,uname:user.firstName+" "+user.lastName,role:user.role};
                                         } else {
                                             res.code = 401;
                                             res.message = "Invalid password";
@@ -67,7 +67,8 @@ module.exports = function(passport) {
                 if(req.body.email && req.body.email !== '' 
                     && req.body.password && req.body.password !== ''
                     && req.body.firstName && req.body.firstName !== ''
-                    && req.body.lastName && req.body.lastName !== '') {
+                    && req.body.lastName && req.body.lastName !== ''
+                    && req.body.role && req.body.role !== '') {
                     mongo.getCollection('user', function(err,coll){
                         coll.findOne({email:req.body.email}, function(err,user){
                             if(err) {
@@ -86,6 +87,7 @@ module.exports = function(passport) {
                                             lastName:req.body.lastName,
                                             email:req.body.email,
                                             password:hash,
+                                            role:req.body.role,
                                             isVerified:true
                                         },function(err, user){
                                             if (err) {
@@ -94,7 +96,7 @@ module.exports = function(passport) {
                                             } else {
                                                 res.code = 200;
                                                 res.message = "Success";
-                                                res.data = {_id:user.insertedIds[0],uname:req.body.firstName+" "+req.body.lastName};
+                                                res.data = {_id:user.insertedIds[0],uname:req.body.firstName+" "+req.body.lastName,role:req.body.role};
                                             }
                                             done(null, res);
                                         });

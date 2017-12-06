@@ -1,0 +1,133 @@
+<div class="input-container">
+  <input type="text" class="form-control" placeholder="Enter location...">
+  <button (click)="toggleView()">
+    <i *ngIf="mapView" class="fa fa-list-ul" aria-hidden="true"></i>
+    <i *ngIf="!mapView" class="fa fa-map" aria-hidden="true"></i>
+  </button>
+</div>
+<div class="data-container">
+  <div *ngIf="mapView" class="map-view">
+    <agm-map [latitude]="lat" [longitude]="lng">
+      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+    </agm-map>
+  </div>
+  <div *ngIf="!mapView" class="list-view">
+    <div class="card">
+      <div class="location-info">
+        <div class="row">
+          <div class="col-xs-12">
+            <p>
+              One Washington Square, San Jose, CA 95192
+              <a href="javascript:void(0)" (click)="viewInMap()"><i class="fa fa-location-arrow" aria-hidden="true"></i></a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="general-info">
+        <div class="row">
+          <div class="col-xs-6">
+            <label>Owner</label>
+            <p>John Doe</p>
+          </div>
+          <div class="col-xs-6">
+            <label>Surface area</label>
+            <p>1280 Sqft.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6">
+            <label>Existing structures</label>
+            <p>Patthar, Jhaad</p>
+          </div>
+          <div class="col-xs-6">
+            <label>Water connection?</label>
+            <p>Yes</p>
+          </div>
+        </div>
+      </div>
+      <div class="action-info">
+        <button class="btn btn-primary btn-uf">Submit proposal</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="location-info">
+        <div class="row">
+          <div class="col-xs-12">
+            <p>
+              One Washington Square, San Jose, CA 95192
+              <a href="javascript:void(0)" (click)="viewInMap()"><i class="fa fa-location-arrow" aria-hidden="true"></i></a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="general-info">
+        <div class="row">
+          <div class="col-xs-6">
+            <label>Owner</label>
+            <p>John Doe</p>
+          </div>
+          <div class="col-xs-6">
+            <label>Surface area</label>
+            <p>1280 Sqft.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6">
+            <label>Existing structures</label>
+            <p>Patthar, Jhaad</p>
+          </div>
+          <div class="col-xs-6">
+            <label>Water connection?</label>
+            <p>Yes</p>
+          </div>
+        </div>
+      </div>
+      <div class="action-info">
+        <button class="btn btn-primary btn-uf">Submit proposal</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="location-info">
+        <div class="row">
+          <div class="col-xs-12">
+            <p>
+              One Washington Square, San Jose, CA 95192
+              <a href="javascript:void(0)" (click)="viewInMap()"><i class="fa fa-location-arrow" aria-hidden="true"></i></a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="general-info">
+        <div class="row">
+          <div class="col-xs-6">
+            <label>Owner</label>
+            <p>John Doe</p>
+          </div>
+          <div class="col-xs-6">
+            <label>Surface area</label>
+            <p>1280 Sqft.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6">
+            <label>Existing structures</label>
+            <p>Patthar, Jhaad</p>
+          </div>
+          <div class="col-xs-6">
+            <label>Water connection?</label>
+            <p>Yes</p>
+          </div>
+        </div>
+      </div>
+      <div class="action-info">
+        <button class="btn btn-primary btn-uf">Submit proposal</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal [blocking]='false' modalId="farm-location" class="farm-location">
+  <agm-map #farmMap [latitude]="lat" [longitude]="lng">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  </agm-map>
+</app-modal>

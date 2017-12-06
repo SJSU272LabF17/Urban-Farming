@@ -1,5 +1,5 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {Injectable, Injector} from '@angular/core';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
@@ -9,10 +9,14 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class CustomInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router) { }
+  private router: Router;
+
+  constructor(injector: Injector) {
+    setTimeout(() => this.router = injector.get(Router);
+  }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    req.withCredentials = true;
+    req = req.clone({withCredentials: true});
     req = req.clone({ headers: req.headers.set('credentials', 'include') });
     if (!req.headers.has('Content-Type')) {
       req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
@@ -24,11 +28,11 @@ export class CustomInterceptor implements HttpInterceptor {
         //authService.removeTokens();
         //redirect to the signin page or show login modal here
         //this.authService.setIsLogged(false);
-        this.router.navigate(['/landing']);
+        this.router.navigate(['/']);
         return Observable.throw(error);
       } else {
         return Observable.throw(error);
       }
-    }) as any;;
+    }) as any;
   }
 }

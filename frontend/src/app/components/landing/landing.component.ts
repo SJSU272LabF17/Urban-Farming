@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { AgmMap } from '@agm/core';
-import { ModalService } from '../../modal/modal.service';
+import { AuthService } from '../../services/auth.service';
+import { SharedService } from "../../services/shared.service";
 
 @Component({
   selector: 'landing',
@@ -9,29 +9,19 @@ import { ModalService } from '../../modal/modal.service';
 })
 export class LandingComponent implements OnInit {
 
-  lat: number = 51.678418;
-  lng: number = 7.809007;
-  mapView: boolean = false;
+  @ViewChild('content') private farmListings: ElementRef;
 
-  @ViewChild('farmMap') map: AgmMap;
-  @ViewChild('farmListings') private farmListings: ElementRef;
-
-  constructor(private modalService:ModalService) { }
+  constructor(private authService:AuthService, private sharedService:SharedService) { }
 
   ngOnInit() {
   }
 
-  toggleView(): void {
-    this.mapView = !this.mapView;
-  }
-
-  viewInMap(): void {
-    this.modalService.open('farm-location');
-    this.map.triggerResize();
-  }
-
   scrollToFarmListings(el): void {
     el.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
+  openOwnerRegister(): void {
+    this.sharedService.openOwnerRegister();
   }
 
 }

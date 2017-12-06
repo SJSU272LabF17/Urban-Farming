@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalService } from '../../modal/modal.service';
 import { AuthService } from '../../services/auth.service';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'header',
@@ -10,86 +10,18 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  isSigninForm: boolean = true;
-  signinData: Object = {
-    email: '',
-    password: ''
-  };
-  signupData: Object = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: ''
-  };
-
-  constructor(private router: Router, private modalService:ModalService, private authService:AuthService) { }
+  constructor(private router: Router, private authService:AuthService, private sharedService:SharedService) { }
 
   ngOnInit() {
   }
 
-  openAuthModal() : void {
-    this.isSigninForm = true;
-    this.signinData = {
-      email: '',
-      password: ''
-    }
-    this.signupData = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: ''
-    }
-    this.modalService.open('auth-modal');
-  }
-
-  closeAuthModal() : void {
-    this.modalService.close('auth-modal');
-  }
-
-  toggleAuthForm() : void {
-    this.isSigninForm = !this.isSigninForm;
-    if(this.isSigninForm){
-      this.signinData = {
-        email: '',
-        password: ''
-      }
-    } else {
-      this.signupData = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: ''
-      }
-    }
-  }
-
-  signin() : void {
-    this.authService.signin(this.signinData).subscribe((data: any) => {
-      this.authService.setIsLogged(true);
-      this.closeAuthModal();
-    }, error => {
-      console.log(error);
-    }, () => {
-      console.log("complete");
-    });
-  }
-
-  signup() : void {
-    this.authService.signup(this.signupData).subscribe((data: any) => {
-      this.authService.setIsLogged(true);
-      this.closeAuthModal();
-    }, error => {
-      console.log(error);
-    });
-  }
-
   logout() : void {
     this.authService.logout().subscribe((data: any) => {
-      this.authService.setIsLogged(false);
-      this.router.navigate(['/landing']);
+      this.authService.resetValues();
+      this.router.navigate(['/']);
     }, error => {
-      this.authService.setIsLogged(false);
-      this.router.navigate(['/landing']);
+      this.authService.resetValues();
+      this.router.navigate(['/']);
     });
   }
 

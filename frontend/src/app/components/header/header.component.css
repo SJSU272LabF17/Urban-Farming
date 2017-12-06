@@ -5,33 +5,39 @@
   right: 0px;
   height: 50px;
   z-index: 999;
-  padding: 0px 15px;
-  background: rgba(0,0,0,0.8);
-  border-bottom: 2px solid rgba(255,255,255,0.2);
+  /*background: rgba(255,255,255,.8);*/
+  background: rgba(255,255,255,1);
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
 }
 
-.header-wrapper .logo-container {
+.header-wrapper .header-inner-wrapper {
+  padding: 0px 60px;
+  width: 100%;
+  height: 100%;
+}
+
+.header-wrapper .header-inner-wrapper .logo-container {
   padding: 10px 0px;
   float: left;
 }
 
-.header-wrapper .logo-container a {
-  color: #fff;
+.header-wrapper .header-inner-wrapper .logo-container a {
+  color: #668226;
   background: none;
   outline: none;
   text-decoration: none;
 }
 
-.header-wrapper .logo-container a img {
+.header-wrapper .header-inner-wrapper .logo-container a img {
   height: 30px;
 }
 
-.header-wrapper .nav-container {
+.header-wrapper .header-inner-wrapper .nav-container {
   float: left;
   padding: 0px 15px;
 }
 
-.header-wrapper .nav-container .nav {
+.header-wrapper .header-inner-wrapper .nav-container .nav {
   list-style: none;
   display: flex;
   align-content: center;
@@ -40,26 +46,27 @@
   line-height: 50px;
 }
 
-.header-wrapper .nav-container .nav .nav-item {
+.header-wrapper .header-inner-wrapper .nav-container .nav .nav-item {
   padding: 0px 15px;
   outline: none;
 }
 
-.header-wrapper .nav-container .nav .nav-item a {
+.header-wrapper .header-inner-wrapper .nav-container .nav .nav-item a {
   padding: 0px;
-  color: #fff;
+  color: #668226;
+  background: none;
+  outline: none;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.header-wrapper .header-inner-wrapper .nav-container .nav .nav-item a:hover, .header-wrapper .nav-container .nav .nav-item a:focus {
   background: none;
   outline: none;
   text-decoration: none;
 }
 
-.header-wrapper .nav-container .nav .nav-item a:hover, .header-wrapper .nav-container .nav .nav-item a:focus {
-  background: none;
-  outline: none;
-  text-decoration: none;
-}
-
-.header-wrapper .nav-container .nav .nav-item a.active:after {
+.header-wrapper .header-inner-wrapper .nav-container .nav .nav-item a.active:after {
   content: "";
   position: absolute;
   bottom: 2px;
@@ -69,55 +76,28 @@
   background: #668226;
 }
 
-.header-wrapper .menu-container {
+.header-wrapper .header-inner-wrapper .menu-container {
   float: right;
   text-align: right;
   line-height: 50px;
 }
 
-.header-wrapper .menu-container a {
+.header-wrapper .header-inner-wrapper .menu-container a {
   cursor: pointer;
-  color: #fff;
+  color: #668226;
+  background: none;
+  outline: none;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.header-wrapper .header-inner-wrapper .menu-container a:hover, .header-wrapper .menu-container a:focus {
   background: none;
   outline: none;
   text-decoration: none;
 }
 
-.header-wrapper .menu-container a:hover, .header-wrapper .menu-container a:focus {
-  background: none;
-  outline: none;
-  text-decoration: none;
-}
-
-.header-wrapper .menu-container a i {
+.header-wrapper .header-inner-wrapper .menu-container a i {
   margin-right: 10px;
 }
 
-.auth-modal ::ng-deep .modal {
-  width: 400px;
-  height: fit-content;
-}
-
-.auth-modal ::ng-deep .modal .body {
-  padding: 60px 60px 30px 60px !important;
-}
-
-.auth-modal ::ng-deep .modal .body .close-button {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  color: #7b7b7b;
-  cursor: pointer;
-}
-
-.auth-modal ::ng-deep .modal .body .form-body {
-  margin-bottom: 60px;
-}
-
-.auth-modal ::ng-deep .modal .body .form-body .btn-container .btn {
-  width: 100%;
-}
-
-.auth-modal ::ng-deep .modal .body .form-footer {
-  text-align: center;
-}

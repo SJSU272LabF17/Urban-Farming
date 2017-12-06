@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -19,8 +19,16 @@ import { HeaderComponent } from './components/header/header.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
-import { FaqComponent } from './components/faq/faq.component';
+import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
+import { MyFarmsComponent } from './components/my-farms/my-farms.component';
+import { ProposalsComponent } from './components/proposals/proposals.component';
+import { OwnerComponent } from './components/landing/owner/owner.component';
+import { FarmerComponent } from './components/landing/farmer/farmer.component';
+import { SharedService } from './services/shared.service';
 
+export function authServiceFactory(authService: AuthService): Function {
+  return () => authService.checkSession();
+}
 
 @NgModule({
   declarations: [
@@ -29,7 +37,11 @@ import { FaqComponent } from './components/faq/faq.component';
     LandingComponent,
     AboutUsComponent,
     ContactUsComponent,
-    FaqComponent
+    HowItWorksComponent,
+    MyFarmsComponent,
+    ProposalsComponent,
+    OwnerComponent,
+    FarmerComponent
   ],
   imports: [
     BrowserModule,
@@ -45,10 +57,18 @@ import { FaqComponent } from './components/faq/faq.component';
     AuthGuard,
     AuthService,
     {
+      // Provider for APP_INITIALIZER
+      provide: APP_INITIALIZER,
+      useFactory: authServiceFactory,
+      deps: [AuthService],
+      multi: true
+    },
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: CustomInterceptor,
-      multi: true,
-    }
+      multi: true
+    },
+    SharedService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,26 @@
+.my-farms-page .content-section {
+  padding: 80px 60px;
+}
+
+.my-farms-page .content-section .btn-container {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 30px;
+}
+
+.my-farms-page .content-section .data-container .card {
+  background: #fff;
+  padding: 30px;
+  border-bottom: 1px solid #ccc;
+}
+
+.my-farms-page .content-section .data-container .card:last-child {
+  margin-bottom: 0px;
+}
+
+.my-farms-page .content-section .data-container .card .location-info {
+  font-size: 22px;
+}
+
+.my-farms-page .content-section .data-container .card .general-info {
+
+}

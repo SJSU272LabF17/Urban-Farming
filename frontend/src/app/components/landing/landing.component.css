@@ -67,54 +67,5 @@
 }
 
 .landing-page .content-section {
-  padding: 60px;
-}
-
-.landing-page .content-section .input-container {
-  margin-bottom: 30px;
-  display: flex;
-}
-
-.landing-page .content-section .input-container .form-control {
-  height: 60px;
-  margin-right: 15px;
-}
-
-.landing-page .content-section .input-container button {
-  height: 60px;
-  width: 60px;
-}
-
-.landing-page .content-section .data-container {
-  min-height: 600px;
-}
-
-.landing-page .content-section .data-container .map-view agm-map {
-  height: 600px;
-}
-
-.landing-page .content-section .data-container .list-view .card {
-  background: #fff;
-  padding: 30px;
-  margin-bottom: 30px;
-}
-
-.landing-page .content-section .data-container .list-view .card:last-child {
-  margin-bottom: 0px;
-}
-
-.landing-page .content-section .data-container .list-view .card .location-info {
-  font-size: 22px;
-}
-
-.landing-page .content-section .data-container .list-view .card .general-info {
-
-}
-
-.farm-location ::ng-deep .modal {
-  height: fit-content;
-}
-
-.farm-location ::ng-deep .modal agm-map {
-  height: 400px;
+  padding: 80px 60px;
 }

@@ -1,76 +1,40 @@
 <div class="header-wrapper">
-  <div class="logo-container">
-    <a routerLink="landing">
-      <img src="/assets/logo.png">
-    </a>
-  </div>
-  <div class="nav-container">
-    <ul class="nav">
-      <li class="nav-item">
-        <a routerLink="landing" routerLinkActive="active">Home</a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="faq" routerLinkActive="active">FAQ</a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="aboutus" routerLinkActive="active">About Us</a>
-      </li>
-      <li class="nav-item">
-        <a routerLink="contactus" routerLinkActive="active">Contact Us</a>
-      </li>
-    </ul>
-  </div>
-  <div class="menu-container">
-    <a *ngIf="!authService.isLogged" (click)="openAuthModal()" >
-      <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
-      <span>My Account</span>
-    </a>
-    <a *ngIf="authService.isLogged" (click)="logout()" >
-      <span>Logout</span>
-    </a>
+  <div class="header-inner-wrapper">
+    <div class="logo-container">
+      <a routerLink="">
+        <img src="/assets/logo.png">
+      </a>
+    </div>
+    <div class="nav-container">
+      <ul class="nav">
+        <li class="nav-item">
+          <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
+        </li>
+        <li *ngIf="authService.isLogged && authService.role === 'OWNER'" class="nav-item">
+          <a routerLink="my-farms" routerLinkActive="active">My Farms</a>
+        </li>
+        <li *ngIf="authService.isLogged && authService.role === 'FARMER'" class="nav-item">
+          <a routerLink="proposals" routerLinkActive="active">Proposals</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="how-it-works" routerLinkActive="active">How it works</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="aboutus" routerLinkActive="active">About us</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="contactus" routerLinkActive="active">Contact us</a>
+        </li>
+      </ul>
+    </div>
+    <div class="menu-container">
+      <a *ngIf="!authService.isLogged" (click)="sharedService.openAuthModal()" >
+        <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
+        <span>My account</span>
+      </a>
+      <a *ngIf="authService.isLogged" (click)="logout()" >
+        <span>Logout</span>
+      </a>
+    </div>
   </div>
 </div>
-
-<app-modal [blocking]='true' modalId="auth-modal" class="auth-modal">
-  <span class="close-button" (click)="closeAuthModal()"><i class="fa fa-times" aria-hidden="true"></i></span>
-  <div *ngIf="isSigninForm" class="signin-form">
-    <div class="form-body">
-      <div class="form-group">
-        <input type="email" class="form-control" placeholder="Email" [(ngModel)]="signinData.email"/>
-      </div>
-      <div class="form-group">
-        <input type="password" class="form-control" placeholder="Password" [(ngModel)]="signinData.password"/>
-      </div>
-      <div class="form-group btn-container">
-        <button class="btn btn-primary btn-uf" (click)="signin()">Sign in</button>
-      </div>
-    </div>
-    <div class="form-footer">
-      <span>Don't have an account?</span>
-      <button class="btn btn-primary btn-uf" (click)="toggleAuthForm()">Sign up</button>
-    </div>
-  </div>
-  <div *ngIf="!isSigninForm" class="signup-form">
-    <div class="form-body">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="First Name" [(ngModel)]="signupData.firstName"/>
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="signupData.lastName"/>
-      </div>
-      <div class="form-group">
-        <input type="email" class="form-control" placeholder="Email" [(ngModel)]="signupData.email"/>
-      </div>
-      <div class="form-group">
-        <input type="password" class="form-control" placeholder="Password" [(ngModel)]="signupData.password"/>
-      </div>
-      <div class="form-group btn-container">
-        <button class="btn btn-primary btn-uf" (click)="signup()">Sign up</button>
-      </div>
-    </div>
-    <div class="form-footer">
-      <span>Already have an account?</span>
-      <button class="btn btn-primary btn-uf" (click)="toggleAuthForm()">Sign in</button>
-    </div>
-  </div>
-</app-modal>

@@ -6,3 +6,51 @@
   </div>
 </div>
 
+<app-modal [blocking]='true' modalId="auth-modal" class="auth-modal">
+  <span class="close-button" (click)="sharedService.closeAuthModal()"><i class="fa fa-times" aria-hidden="true"></i></span>
+  <div *ngIf="sharedService.isSigninForm" class="signin-form">
+    <div class="form-body">
+      <div class="form-group">
+        <input type="email" class="form-control" placeholder="Email" [(ngModel)]="sharedService.signinData.email"/>
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="Password" [(ngModel)]="sharedService.signinData.password"/>
+      </div>
+      <div class="form-group btn-container">
+        <button class="btn btn-primary btn-uf" (click)="sharedService.signin()">Sign in</button>
+      </div>
+    </div>
+    <div class="form-footer">
+      <span>Don't have an account?</span>
+      <button class="btn btn-primary btn-uf" (click)="sharedService.toggleAuthForm()">Sign up</button>
+    </div>
+  </div>
+  <div *ngIf="!sharedService.isSigninForm" class="signup-form">
+    <div class="form-body">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="First Name" [(ngModel)]="sharedService.signupData.firstName"/>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="sharedService.signupData.lastName"/>
+      </div>
+      <div class="form-group">
+        <input type="email" class="form-control" placeholder="Email" [(ngModel)]="sharedService.signupData.email"/>
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="Password" [(ngModel)]="sharedService.signupData.password"/>
+      </div>
+      <div class="form-group radio-buttons">
+        I'm
+        <label><input type="radio" value="FARMER" name="role" [(ngModel)]="sharedService.signupData.role"> a farmer</label>
+        <label><input type="radio" value="OWNER" name="role" [(ngModel)]="sharedService.signupData.role"> an owner</label>
+      </div>
+      <div class="form-group btn-container">
+        <button class="btn btn-primary btn-uf" (click)="sharedService.signup()">Sign up</button>
+      </div>
+    </div>
+    <div class="form-footer">
+      <span>Already have an account?</span>
+      <button class="btn btn-primary btn-uf" (click)="sharedService.toggleAuthForm()">Sign in</button>
+    </div>
+  </div>
+</app-modal>

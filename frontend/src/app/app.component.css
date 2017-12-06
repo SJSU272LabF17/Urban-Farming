@@ -5,3 +5,41 @@
 .page-wrapper .inner-page-wrapper {
 
 }
+
+.auth-modal ::ng-deep .modal {
+  width: 400px;
+  height: fit-content;
+}
+
+.auth-modal ::ng-deep .modal .body {
+  padding: 60px 60px 30px 60px !important;
+}
+
+.auth-modal ::ng-deep .modal .body .close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #7b7b7b;
+  cursor: pointer;
+}
+
+.auth-modal ::ng-deep .modal .body .form-body {
+  margin-bottom: 60px;
+}
+
+.auth-modal ::ng-deep .modal .body .form-body .radio-buttons {
+  text-align: center;
+}
+
+.auth-modal ::ng-deep .modal .body .form-body .radio-buttons label {
+  margin-left: 10px;
+  font-weight: normal;
+}
+
+.auth-modal ::ng-deep .modal .body .form-body .btn-container .btn {
+  width: 100%;
+}
+
+.auth-modal ::ng-deep .modal .body .form-footer {
+  text-align: center;
+}
