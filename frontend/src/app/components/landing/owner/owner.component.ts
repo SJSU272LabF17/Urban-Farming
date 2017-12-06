@@ -11,6 +11,7 @@ export class OwnerComponent implements OnInit {
   constructor(private router:Router) { }
 
   ngOnInit() {
+    //TODO: call api to get all the proposals for the logged in user's all farms
   }
 
   viewProposal(id: any) : void {

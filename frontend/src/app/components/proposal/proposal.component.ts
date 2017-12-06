@@ -17,6 +17,7 @@ export class ProposalComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    //TODO: fetch proposal info by param id
   }
 
 }

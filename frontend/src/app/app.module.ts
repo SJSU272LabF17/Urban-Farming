@@ -26,6 +26,7 @@ import { FarmerComponent } from './components/landing/farmer/farmer.component';
 import { SharedService } from './services/shared.service';
 import { MyProposalsComponent } from './components/my-proposals/my-proposals.component';
 import { ProposalComponent } from './components/proposal/proposal.component';
+import { GoogleMapsService } from './services/google-maps.service';
 
 export function authServiceFactory(authService: AuthService): Function {
   return () => authService.checkSession();
@@ -70,7 +71,8 @@ export function authServiceFactory(authService: AuthService): Function {
       useClass: CustomInterceptor,
       multi: true
     },
-    SharedService
+    SharedService,
+    GoogleMapsService
   ],
   bootstrap: [AppComponent]
 })

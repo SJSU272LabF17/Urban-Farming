@@ -18,6 +18,7 @@ export class FarmerComponent implements OnInit {
   constructor(private modalService:ModalService) { }
 
   ngOnInit() {
+    //TODO: get all farms sorted by user's current location
   }
 
   toggleView(): void {

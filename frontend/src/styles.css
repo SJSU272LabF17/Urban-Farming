@@ -73,5 +73,12 @@ input, select, .form-control {
   font-size: 12px;
 }
 
+textarea {
+  resize: none !important;
+}
+
+.no-margin {
+  margin: 0px !important;
+}
 
 

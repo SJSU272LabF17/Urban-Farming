@@ -24,6 +24,7 @@ export class ModalService {
     const modal = this.findModal(modalId);
 
     if (modal) {
+      document.body.style.overflow = 'hidden';
       modal.isOpen = true;
     }
   }
@@ -35,7 +36,7 @@ export class ModalService {
       if (checkBlocking && modal.blocking) {
         return;
       }
-
+      document.body.style.overflow = 'auto';
       modal.isOpen = false;
     }
   }

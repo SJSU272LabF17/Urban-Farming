@@ -24,3 +24,82 @@
 .my-farms-page .content-section .data-container .card .general-info {
 
 }
+
+.farm-form ::ng-deep .modal {
+  width: 75%;
+  min-width: 767px;
+}
+
+.farm-form ::ng-deep .modal .body {
+  padding: 60px 60px 30px 60px !important;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.farm-form ::ng-deep .modal .body .close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #7b7b7b;
+  cursor: pointer;
+}
+
+.farm-form ::ng-deep .modal .body .form-body {
+  margin-bottom: 60px;
+  flex: 1;
+  overflow-y: auto;
+  padding: 0px 15px;
+}
+
+.farm-form ::ng-deep .modal .body .form-body .section-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.farm-form ::ng-deep .modal .body .form-body agm-map {
+  height: 300px;
+}
+
+.farm-form ::ng-deep .modal .body .form-body .radio-buttons {
+
+}
+
+.farm-form ::ng-deep .modal .body .form-body .radio-buttons label {
+  margin-right: 10px;
+  font-weight: normal;
+}
+
+.farm-form ::ng-deep .modal .body .form-body .radio-buttons label input[type=radio] {
+  margin-right: 5px;
+}
+
+.farm-form ::ng-deep .modal .body .form-footer {
+  text-align: right;
+  flex: none;
+}
+
+.delete-farm ::ng-deep .modal {
+  width: 50%;
+  height: fit-content;
+}
+
+.delete-farm ::ng-deep .modal .body {
+  padding: 60px 60px 30px 60px !important;
+}
+
+.delete-farm ::ng-deep .modal .body .close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #7b7b7b;
+  cursor: pointer;
+}
+
+.delete-farm ::ng-deep .modal .body .form-body {
+
+}
+
+.delete-farm ::ng-deep .modal .body .form-footer {
+  text-align: right;
+}
