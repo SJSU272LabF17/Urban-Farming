@@ -20,9 +20,9 @@ function addNewFarm(req, res){
     farmModel.updatedDate = date;
     farmModel.save(function(err) {
         if (err) {
-            res.status(500).json({status: 500, statusText: err.message});
+            return res.status(500).json({status: 500, statusText: err.message});
         } else {
-            res.status(200).json({status: 200, statusText: "Success"});
+            return res.status(200).json({status: 200, statusText: "Success"});
         }
     });
 }
@@ -46,9 +46,9 @@ function updateFarm(req, res){
         owner: req.session.passport.user.id
     }, updateObj, function(err, result){
         if (err) {
-            res.status(500).json({status: 500, statusText: err.message});
+            return res.status(500).json({status: 500, statusText: err.message});
         } else {
-            res.status(200).json({status: 200, statusText: "Success"});
+            return res.status(200).json({status: 200, statusText: "Success"});
         }
     });
 }
@@ -59,9 +59,9 @@ function getMyFarms(req, res){
         isDeleted:false
     }).exec(function(err, farms){
         if (err) {
-            res.status(500).json({status: 500, statusText: err.message});
+            return res.status(500).json({status: 500, statusText: err.message});
         } else {
-            res.status(200).json({status: 200, statusText: "Success", data: farms});
+            return res.status(200).json({status: 200, statusText: "Success", data: farms});
         }
     });
 }
@@ -75,9 +75,9 @@ function deleteFarm(req, res){
         updatedDate : new Date()
     }, function(err, result){
         if (err) {
-            res.status(500).json({status: 500, statusText: err.message});
+            return res.status(500).json({status: 500, statusText: err.message});
         } else {
-            res.status(200).json({status: 200, statusText: "Success"});
+            return res.status(200).json({status: 200, statusText: "Success"});
         }
     });
 }
@@ -95,13 +95,13 @@ function searchFarms(req, res){
             isDeleted:false
         }).exec(function(err, farms){
             if (err) {
-                res.status(500).json({status: 500, statusText: err.message});
+                return res.status(500).json({status: 500, statusText: err.message});
             } else {
-                res.status(200).json({status: 200, statusText: "Success", data: farms});
+                return res.status(200).json({status: 200, statusText: "Success", data: farms});
             }
         });
     } else {
-        res.status(400).json({status: 400, statusText: "Bad request"});
+        return res.status(400).json({status: 400, statusText: "Bad request"});
     }
 }
 

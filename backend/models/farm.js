@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 
 var farmSchema = new mongoose.Schema({
     isDeleted : Boolean,
-    owner : {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    owner : {type: mongoose.Schema.Types.ObjectId, ref: 'users'},
     streetAddress : String,
     city : String,
     state : String,
@@ -16,7 +16,7 @@ var farmSchema = new mongoose.Schema({
     waterAlternative : String,
     appliedWaterConn : String,
     existingStructures : String,
-    status: String,
+    status: String, //ACTIVE-IN CONTRACT
     createdDate: Date,
     updatedDate: Date
 });

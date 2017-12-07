@@ -27,12 +27,12 @@ module.exports = function(passport) {
 	}
 
 	module.checkSession = function(req,res){
-		res.status(200).json({status:200,statusText:"Success",data:{uname:req.user.uname,role:req.user.role}});
+        return res.status(200).json({status:200,statusText:"Success",data:{uname:req.user.uname,role:req.user.role}});
 	}
 
 	module.logout = function(req,res){
 		req.session.destroy();
-    	res.status(200).json({status:200,statusText:"Success"});
+        return res.status(200).json({status:200,statusText:"Success"});
 	}
 
 	return module;

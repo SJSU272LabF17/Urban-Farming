@@ -11,10 +11,10 @@
           <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
         </li>
         <li *ngIf="authService.isLogged && authService.role === 'OWNER'" class="nav-item">
-          <a routerLink="my-farms" routerLinkActive="active">My Farms</a>
+          <a routerLink="my-farms" routerLinkActive="active">My farms</a>
         </li>
         <li *ngIf="authService.isLogged && authService.role === 'FARMER'" class="nav-item">
-          <a routerLink="my-proposals" routerLinkActive="active">Proposals</a>
+          <a routerLink="my-proposals" routerLinkActive="active">My proposals</a>
         </li>
         <li class="nav-item">
           <a routerLink="how-it-works" routerLinkActive="active">How it works</a>
