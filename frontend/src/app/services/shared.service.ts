@@ -7,11 +7,11 @@ import { AuthService } from './auth.service';
 export class SharedService {
 
   isSigninForm: boolean = true;
-  signinData: Object = {
+  signinData: any = {
     email: '',
     password: ''
   };
-  signupData: Object = {
+  signupData: any = {
     firstName: '',
     lastName: '',
     email: '',

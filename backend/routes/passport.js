@@ -1,4 +1,5 @@
 var LocalStrategy = require("passport-local").Strategy;
+var User = require('../models/user');
 
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -17,33 +18,33 @@ module.exports = function(passport) {
                 var res = {};
                 if(username && username !== '' 
                     && password && password !== '') {
-                    mongo.getCollection('user', function(err,coll){
-                        coll.findOne({email:username}, function(err,user){
-                            if(err) {
-                                res.code = 500;
-                                res.message = "Internal server error";
-                                done(null, res);
-                            } else {
-                                if (user) {
-                                    bcrypt.compare(password, user.password, function(err,result) {
-                                        if(result) {
-                                            res.code = 200;
-                                            res.message = "Success";
-                                            res.data = {_id:user._id,uname:user.firstName+" "+user.lastName,role:user.role};
-                                        } else {
-                                            res.code = 401;
-                                            res.message = "Invalid password";
-                                        }
-                                        done(null, res);
-                                    });
-                                } else {
-                                    res.code = 401;
-                                    res.message = "Invalid email";
+                    User.findOne({
+                        email: username
+                    }).exec(function(err, user) {
+                        if (err) {
+                            res.code = 500;
+                            res.message = err.message;
+                            done(null, res);
+                        } else {
+                            if(user) {
+                                bcrypt.compare(password, user.password, function(err,result) {
+                                    if(result) {
+                                        res.code = 200;
+                                        res.message = "Success";
+                                        res.data = {id:user._id,uname:user.firstName+" "+user.lastName,role:user.role};
+                                    } else {
+                                        res.code = 401;
+                                        res.message = "Invalid password";
+                                    }
                                     done(null, res);
-                                }  
-                            }     
-                        });
-                    })
+                                });
+                            } else {
+                                res.code = 401;
+                                res.message = "Invalid email";
+                                done(null, res);
+                            }
+                        }
+                    });
                 } else {
                     res.code = 400;
                     res.message = "Fields missing";
@@ -69,42 +70,43 @@ module.exports = function(passport) {
                     && req.body.firstName && req.body.firstName !== ''
                     && req.body.lastName && req.body.lastName !== ''
                     && req.body.role && req.body.role !== '') {
-                    mongo.getCollection('user', function(err,coll){
-                        coll.findOne({email:req.body.email}, function(err,user){
-                            if(err) {
-                                res.code = 500;
-                                res.message = "Internal server error";
+                    User.findOne({
+                        email: req.body.email
+                    }).exec(function(err, result){
+                        if(err){
+                            res.code = 500;
+                            res.message = err.message;
+                            done(null, res);
+                        } else {
+                            if(result) {
+                                res.code = 400;
+                                res.message = "User already exists";
                                 done(null, res);
                             } else {
-                                if (user) {
-                                    res.code = 400;
-                                    res.message = "User already exists";
-                                    done(null, res);
-                                } else {
-                                    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
-                                        coll.insert({
-                                            firstName:req.body.firstName,
-                                            lastName:req.body.lastName,
-                                            email:req.body.email,
-                                            password:hash,
-                                            role:req.body.role,
-                                            isVerified:true
-                                        },function(err, user){
-                                            if (err) {
-                                                res.code = 500;
-                                                res.message = "Internal server error";
-                                            } else {
-                                                res.code = 200;
-                                                res.message = "Success";
-                                                res.data = {_id:user.insertedIds[0],uname:req.body.firstName+" "+req.body.lastName,role:req.body.role};
-                                            }
-                                            done(null, res);
-                                        });
+                                bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+                                    var userModel = new User();
+                                    userModel.firstName = req.body.firstName;
+                                    userModel.lastName = req.body.lastName;
+                                    userModel.email = req.body.email;
+                                    userModel.password = hash;
+                                    userModel.role = req.body.role;
+                                    userModel.isVerified = true;
+                                    userModel.isDeleted = false;
+                                    userModel.save(function(err, user) {
+                                        if (err) {
+                                            res.code = 500;
+                                            res.message = err.message;
+                                        } else {
+                                            res.code = 200;
+                                            res.message = "Success";
+                                            res.data = {id:user._id,uname:req.body.firstName+" "+req.body.lastName,role:req.body.role};
+                                        }
+                                        done(null, res);
                                     });
-                                }
+                                });
                             }
-                        });
-                    })
+                        }
+                    });
                 } else {
                     res.code = 400;
                     res.message = "Fields missing";

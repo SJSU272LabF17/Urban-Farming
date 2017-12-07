@@ -4,12 +4,16 @@
       <button class="btn btn-primary btn-uf" (click)="openAddNewFarm()">Add new</button>
     </div>
     <div class="data-container">
-      <div class="card">
+      <div *ngIf="farms.length > 0" >
+        <div class="card" *ngFor="let f of farms; let i = index">
         <div class="location-info">
           <div class="row">
             <div class="col-xs-12">
               <p>
-                One Washington Square, San Jose, CA 95192
+                {{f.streetAddress}}
+                {{f.city}}
+                {{f.state}}
+                {{f.zipCode}}
               </p>
             </div>
           </div>
@@ -18,92 +22,27 @@
           <div class="row">
             <div class="col-xs-6">
               <label>Surface area</label>
-              <p>1280 Sqft.</p>
+              <p>{{f.size}} Sqft.</p>
             </div>
             <div class="col-xs-6">
               <label>Water connection?</label>
-              <p>Yes</p>
+              <p>{{f.waterConn}}</p>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-6">
               <label>Existing structures</label>
-              <p>Patthar, Jhaad</p>
+              <p>{{f.existingStructures}}</p>
             </div>
           </div>
         </div>
         <div class="action-info">
-          <button class="btn btn-primary btn-uf" (click)="openEditFarm()">Edit</button>
-          <button class="btn btn-uf btn-default btn-uf-default" (click)="openDeleteFarm()">Delete</button>
+          <button class="btn btn-primary btn-uf" (click)="openEditFarm(i)">Edit</button>
+          <button class="btn btn-uf btn-default btn-uf-default" (click)="openDeleteFarm(i)">Delete</button>
         </div>
       </div>
-      <div class="card">
-        <div class="location-info">
-          <div class="row">
-            <div class="col-xs-12">
-              <p>
-                One Washington Square, San Jose, CA 95192
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="general-info">
-          <div class="row">
-            <div class="col-xs-6">
-              <label>Surface area</label>
-              <p>1280 Sqft.</p>
-            </div>
-            <div class="col-xs-6">
-              <label>Water connection?</label>
-              <p>Yes</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-6">
-              <label>Existing structures</label>
-              <p>Patthar, Jhaad</p>
-            </div>
-          </div>
-        </div>
-        <div class="action-info">
-          <button class="btn btn-primary btn-uf" (click)="openEditFarm()">Edit</button>
-          <button class="btn btn-uf btn-default btn-uf-default" (click)="openDeleteFarm()">Delete</button>
-        </div>
       </div>
-      <div class="card">
-        <div class="location-info">
-          <div class="row">
-            <div class="col-xs-12">
-              <p>
-                One Washington Square, San Jose, CA 95192
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="general-info">
-          <div class="row">
-            <div class="col-xs-6">
-              <label>Surface area</label>
-              <p>1280 Sqft.</p>
-            </div>
-            <div class="col-xs-6">
-              <label>Water connection?</label>
-              <p>Yes</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-6">
-              <label>Existing structures</label>
-              <p>Patthar, Jhaad</p>
-            </div>
-          </div>
-        </div>
-        <div class="action-info">
-          <button class="btn btn-primary btn-uf" (click)="openEditFarm()">Edit</button>
-          <button class="btn btn-uf btn-default btn-uf-default" (click)="openDeleteFarm()">Delete</button>
-        </div>
-      </div>
-      <p class="empty-message">You don't have any farms</p>
+      <p *ngIf="farms.length === 0" class="empty-message">You don't have any farms</p>
     </div>
   </div>
 </div>

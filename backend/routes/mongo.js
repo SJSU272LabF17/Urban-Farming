@@ -1,4 +1,4 @@
-var MongoClient = require('mongodb').MongoClient;
+var mongoose = require("mongoose");
 
 var config = require('config');
 var mongoURL = config.dbUrl;
@@ -10,7 +10,7 @@ var connected = false;
  * Connects to the MongoDB Database with the provided URL
  */
 var connect = function(callback){
-  MongoClient.connect(mongoURL, function(err, _db){
+    mongoose.connect(mongoURL, { useMongoClient: true }, function(err, _db){
     if (err) { 
       callback(err); 
     } else {

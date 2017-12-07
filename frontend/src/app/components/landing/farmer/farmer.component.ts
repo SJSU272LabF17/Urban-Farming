@@ -18,7 +18,7 @@ export class FarmerComponent implements OnInit {
   @ViewChild('farmMap') map: AgmMap;
   @ViewChild('farmMap2') map2: AgmMap;
 
-  proposalData: Object = {
+  proposalData: any = {
     coverLetter: '',
     proposedUses: '',
     plannerOperations: '',

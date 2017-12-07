@@ -12,7 +12,7 @@ export class CustomInterceptor implements HttpInterceptor {
   private router: Router;
 
   constructor(injector: Injector) {
-    setTimeout(() => this.router = injector.get(Router);
+    setTimeout(() => this.router = injector.get(Router));
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
