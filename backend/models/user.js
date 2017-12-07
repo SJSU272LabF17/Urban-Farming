@@ -7,7 +7,19 @@ var userSchema = new mongoose.Schema({
     lastName: String,
     email: String,
     password: String,
-    role: String
+    role: String,
+    //
+    ssn: String,
+    streetAddress: String,
+    city: String,
+    state: String,
+    zipCode: String,
+    phoneNumber: String,
+    occupation: String,
+    education: String,
+    pastExperience: String,
+    createdDate: Date,
+    updatedDate: Date
 });
 
 module.exports = mongoose.model('users', userSchema);

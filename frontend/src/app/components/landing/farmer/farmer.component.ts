@@ -3,6 +3,7 @@ import { AgmMap } from '@agm/core';
 import { ModalService } from '../../../modal/modal.service';
 import {AuthService} from "../../../services/auth.service";
 import {SharedService} from "../../../services/shared.service";
+import {FarmService} from "../../../services/farm.service";
 
 @Component({
   selector: 'app-farmer',
@@ -11,12 +12,17 @@ import {SharedService} from "../../../services/shared.service";
 })
 export class FarmerComponent implements OnInit {
 
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+  lat: number = 37.3369;
+  lng: number = -121.8863;
   mapView: boolean = true;
 
   @ViewChild('farmMap') map: AgmMap;
   @ViewChild('farmMap2') map2: AgmMap;
+
+  farms: any[] = [];
+
+  viewMapLat: number;
+  viewMapLng: number;
 
   proposalData: any = {
     coverLetter: '',
@@ -25,25 +31,42 @@ export class FarmerComponent implements OnInit {
     invitedUsers: []
   };
 
-  selectedFarmId: string;
+  selectedFarm: any = {location:[]};
 
-  constructor(private modalService:ModalService, private authService:AuthService, private sharedService:SharedService) { }
+  constructor(private modalService:ModalService, private authService:AuthService, private sharedService:SharedService, private farmService:FarmService) { }
 
   ngOnInit() {
-    //TODO: get all farms sorted by user's current location
-    //TODO: load markers in map
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(position => {
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
+        this.searchNearByFarms();
+      }, error => {
+        console.log(error);
+      });
+    }
+  }
+
+  searchNearByFarms(): void {
+    this.farmService.searchFarms(this.lat,this.lng).subscribe((data: any) => {
+      this.farms = data.data;
+    }, error => {
+      console.log(error);
+    })
   }
 
   toggleView(): void {
     this.mapView = !this.mapView;
   }
 
-  viewInMap(): void {
+  viewInMap(index: any): void {
+    this.viewMapLat = this.farms[index].location[1];
+    this.viewMapLng = this.farms[index].location[0];
     this.modalService.open('farm-location');
     this.map.triggerResize();
   }
 
-  openSubmitProposal(farmId): void {
+  openSubmitProposal(index: any): void {
     if(this.authService.isLogged){
       this.proposalData = {
         coverLetter: '',
@@ -51,7 +74,7 @@ export class FarmerComponent implements OnInit {
         plannerOperations: '',
         invitedUsers: []
       };
-      this.selectedFarmId = farmId;
+      this.selectedFarm = this.farms[index];
       this.modalService.open('new-proposal');
       this.map2.triggerResize();
     } else {
@@ -60,6 +83,7 @@ export class FarmerComponent implements OnInit {
   }
 
   closeNewProposal(): void {
+    this.selectedFarm = {location:[]};
     this.modalService.close('new-proposal');
   }
 

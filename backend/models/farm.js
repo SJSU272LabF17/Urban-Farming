@@ -15,7 +15,10 @@ var farmSchema = new mongoose.Schema({
     waterConn : String,
     waterAlternative : String,
     appliedWaterConn : String,
-    existingStructures : String
+    existingStructures : String,
+    status: String,
+    createdDate: Date,
+    updatedDate: Date
 });
 
 module.exports = mongoose.model('farms', farmSchema);

@@ -92,6 +92,9 @@ module.exports = function(passport) {
                                     userModel.role = req.body.role;
                                     userModel.isVerified = true;
                                     userModel.isDeleted = false;
+                                    var date = new Date();
+                                    userModel.createdDate = date;
+                                    userModel.updatedDate = date;
                                     userModel.save(function(err, user) {
                                         if (err) {
                                             res.code = 500;

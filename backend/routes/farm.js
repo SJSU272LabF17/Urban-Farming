@@ -14,6 +14,10 @@ function addNewFarm(req, res){
     farmModel.existingStructures = req.body.existingStructures;
     farmModel.isDeleted = false;
     farmModel.owner = req.session.passport.user.id;
+    farmModel.status = 'ACTVIE';
+    var date = new Date();
+    farmModel.createdDate = date;
+    farmModel.updatedDate = date;
     farmModel.save(function(err) {
         if (err) {
             res.status(500).json({status: 500, statusText: err.message});
@@ -34,7 +38,8 @@ function updateFarm(req, res){
         waterConn : req.body.waterConn,
         waterAlternative : req.body.waterAlternative,
         appliedWaterConn : req.body.appliedWaterConn,
-        existingStructures : req.body.existingStructures
+        existingStructures : req.body.existingStructures,
+        updatedDate : new Date()
     }
     Farm.update({
         _id: req.params.id,
@@ -50,7 +55,8 @@ function updateFarm(req, res){
 
 function getMyFarms(req, res){
     Farm.find({
-        owner:req.session.passport.user.id
+        owner:req.session.passport.user.id,
+        isDeleted:false
     }).exec(function(err, farms){
         if (err) {
             res.status(500).json({status: 500, statusText: err.message});
@@ -65,7 +71,8 @@ function deleteFarm(req, res){
         _id: req.params.id,
         owner: req.session.passport.user.id
     }, {
-        isDeleted: true
+        isDeleted: true,
+        updatedDate : new Date()
     }, function(err, result){
         if (err) {
             res.status(500).json({status: 500, statusText: err.message});
@@ -76,8 +83,26 @@ function deleteFarm(req, res){
 }
 
 function searchFarms(req, res){
-    //TODO
-    res.status(200).json({status:200,statusText:"Success",data:[]});
+    if(req.query.lat && !isNaN(parseFloat(req.query.lat))
+        && req.query.lng && !isNaN(parseFloat(req.query.lng))) {
+        var coords = [parseFloat(req.query.lng),parseFloat(req.query.lat)];
+        Farm.find({
+            location: {
+                $near: coords,
+                $maxDistance: 100/6371 //in radians
+            },
+            status:"ACTIVE",
+            isDeleted:false
+        }).exec(function(err, farms){
+            if (err) {
+                res.status(500).json({status: 500, statusText: err.message});
+            } else {
+                res.status(200).json({status: 200, statusText: "Success", data: farms});
+            }
+        });
+    } else {
+        res.status(400).json({status: 400, statusText: "Bad request"});
+    }
 }
 
 exports.addNewFarm = addNewFarm;

@@ -25,8 +25,8 @@ export class FarmService {
     return this.http.delete<T>(this.host+'/farms/'+id);
   }
 
-  searchFarms<T>(payload: any): Observable<T> {
-    return this.http.get<T>(this.host+'/farms');
+  searchFarms<T>(lat: number, lng: number): Observable<T> {
+    return this.http.get<T>(this.host+'/farms?lat='+lat+'&lng='+lng);
   }
 
 }
