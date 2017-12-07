@@ -2,7 +2,8 @@
   <p>Search for the farms near you</p>
 </div>
 <div class="input-container">
-  <input type="text" class="form-control" placeholder="Search location...">
+  <input placeholder="Search location..." autocorrect="off" autocapitalize="off" spellcheck="off"
+         type="text" class="form-control" #search [formControl]="searchControl">
   <button (click)="toggleView()">
     <i *ngIf="mapView" class="fa fa-list-ul" aria-hidden="true"></i>
     <i *ngIf="!mapView" class="fa fa-map" aria-hidden="true"></i>
@@ -10,7 +11,7 @@
 </div>
 <div class="data-container">
   <div *ngIf="mapView" class="map-view">
-    <agm-map [latitude]="lat" [longitude]="lng">
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
       <agm-marker *ngFor="let f of farms; let i = index" [latitude]="f.location[1]" [longitude]="f.location[0]" (markerClick)="openSubmitProposal(i)">
 
       </agm-marker>
@@ -64,7 +65,7 @@
 </div>
 
 <app-modal [blocking]='false' modalId="farm-location" class="farm-location">
-  <agm-map #farmMap [latitude]="viewMapLat" [longitude]="viewMapLng">
+  <agm-map #farmMap [latitude]="viewMapLat" [longitude]="viewMapLng" [zoom]="zoom">
     <agm-marker [latitude]="viewMapLat" [longitude]="viewMapLng"></agm-marker>
   </agm-map>
 </app-modal>
@@ -104,7 +105,7 @@
           </div>
         </div>
         <div class="col-xs-6 location-map">
-          <agm-map #farmMap2 [latitude]="selectedFarm.location[1]" [longitude]="selectedFarm.location[0]">
+          <agm-map #farmMap2 [latitude]="selectedFarm.location[1]" [longitude]="selectedFarm.location[0]" [zoom]="zoom">
             <agm-marker [latitude]="selectedFarm.location[1]" [longitude]="selectedFarm.location[0]"></agm-marker>
           </agm-map>
         </div>

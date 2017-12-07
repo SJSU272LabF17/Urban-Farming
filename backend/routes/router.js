@@ -13,7 +13,7 @@ module.exports = function(router,passport) {
     router.put('/farms/:id', isOwnerAuthenticated, farm.updateFarm);
     router.delete('/farms/:id', isOwnerAuthenticated, farm.deleteFarm);
     router.get('/myfarms', isOwnerAuthenticated, farm.getMyFarms);
-    router.get('/farms', isFarmerAuthenticated, farm.searchFarms);
+    router.get('/farms', farm.searchFarms);
 	
 	function isAuthenticated(req, res, next) {
 	    if(req.session.passport && req.session.passport.user.id) {

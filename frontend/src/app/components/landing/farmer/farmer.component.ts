@@ -1,9 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { AgmMap } from '@agm/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { FormControl } from "@angular/forms";
+import { AgmMap, MapsAPILoader } from '@agm/core';
 import { ModalService } from '../../../modal/modal.service';
 import {AuthService} from "../../../services/auth.service";
 import {SharedService} from "../../../services/shared.service";
 import {FarmService} from "../../../services/farm.service";
+
+declare var google: any;
 
 @Component({
   selector: 'app-farmer',
@@ -12,9 +15,16 @@ import {FarmService} from "../../../services/farm.service";
 })
 export class FarmerComponent implements OnInit {
 
+  zoom: number = 12;
+
   lat: number = 37.3369;
   lng: number = -121.8863;
   mapView: boolean = true;
+
+  public searchControl: FormControl;
+
+  @ViewChild("search")
+  public searchElementRef: ElementRef;
 
   @ViewChild('farmMap') map: AgmMap;
   @ViewChild('farmMap2') map2: AgmMap;
@@ -33,7 +43,7 @@ export class FarmerComponent implements OnInit {
 
   selectedFarm: any = {location:[]};
 
-  constructor(private modalService:ModalService, private authService:AuthService, private sharedService:SharedService, private farmService:FarmService) { }
+  constructor(private modalService:ModalService, private authService:AuthService, private sharedService:SharedService, private farmService:FarmService, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone) { }
 
   ngOnInit() {
     if(navigator.geolocation){
@@ -45,6 +55,29 @@ export class FarmerComponent implements OnInit {
         console.log(error);
       });
     }
+
+    this.searchControl = new FormControl();
+
+    //load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: ["address"]
+      });
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+          //set latitude, longitude and zoom
+          this.lat = place.geometry.location.lat();
+          this.lng = place.geometry.location.lng();
+          this.searchNearByFarms();
+        });
+      });
+    });
   }
 
   searchNearByFarms(): void {

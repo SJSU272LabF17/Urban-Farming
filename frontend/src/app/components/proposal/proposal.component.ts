@@ -9,9 +9,10 @@ import {ModalService} from "../../modal/modal.service";
 })
 export class ProposalComponent implements OnInit {
 
-  lat: number = 51.678418;
-  lng: number = 7.809007;
-  mapView: boolean = false;
+  zoom: number = 12;
+
+  lat: number = 37.3369;
+  lng: number = -121.8863;
 
   @ViewChild('farmMap') map: AgmMap;
 

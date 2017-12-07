@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -50,10 +50,12 @@ export function authServiceFactory(authService: AuthService): Function {
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAaI2kPf5ry2flRY1Gu4Jbf2OyvtWBa9uE'
+      apiKey: 'AIzaSyAaI2kPf5ry2flRY1Gu4Jbf2OyvtWBa9uE',
+      libraries: ["places"]
     }),
     ModalModule
   ],

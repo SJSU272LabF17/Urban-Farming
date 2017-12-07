@@ -14,6 +14,8 @@ export class MyFarmsComponent implements OnInit {
   markerLat: number;
   markerLng: number;
 
+  zoom: number = 12;
+
   @ViewChild('farmMap') map: AgmMap;
 
   farmData: any = {

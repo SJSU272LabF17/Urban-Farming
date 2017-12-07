@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="col-xs-6 location-map">
-          <agm-map #farmMap [latitude]="lat" [longitude]="lng">
+          <agm-map #farmMap [latitude]="lat" [longitude]="lng" [zoom]="zoom">
             <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
           </agm-map>
         </div>
