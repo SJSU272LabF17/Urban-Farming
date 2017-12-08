@@ -31,18 +31,12 @@ module.exports = function(router,passport) {
     //TODO accept-reject proposal, its own farm proposal only
     router.post('/proposals/action', isOwnerAuthenticated, proposal.takeProposalAction);
 
-    //TODO get all messages for proposal, shouldn't allow outside party
     router.get('/proposals/:id/messages', isAuthenticated, proposal.getProposalMessages);
-    //TODO add new message to proposal, shouldn't allow outside party
     router.post('/proposals/:id/messages', isAuthenticated, proposal.addNewProposalMessage);
 
-    //TODO create forum topic
     router.post('/forums', isAuthenticated, forum.createForumTopic);
-    //TODO get all forum topics
     router.get('/forums', forum.getAllForumTopics);
-    //TODO add comment to forum
     router.post('/forums/:id/comments', isAuthenticated, forum.addForumComment);
-    //TODO add comment to forum
     router.get('/forums/:id/comments', forum.getForumComments);
 
 	function isAuthenticated(req, res, next) {
