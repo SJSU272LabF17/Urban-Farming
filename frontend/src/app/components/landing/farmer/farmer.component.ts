@@ -106,7 +106,7 @@ export class FarmerComponent implements OnInit {
       this.proposalData = {
         coverLetter: '',
         proposedUses: '',
-        plannerOperations: '',
+        plannedOperations: '',
         invitedUsers: []
       };
       this.selectedFarm = this.farms[index];
@@ -126,6 +126,7 @@ export class FarmerComponent implements OnInit {
     //TODO: validation
     var payload = this.proposalData;
     payload.farm = this.selectedFarm._id;
+    payload.farmOwner = this.selectedFarm.owner._id;
     payload.asDraft = asDraft;
     this.proposalService.createProposal(payload).subscribe((data: any) => {
       //TODO: show success notification

@@ -1,4 +1,5 @@
 var Proposal = require('../models/proposal');
+var ProposalMsg = require('../models/proposalMsg');
 
 function createProposal(req,res){
     Proposal.find({
@@ -23,6 +24,7 @@ function createProposal(req,res){
                 proposalModel.plannedOperations = req.body.plannedOperations;
                 proposalModel.invitedUsers = req.body.invitedUsers;
                 proposalModel.farm = req.body.farm;
+                proposalModel.farmOwner = req.body.farmOwner;
                 proposalModel.createdBy = req.session.passport.user.id;
                 if(req.body.asDraft){
                     proposalModel.status = 'DRAFT';
@@ -134,7 +136,8 @@ function getProposals(req,res){
         }
     } else {
         Proposal.find({
-            isDeleted: false
+            isDeleted: false,
+            farmOwner: req.session.passport.user.id
         }).select({
             _id: true,
             status: true,
@@ -144,8 +147,7 @@ function getProposals(req,res){
         }).populate({
             path: 'farm',
             model: 'farms',
-            select: 'streetAddress city state zipCode owner -_id',
-            match: { owner: req.session.passport.user.id },
+            select: 'streetAddress city state zipCode -_id'
         }).populate({
             path: 'invitedUsers',
             model: 'users',
@@ -155,9 +157,6 @@ function getProposals(req,res){
             model: 'users',
             select: 'firstName lastName -_id'
         }).exec(function (err, proposals) {
-            proposals = proposals.filter(function(proposal){
-                return proposal.farm;
-            });
             if (err) {
                 return res.status(500).json({status: 500, statusText: err.message});
             } else {
@@ -168,7 +167,52 @@ function getProposals(req,res){
 }
 
 function getProposalById(req,res){
-    return res.status(200).json({status:200,statusText:"Success"});
+    Proposal.findOne({
+        _id: req.params.id,
+        isDeleted: false,
+        $or:[{
+            createdBy: req.session.passport.user.id
+        },{
+            invitedUsers:{$in:[req.session.passport.user.id]}
+        },{
+            farmOwner: req.session.passport.user.id
+        }]
+    }).select({
+        _id: true,
+        status: true,
+        farm: true,
+        createdBy: true,
+        invitedUsers: true,
+        coverLetter: true,
+        proposedUses: true,
+        plannedOperations: true
+    }).populate({
+        path: 'farm',
+        model: 'farms',
+        select: 'streetAddress city state zipCode owner location size waterConn waterAlternative appliedWaterConn existingStructures -_id',
+        populate: {
+            path: 'owner',
+            model: 'users',
+            select: 'firstName lastName -_id'
+        }
+    }).populate({
+        path: 'createdBy',
+        model: 'users',
+        select: 'firstName lastName -_id'
+    }).populate({
+        path: 'invitedUsers',
+        model: 'users',
+        select: 'firstName lastName _id'
+    }).exec(function (err, proposal) {
+        if (err) {
+            return res.status(500).json({status: 500, statusText: err.message});
+        } else {
+            if(proposal) {
+                return res.status(200).json({status: 200, statusText: "Success", data: proposal});
+            }
+            return res.status(404).json({status: 404, statusText: "Not found"});
+        }
+    });
 }
 
 function takeProposalAction(req,res){
@@ -176,11 +220,82 @@ function takeProposalAction(req,res){
 }
 
 function getProposalMessages(req,res){
-    return res.status(200).json({status:200,statusText:"Success"});
+    Proposal.find({
+        _id: req.params.id,
+        isDeleted: false,
+        $or:[{
+            createdBy: req.session.passport.user.id
+        },{
+            invitedUsers:{$in:[req.session.passport.user.id]}
+        },{
+            farmOwner: req.session.passport.user.id
+        }]
+    }).exec(function(err, proposal){
+        if (err) {
+            return res.status(500).json({status: 500, statusText: err.message});
+        } else {
+            if(proposal){
+                ProposalMsg.find({
+                    proposal: req.params.id,
+                    isDeleted: false
+                }).select({
+                    message: true,
+                    createdDate: true,
+                    createdBy: true
+                }).populate({
+                    path: 'createdBy',
+                    model: 'users',
+                    select: 'firstName lastName -_id'
+                }).sort('createdDate').exec(function(err, messages) {
+                    if (err) {
+                        return res.status(500).json({status: 500, statusText: err.message});
+                    } else {
+                        return res.status(200).json({status: 200, statusText: "Success", data:messages});
+                    }
+                });
+            } else {
+                return res.status(404).json({status: 404, statusText: "Not found"});
+            }
+        }
+    });
 }
 
 function addNewProposalMessage(req,res){
-    return res.status(200).json({status:200,statusText:"Success"});
+    Proposal.find({
+        _id: req.params.id,
+        isDeleted: false,
+        $or:[{
+            createdBy: req.session.passport.user.id
+        },{
+            invitedUsers:{$in:[req.session.passport.user.id]}
+        },{
+            farmOwner: req.session.passport.user.id
+        }]
+    }).exec(function(err, proposal){
+        if (err) {
+            return res.status(500).json({status: 500, statusText: err.message});
+        } else {
+            if(proposal){
+                var proposalMsgModel = new ProposalMsg();
+                proposalMsgModel.proposal = req.params.id;
+                proposalMsgModel.message = req.body.message;
+                proposalMsgModel.createdBy = req.session.passport.user.id;
+                proposalMsgModel.isDeleted = false;
+                var date = new Date();
+                proposalMsgModel.createdDate = date;
+                proposalMsgModel.updatedDate = date;
+                proposalMsgModel.save(function(err) {
+                    if (err) {
+                        return res.status(500).json({status: 500, statusText: err.message});
+                    } else {
+                        return res.status(200).json({status: 200, statusText: "Success"});
+                    }
+                });
+            } else {
+                return res.status(404).json({status: 404, statusText: "Not found"});
+            }
+        }
+    });
 }
 
 exports.createProposal = createProposal;

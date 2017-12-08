@@ -27,7 +27,6 @@ module.exports = function(router,passport) {
     router.put('/proposals/:id', isFarmerAuthenticated, proposal.updateProposal);
     router.delete('/proposals/:id', isFarmerAuthenticated, proposal.deleteProposal);
     router.get('/proposals', isAuthenticated, proposal.getProposals);
-    //TODO get proposal data by id based on role
     router.get('/proposals/:id', isAuthenticated, proposal.getProposalById);
     //TODO accept-reject proposal, its own farm proposal only
     router.post('/proposals/action', isOwnerAuthenticated, proposal.takeProposalAction);

@@ -7,6 +7,7 @@ var proposalSchema = new mongoose.Schema({
     proposedUses: String,
     plannedOperations: String,
     farm:{type: mongoose.Schema.Types.ObjectId, ref: 'farms'},
+    farmOwner:{type: mongoose.Schema.Types.ObjectId, ref: 'users'},
     invitedUsers:[{type: mongoose.Schema.Types.ObjectId, ref: 'users'}],
     status: String, //DRAFT-SUBMITTED-ACCEPTED-REJECTED-ENDED-TERMINATED
     createdDate: Date,

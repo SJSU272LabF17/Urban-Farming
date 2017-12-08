@@ -93,7 +93,7 @@ function searchFarms(req, res){
             },
             status:"ACTIVE",
             isDeleted:false
-        }).populate('owner','firstName lastName -_id').exec(function(err, farms){
+        }).populate('owner','firstName lastName _id').exec(function(err, farms){
             if (err) {
                 return res.status(500).json({status: 500, statusText: err.message});
             } else {
