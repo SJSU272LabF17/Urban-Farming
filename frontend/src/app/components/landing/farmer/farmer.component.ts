@@ -43,7 +43,7 @@ export class FarmerComponent implements OnInit {
     invitedUsers: []
   };
 
-  selectedFarm: any = {location:[]};
+  selectedFarm: any = {location:[],owner:{}};
 
   constructor(private router:Router, private modalService:ModalService, private authService:AuthService, private sharedService:SharedService, private farmService:FarmService, private proposalService:ProposalService, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone) { }
 
@@ -118,7 +118,7 @@ export class FarmerComponent implements OnInit {
   }
 
   closeNewProposal(): void {
-    this.selectedFarm = {location:[]};
+    this.selectedFarm = {location:[],owner:{}};
     this.modalService.close('new-proposal');
   }
 

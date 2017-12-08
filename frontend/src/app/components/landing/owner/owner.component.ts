@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import {ProposalService} from "../../../services/proposal.service";
 
 @Component({
   selector: 'app-owner',
@@ -8,14 +9,20 @@ import { Router } from "@angular/router";
 })
 export class OwnerComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  myProposals: any[] = [];
+
+  constructor(private router:Router, private proposalService:ProposalService) { }
 
   ngOnInit() {
-    //TODO: call api to get all the proposals for the logged in user's all farms
+    this.proposalService.getMyProposals().subscribe((data: any) => {
+      this.myProposals = data.data;
+    }, error => {
+      console.log(error);
+    });
   }
 
-  viewProposal(id: any) : void {
-    this.router.navigate(['/proposal',id]);
+  viewProposal(index: any) : void {
+    this.router.navigate(['/proposal',this.myProposals[index]._id]);
   }
 
 }

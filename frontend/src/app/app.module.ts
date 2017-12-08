@@ -29,6 +29,7 @@ import { ProposalComponent } from './components/proposal/proposal.component';
 import { GoogleMapsService } from './services/google-maps.service';
 import {FarmService} from "./services/farm.service";
 import { ProposalService } from './services/proposal.service';
+import { ForumService } from './services/forum.service';
 
 export function authServiceFactory(authService: AuthService): Function {
   return () => authService.checkSession();
@@ -78,7 +79,8 @@ export function authServiceFactory(authService: AuthService): Function {
     SharedService,
     GoogleMapsService,
     FarmService,
-    ProposalService
+    ProposalService,
+    ForumService
   ],
   bootstrap: [AppComponent]
 })

@@ -2,68 +2,94 @@
   <div class="content-section">
     <p class="section-title">My proposals</p>
     <div class="data-container">
-      <div class="card">
-        <div class="row proposal-info">
-          <div class="col-xs-12">
-            <p class="farm-location">One Washington Square, San Jose, CA 95192</p>
+      <div *ngIf="myProposals.length > 0">
+        <div class="card" *ngFor="let p of myProposals; let i = index">
+          <div class="proposal-info">
+            <div class="row">
+              <div class="col-xs-6">
+                <p class="farm-location">
+                  {{p.farm.streetAddress}}
+                  {{p.farm.city}}
+                  {{p.farm.state}}
+                  {{p.farm.zipCode}}
+                </p>
+              </div>
+              <div class="col-xs-6">
+                <p class="status">{{p.status}}</p>
+              </div>
+            </div>
+            <div class="row">
+            <div class="col-xs-6">
+                <label>Owner</label>
+                <p>
+                  {{p.farm.owner.firstName}}
+                  {{p.farm.owner.lastName}}
+                </p>
+              </div>
+              <div class="col-xs-6">
+                <label>Other farmers invited</label>
+                <p *ngFor="let u of p.invitedUsers">
+                  {{u.firstName}}
+                  {{u.lastName}}
+                </p>
+              </div>
+            </div>
           </div>
-          <div class="col-xs-6">
-            <label>Owner</label>
-            <p>John Doe</p>
+          <div class="action-info">
+            <button class="btn btn-primary btn-uf" (click)="viewMyProposal(i)">View proposal</button>
           </div>
-          <div class="col-xs-6">
-            <label>Other farmers invited</label>
-            <p>Jon Snow</p>
-            <p>Json Momoa</p>
-          </div>
-        </div>
-        <div class="action-info">
-          <button class="btn btn-primary btn-uf" (click)="viewProposal(1)">View proposal</button>
         </div>
       </div>
-      <div class="card">
-        <div class="row proposal-info">
-          <div class="col-xs-12">
-            <p class="farm-location">One Washington Square, San Jose, CA 95192</p>
-          </div>
-          <div class="col-xs-6">
-            <label>Owner</label>
-            <p>John Doe</p>
-          </div>
-          <div class="col-xs-6">
-            <label>Other farmers invited</label>
-            <p>Jon Snow</p>
-            <p>Json Momoa</p>
-          </div>
-        </div>
-        <div class="action-info">
-          <button class="btn btn-primary btn-uf" (click)="viewProposal(1)">View proposal</button>
-        </div>
-      </div>
-      <div class="card">
-        <div class="row proposal-info">
-          <div class="col-xs-12">
-            <p class="farm-location">One Washington Square, San Jose, CA 95192</p>
-          </div>
-          <div class="col-xs-6">
-            <label>Owner</label>
-            <p>John Doe</p>
-          </div>
-          <div class="col-xs-6">
-            <label>Other farmers invited</label>
-            <p>Jon Snow</p>
-            <p>Json Momoa</p>
-          </div>
-        </div>
-        <div class="action-info">
-          <button class="btn btn-primary btn-uf" (click)="viewProposal(1)">View proposal</button>
-        </div>
-      </div>
-      <p class="empty-message">You don't have any saved proposals</p>
+      <p *ngIf="myProposals.length === 0" class="empty-message">You don't have any saved proposals</p>
     </div>
     <p class="section-title">Invitations</p>
     <div class="data-container">
-      <p class="empty-message">You don't have any invitations</p>
+      <div *ngIf="invitations.length > 0">
+        <div class="card" *ngFor="let p of invitations; let i = index">
+          <div class="proposal-info">
+            <div class="row">
+              <div class="col-xs-6">
+                <p class="farm-location">
+                  {{p.farm.streetAddress}}
+                  {{p.farm.city}}
+                  {{p.farm.state}}
+                  {{p.farm.zipCode}}
+                </p>
+              </div>
+              <div class="col-xs-6">
+                <p class="status">{{p.status}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-6">
+                <label>Owner</label>
+                <p>
+                  {{p.farm.owner.firstName}}
+                  {{p.farm.owner.lastName}}
+                </p>
+              </div>
+              <div class="col-xs-6">
+                <label>Created by</label>
+                <p>
+                  {{p.createdBy.firstName}}
+                  {{p.createdBy.lastName}}
+                </p>
+              </div>
+              <div class="col-xs-6">
+                <label>Other farmers invited</label>
+                <p *ngFor="let u of p.invitedUsers">
+                  {{u.firstName}}
+                  {{u.lastName}}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="action-info">
+            <button class="btn btn-primary btn-uf" (click)="viewInvitedProposal(i)">View proposal</button>
+          </div>
+        </div>
+      </div>
+      <p *ngIf="invitations.length === 0" class="empty-message">You don't have any invitations</p>
     </div>
   </div>
 </div>

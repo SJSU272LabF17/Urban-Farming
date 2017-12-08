@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {ProposalService} from "../../services/proposal.service";
 
 @Component({
   selector: 'app-my-proposals',
@@ -8,16 +9,30 @@ import {Router} from "@angular/router";
 })
 export class MyProposalsComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  myProposals: any[] = [];
+  invitations: any[] = [];
+
+  constructor(private router:Router, private proposalService:ProposalService) { }
 
   ngOnInit() {
-    //TODO: get saved proposals for logged in user
-    //TODO: get submitted proposals for logged in user
-    //TODO: get invitations for logged in user
+    this.proposalService.getMyProposals().subscribe((data: any) => {
+      this.myProposals = data.data;
+    }, error => {
+      console.log(error);
+    });
+    this.proposalService.getInvitedProposals().subscribe((data: any) => {
+      this.invitations = data.data;
+    }, error => {
+      console.log(error);
+    });
   }
 
-  viewProposal(id: any): void {
-    this.router.navigate(['/proposal',id]);
+  viewMyProposal(index: any): void {
+    this.router.navigate(['/proposal',this.myProposals[index]._id]);
+  }
+
+  viewInvitedProposal(index: any): void {
+    this.router.navigate(['/proposal',this.invitations[index]._id]);
   }
 
 }

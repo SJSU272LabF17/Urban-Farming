@@ -50,11 +50,121 @@ function updateProposal(req,res){
 }
 
 function deleteProposal(req,res){
-    return res.status(200).json({status:200,statusText:"Success"});
+    Proposal.update({
+        _id: req.params.id,
+        createdBy: req.session.passport.user.id,
+        status: "DRAFT"
+    }, {
+        isDeleted: true,
+        updatedDate : new Date()
+    }, function(err, result){
+        if (err) {
+            return res.status(500).json({status: 500, statusText: err.message});
+        } else {
+            return res.status(200).json({status: 200, statusText: "Success"});
+        }
+    });
 }
 
 function getProposals(req,res){
-    return res.status(200).json({status:200,statusText:"Success"});
+    if(req.session.passport.user.role === "FARMER") {
+        if(req.query.type === "invitations") {
+            Proposal.find({
+                invitedUsers:{$in:[req.session.passport.user.id]},
+                isDeleted: false
+            }).select({
+                _id: true,
+                status: true,
+                farm: true,
+                invitedUsers: true,
+                createdBy: true
+            }).populate({
+                path: 'farm',
+                model: 'farms',
+                select: 'streetAddress city state zipCode owner -_id',
+                populate: {
+                    path: 'owner',
+                    model: 'users',
+                    select: 'firstName lastName -_id'
+                }
+            }).populate({
+                path: 'invitedUsers',
+                model: 'users',
+                select: 'firstName lastName -_id'
+            }).populate({
+                path: 'createdBy',
+                model: 'users',
+                select: 'firstName lastName -_id'
+            }).exec(function (err, proposals) {
+                if (err) {
+                    return res.status(500).json({status: 500, statusText: err.message});
+                } else {
+                    return res.status(200).json({status: 200, statusText: "Success", data: proposals});
+                }
+            });
+        } else {
+            Proposal.find({
+                createdBy: req.session.passport.user.id,
+                isDeleted: false
+            }).select({
+                _id: true,
+                status: true,
+                farm: true,
+                invitedUsers: true
+            }).populate({
+                path: 'farm',
+                model: 'farms',
+                select: 'streetAddress city state zipCode owner -_id',
+                populate: {
+                    path: 'owner',
+                    model: 'users',
+                    select: 'firstName lastName -_id'
+                }
+            }).populate({
+                path: 'invitedUsers',
+                model: 'users',
+                select: 'firstName lastName -_id'
+            }).exec(function (err, proposals) {
+                if (err) {
+                    return res.status(500).json({status: 500, statusText: err.message});
+                } else {
+                    return res.status(200).json({status: 200, statusText: "Success", data: proposals});
+                }
+            });
+        }
+    } else {
+        Proposal.find({
+            isDeleted: false
+        }).select({
+            _id: true,
+            status: true,
+            farm: true,
+            invitedUsers: true,
+            createdBy: true
+        }).populate({
+            path: 'farm',
+            model: 'farms',
+            select: 'streetAddress city state zipCode owner -_id',
+            match: { owner: req.session.passport.user.id },
+        }).populate({
+            path: 'invitedUsers',
+            model: 'users',
+            select: 'firstName lastName -_id'
+        }).populate({
+            path: 'createdBy',
+            model: 'users',
+            select: 'firstName lastName -_id'
+        }).exec(function (err, proposals) {
+            proposals = proposals.filter(function(proposal){
+                return proposal.farm;
+            });
+            if (err) {
+                return res.status(500).json({status: 500, statusText: err.message});
+            } else {
+                return res.status(200).json({status: 200, statusText: "Success", data: proposals});
+            }
+        });
+    }
 }
 
 function getProposalById(req,res){
