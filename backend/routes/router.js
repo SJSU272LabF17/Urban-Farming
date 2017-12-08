@@ -18,14 +18,10 @@ module.exports = function(router,passport) {
     router.get('/myfarms', isOwnerAuthenticated, farm.getMyFarms);
     router.get('/farms', farm.searchFarms);
 
-    //get self profile
     router.get('/profile', isAuthenticated, user.getProfile);
-    //update self profile
     router.put('/profile', isAuthenticated, user.updateProfile);
-    //search farmers to invite in proposal
     router.get('/farmers', isFarmerAuthenticated, user.searchFarmers);
 
-    //create proposal with draft/submitted status - should not allow duplicate proposals to same farm even if invited to other proposal
     router.post('/proposals', isFarmerAuthenticated, proposal.createProposal);
     //update proposal with draft/submitted status
     router.put('/proposals/:id', isFarmerAuthenticated, proposal.updateProposal);

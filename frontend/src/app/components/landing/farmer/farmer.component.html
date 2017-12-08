@@ -37,7 +37,10 @@
         <div class="row">
           <div class="col-xs-6">
             <label>Owner</label>
-            <p>John Doe</p>
+            <p>
+              {{f.owner.firstName}}
+              {{f.owner.lastName}}
+            </p>
           </div>
           <div class="col-xs-6">
             <label>Surface area</label>
@@ -88,7 +91,10 @@
             </div>
             <div class="col-xs-6">
               <label>Owner</label>
-              <p>John Doe</p>
+              <p>
+                {{selectedFarm.owner.firstName}}
+                {{selectedFarm.owner.lastName}}
+              </p>
             </div>
             <div class="col-xs-6">
               <label>Surface area</label>

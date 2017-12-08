@@ -5,6 +5,8 @@ import { ModalService } from '../../../modal/modal.service';
 import {AuthService} from "../../../services/auth.service";
 import {SharedService} from "../../../services/shared.service";
 import {FarmService} from "../../../services/farm.service";
+import {ProposalService} from "../../../services/proposal.service";
+import {Router} from "@angular/router";
 
 declare var google: any;
 
@@ -43,7 +45,7 @@ export class FarmerComponent implements OnInit {
 
   selectedFarm: any = {location:[]};
 
-  constructor(private modalService:ModalService, private authService:AuthService, private sharedService:SharedService, private farmService:FarmService, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone) { }
+  constructor(private router:Router, private modalService:ModalService, private authService:AuthService, private sharedService:SharedService, private farmService:FarmService, private proposalService:ProposalService, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone) { }
 
   ngOnInit() {
     if(navigator.geolocation){
@@ -66,7 +68,7 @@ export class FarmerComponent implements OnInit {
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
           //get the place result
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+          let place: any = autocomplete.getPlace();
           //verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
@@ -122,11 +124,17 @@ export class FarmerComponent implements OnInit {
 
   saveProposal(asDraft: boolean): void {
     //TODO: validation
-    if(asDraft){
-      //TODO: save as draft
-    } else {
-      //TODO: submit proposal
-    }
+    var payload = this.proposalData;
+    payload.farm = this.selectedFarm._id;
+    payload.asDraft = asDraft;
+    this.proposalService.createProposal(payload).subscribe((data: any) => {
+      //TODO: show success notification
+      this.modalService.close('new-proposal');
+      this.router.navigate(['/proposal',data.data._id]);
+    }, error => {
+      //TODO: show error notification
+      console.log(error);
+    });
   }
 
 }

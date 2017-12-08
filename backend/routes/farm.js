@@ -12,9 +12,9 @@ function addNewFarm(req, res){
     farmModel.waterAlternative = req.body.waterAlternative;
     farmModel.appliedWaterConn = req.body.appliedWaterConn;
     farmModel.existingStructures = req.body.existingStructures;
-    farmModel.isDeleted = false;
     farmModel.owner = req.session.passport.user.id;
     farmModel.status = 'ACTVIE';
+    farmModel.isDeleted = false;
     var date = new Date();
     farmModel.createdDate = date;
     farmModel.updatedDate = date;
@@ -93,7 +93,7 @@ function searchFarms(req, res){
             },
             status:"ACTIVE",
             isDeleted:false
-        }).exec(function(err, farms){
+        }).populate('owner','firstName lastName -_id').exec(function(err, farms){
             if (err) {
                 return res.status(500).json({status: 500, statusText: err.message});
             } else {
