@@ -33,8 +33,8 @@ export class ProposalService {
     return this.http.delete<T>(this.host+'/proposals/'+id);
   }
 
-  takeAction<T>(payload: any): Observable<T> {
-    return this.http.post<T>(this.host+'/proposals/action', JSON.stringify(payload));
+  takeAction<T>(payload: any, id: any): Observable<T> {
+    return this.http.post<T>(this.host+'/proposals/'+id+'/action', JSON.stringify(payload));
   }
 
   sendMessageToProposal<T>(payload: any, id: any): Observable<T> {

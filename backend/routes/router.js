@@ -23,13 +23,11 @@ module.exports = function(router,passport) {
     router.get('/farmers', isFarmerAuthenticated, user.searchFarmers);
 
     router.post('/proposals', isFarmerAuthenticated, proposal.createProposal);
-    //TODO update proposal with draft/submitted status
     router.put('/proposals/:id', isFarmerAuthenticated, proposal.updateProposal);
     router.delete('/proposals/:id', isFarmerAuthenticated, proposal.deleteProposal);
     router.get('/proposals', isAuthenticated, proposal.getProposals);
     router.get('/proposals/:id', isAuthenticated, proposal.getProposalById);
-    //TODO accept-reject proposal, its own farm proposal only
-    router.post('/proposals/action', isOwnerAuthenticated, proposal.takeProposalAction);
+    router.post('/proposals/:id/action', isOwnerAuthenticated, proposal.takeProposalAction);
 
     router.get('/proposals/:id/messages', isAuthenticated, proposal.getProposalMessages);
     router.post('/proposals/:id/messages', isAuthenticated, proposal.addNewProposalMessage);

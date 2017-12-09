@@ -122,7 +122,24 @@
       <div class="row">
         <div class="col-xs-12 form-group">
           <label>Invite other farmers</label>
-          <input type="text" class="form-control" placeholder="Search farmers...">
+          <input  ngui-auto-complete class="form-control" placeholder="Search farmers..."
+                  min-chars="1"
+                  accept-user-input="false"
+                  [(ngModel)]="selectedFarmer"
+                  [source]="searchFarmers.bind(this)"
+                  (valueChanged)="farmerSelected($event)"
+                  value-property-name="id"
+                  display-property-name="firstName"
+                  [list-formatter]="myListFormatter"/>
+        </div>
+        <div class="col-xs-12 form-group" *ngIf="proposalData.invitedUsers.length > 0">
+          <div *ngFor="let u of proposalData.invitedUsers; let i = index">
+            <p>
+              {{u.firstName}}
+              {{u.lastName}}
+              <a href="javascript:void(0)" (click)="removeFarmer(i)"><i class="fa fa-close" aria-hidden="true"></i></a>
+            </p>
+          </div>
         </div>
         <div class="col-xs-12 form-group">
           <label>Cover letter</label>

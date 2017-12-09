@@ -59,7 +59,8 @@
 }
 
 .proposal-page .content-section .discussion-section {
-
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .proposal-page .content-section .discussion-section .message-item .user-name {
@@ -93,32 +94,6 @@
   height: 54px;
 }
 
-
-.edit-proposal ::ng-deep .modal {
-  width: 50%;
-  height: fit-content;
-}
-
-.edit-proposal ::ng-deep .modal .body {
-  padding: 60px 60px 30px 60px !important;
-}
-
-.edit-proposal ::ng-deep .modal .body .close-button {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  color: #7b7b7b;
-  cursor: pointer;
-}
-
-.edit-proposal ::ng-deep .modal .body .form-body {
-
-}
-
-.edit-proposal ::ng-deep .modal .body .form-footer {
-  text-align: right;
-}
-
 .delete-proposal ::ng-deep .modal {
   width: 50%;
   height: fit-content;
@@ -141,5 +116,30 @@
 }
 
 .delete-proposal ::ng-deep .modal .body .form-footer {
+  text-align: right;
+}
+
+.confirm-proposal ::ng-deep .modal {
+  width: 50%;
+  height: fit-content;
+}
+
+.confirm-proposal ::ng-deep .modal .body {
+  padding: 60px 60px 30px 60px !important;
+}
+
+.confirm-proposal ::ng-deep .modal .body .close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #7b7b7b;
+  cursor: pointer;
+}
+
+.confirm-proposal ::ng-deep .modal .body .form-body {
+
+}
+
+.confirm-proposal ::ng-deep .modal .body .form-footer {
   text-align: right;
 }

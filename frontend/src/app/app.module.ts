@@ -6,6 +6,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AgmCoreModule } from '@agm/core';
 
+import { NguiAutoCompleteModule } from '@ngui/auto-complete';
+
 import { ModalModule } from './modal/modal.module';
 
 import { AppComponent } from './app.component';
@@ -30,6 +32,7 @@ import { GoogleMapsService } from './services/google-maps.service';
 import {FarmService} from "./services/farm.service";
 import { ProposalService } from './services/proposal.service';
 import { ForumService } from './services/forum.service';
+import { UserService } from './services/user.service';
 
 export function authServiceFactory(authService: AuthService): Function {
   return () => authService.checkSession();
@@ -59,7 +62,8 @@ export function authServiceFactory(authService: AuthService): Function {
       apiKey: 'AIzaSyAaI2kPf5ry2flRY1Gu4Jbf2OyvtWBa9uE',
       libraries: ["places"]
     }),
-    ModalModule
+    ModalModule,
+    NguiAutoCompleteModule
   ],
   providers: [
     AuthGuard,
@@ -80,7 +84,8 @@ export function authServiceFactory(authService: AuthService): Function {
     GoogleMapsService,
     FarmService,
     ProposalService,
-    ForumService
+    ForumService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

@@ -7,6 +7,9 @@ import {SharedService} from "../../../services/shared.service";
 import {FarmService} from "../../../services/farm.service";
 import {ProposalService} from "../../../services/proposal.service";
 import {Router} from "@angular/router";
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import {UserService} from "../../../services/user.service";
 
 declare var google: any;
 
@@ -42,10 +45,11 @@ export class FarmerComponent implements OnInit {
     plannerOperations: '',
     invitedUsers: []
   };
+  selectedFarmer: any;
 
   selectedFarm: any = {location:[],owner:{}};
 
-  constructor(private router:Router, private modalService:ModalService, private authService:AuthService, private sharedService:SharedService, private farmService:FarmService, private proposalService:ProposalService, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone) { }
+  constructor(private router:Router, private modalService:ModalService, private authService:AuthService, private sharedService:SharedService, private farmService:FarmService, private proposalService:ProposalService, private userService:UserService, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone) { }
 
   ngOnInit() {
     if(navigator.geolocation){
@@ -109,6 +113,7 @@ export class FarmerComponent implements OnInit {
         plannedOperations: '',
         invitedUsers: []
       };
+      this.selectedFarmer = null;
       this.selectedFarm = this.farms[index];
       this.modalService.open('new-proposal');
       this.map2.triggerResize();
@@ -136,6 +141,35 @@ export class FarmerComponent implements OnInit {
       //TODO: show error notification
       console.log(error);
     });
+  }
+
+  searchFarmers = (keyword: any): Observable<any[]> => {
+    if (keyword) {
+      return this.userService.searchFarmers(keyword)
+        .map(res => {
+          return res.data;
+        })
+    } else {
+      return Observable.of([]);
+    }
+  }
+
+  farmerSelected(e): void {
+    if(e._id) {
+      var found = this.proposalData.invitedUsers.some(function (el) {
+        return el._id === e._id;
+      });
+      if (!found) { this.proposalData.invitedUsers.push({_id: e._id, firstName: e.firstName, lastName: e.lastName}); }
+    }
+    this.selectedFarmer = null;
+  }
+
+  removeFarmer(index: any): void {
+    this.proposalData.invitedUsers.splice(index);
+  }
+
+  myListFormatter(data: any): string {
+    return `${data['firstName']} ${data['lastName']} - ${data['email']}`;
   }
 
 }

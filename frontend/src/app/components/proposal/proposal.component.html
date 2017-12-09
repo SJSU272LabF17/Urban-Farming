@@ -46,51 +46,79 @@
       </div>
     </div>
     <p class="section-title">Proposal details</p>
-    <div class="row section proposal-section">
+    <div class="row section proposal-section" *ngIf="proposalData.status === 'DRAFT' && proposalData.createdBy._id === authService.uid">
       <div class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-12 form-group">
+          <div class="form-group">
+            <label>Other farmers invited</label>
+            <input  ngui-auto-complete class="form-control" placeholder="Search farmers..."
+                    min-chars="1"
+                    accept-user-input="false"
+                    [(ngModel)]="selectedFarmer"
+                    [source]="searchFarmers.bind(this)"
+                    (valueChanged)="farmerSelected($event)"
+                    value-property-name="id"
+                    display-property-name="firstName"
+                    [list-formatter]="myListFormatter"/>
+          </div>
+          <p *ngFor="let u of proposalData.invitedUsers; let i = index">
+            {{u.firstName}}
+            {{u.lastName}}
+            <a href="javascript:void(0)" (click)="removeFarmer(i)"><i class="fa fa-close" aria-hidden="true"></i></a>
+          </p>
+        </div>
+        <div class="col-xs-12 form-group">
+          <label>Cover letter</label>
+          <textarea class="form-control" rows="4" [(ngModel)]="proposalData.coverLetter"></textarea>
+        </div>
+        <div class="col-xs-12 form-group">
+          <label>Proposed uses</label>
+          <textarea class="form-control" rows="4" [(ngModel)]="proposalData.proposedUses"></textarea>
+        </div>
+        <div class="col-xs-12 form-group">
+          <label>Planned operations</label>
+          <textarea class="form-control" rows="4" [(ngModel)]="proposalData.plannedOperations"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="row section proposal-section" *ngIf="proposalData.status !== 'DRAFT' || proposalData.createdBy._id !== authService.uid">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 form-group">
           <label>Created by</label>
           <p>
             {{proposalData.createdBy.firstName}}
             {{proposalData.createdBy.lastName}}
           </p>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-12 col-sm-6 form-group">
           <label>Other farmers invited</label>
-          <p *ngFor="let u of proposalData.invitedUsers; let i = index">
+          <p *ngFor="let u of proposalData.invitedUsers">
             {{u.firstName}}
             {{u.lastName}}
-            <a href="javascript:void(0)"><i class="fa fa-close" aria-hidden="true"></i></a>
           </p>
-          <a href="javascript:void(0)" (click)="openEditProposal('inviteFarmers')">Invite more</a>
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-12">
-          <label>Cover letter
-            <a href="javascript:void(0)" (click)="openEditProposal('coverLetter')"><i class="fa fa-edit" aria-hidden="true"></i></a>
-          </label>
+        <div class="col-xs-12 form-group">
+          <label>Cover letter</label>
           <p>{{proposalData.coverLetter}}</p>
         </div>
-        <div class="col-xs-12">
-          <label>Proposed uses
-            <a href="javascript:void(0)" (click)="openEditProposal('proposedUses')"><i class="fa fa-edit" aria-hidden="true"></i></a>
-          </label>
+        <div class="col-xs-12 form-group">
+          <label>Proposed uses</label>
           <p>{{proposalData.proposedUses}}</p>
         </div>
-        <div class="col-xs-12">
-          <label>Planned operations
-            <a href="javascript:void(0)" (click)="openEditProposal('plannedOperations')"><i class="fa fa-edit" aria-hidden="true"></i></a>
-          </label>
+        <div class="col-xs-12 form-group">
+          <label>Planned operations</label>
           <p>{{proposalData.plannedOperations}}</p>
         </div>
       </div>
     </div>
-    <div class="row section action-section">
+    <div class="row section action-section" *ngIf="(proposalData.createdBy._id === authService.uid && proposalData.status === 'DRAFT') || (proposalData.farmOwner === authService.uid && proposalData.status === 'SUBMITTED')">
       <button *ngIf="authService.role === 'FARMER' && proposalData.status === 'DRAFT'" class="btn btn-primary btn-uf" (click)="saveProposal(true)">Save as draft</button>
       <button *ngIf="authService.role === 'FARMER' && proposalData.status === 'DRAFT'" class="btn btn-primary btn-uf" (click)="saveProposal(false)">Submit</button>
       <button *ngIf="authService.role === 'FARMER' && proposalData.status === 'DRAFT'" class="btn btn-default btn-uf btn-uf-default" (click)="openDeleteProposal()">Delete</button>
-      <button *ngIf="authService.role === 'OWNER' && proposalData.status == 'DRAFT'" class="btn btn-primary btn-uf" (click)="takeAction()">Take action</button>
+      <button *ngIf="authService.role === 'OWNER' && proposalData.status == 'SUBMITTED'" class="btn btn-primary btn-uf" (click)="confirmTakeAction('ACCEPTED')">Accept</button>
+      <button *ngIf="authService.role === 'OWNER' && proposalData.status == 'SUBMITTED'" class="btn btn-primary btn-uf" (click)="confirmTakeAction('REJECTED')">Reject</button>
     </div>
     <p class="section-title">Discussions</p>
     <div class="row section discussion-section">
@@ -118,34 +146,6 @@
   </div>
 </div>
 
-<app-modal [blocking]='true' modalId="edit-proposal" class="edit-proposal">
-  <span class="close-button" (click)="closeEditProposal()"><i class="fa fa-times" aria-hidden="true"></i></span>
-  <div class="form-body">
-    <div class="row">
-      <div *ngIf="editView === 'coverLetter'" class="col-xs-12 form-group">
-        <label>Cover letter</label>
-        <textarea class="form-control" rows="4"></textarea>
-      </div>
-      <div *ngIf="editView === 'proposedUses'" class="col-xs-12 form-group">
-        <label>Proposed uses</label>
-        <textarea class="form-control" rows="4"></textarea>
-      </div>
-      <div *ngIf="editView === 'plannedOperations'" class="col-xs-12 form-group">
-        <label>Planned operations</label>
-        <textarea class="form-control" rows="4"></textarea>
-      </div>
-      <div *ngIf="editView === 'inviteFarmers'" class="col-xs-12 form-group">
-        <label>Invite other farmers</label>
-        <input type="text" class="form-control" placeholder="Search farmers...">
-      </div>
-    </div>
-  </div>
-  <div class="form-footer">
-    <button class="btn btn-default btn-uf btn-uf-default" (click)="closeEditProposal()">Cancel</button>
-    <button class="btn btn-primary btn-uf" (click)="saveProposalTemp()">Ok</button>
-  </div>
-</app-modal>
-
 <app-modal [blocking]='true' modalId="delete-proposal" class="delete-proposal">
   <span class="close-button" (click)="closeDeleteProposal()"><i class="fa fa-times" aria-hidden="true"></i></span>
   <div class="form-body">
@@ -154,5 +154,17 @@
   <div class="form-footer">
     <button class="btn btn-default btn-uf btn-uf-default" (click)="closeDeleteProposal()">No</button>
     <button class="btn btn-primary btn-uf" (click)="deleteProposal()">Yes</button>
+  </div>
+</app-modal>
+
+<app-modal [blocking]='true' modalId="confirm-proposal" class="confirm-proposal">
+  <span class="close-button" (click)="closeTakeAction()"><i class="fa fa-times" aria-hidden="true"></i></span>
+  <div class="form-body">
+    <p *ngIf="confirmStatus === 'ACCEPTED'">You chose to accept this proposal. Are you sure?</p>
+    <p *ngIf="confirmStatus === 'REJECTED'">You chose to reject this proposal. Are you sure?</p>
+  </div>
+  <div class="form-footer">
+    <button class="btn btn-default btn-uf btn-uf-default" (click)="closeTakeAction()">No</button>
+    <button class="btn btn-primary btn-uf" (click)="takeAction()">Yes</button>
   </div>
 </app-modal>

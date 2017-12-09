@@ -10,6 +10,7 @@ export class AuthService {
   public isLogged: boolean = true;
   public role: String = "";
   public uname: String = "";
+  public uid: String = "";
   private host: String = "http://localhost:3001/api/v1";
 
   constructor(private http: HttpClient) { }
@@ -18,6 +19,7 @@ export class AuthService {
     this.isLogged = false;
     this.uname = "";
     this.role = "";
+    this.uid = "";
   }
 
   signin<T>(payload: any): Observable<T> {
@@ -41,11 +43,13 @@ export class AuthService {
         this.isLogged = true;
         this.uname = data.data.uname;
         this.role = data.data.role;
+        this.uid = data.data.uid;
       })
       .catch((err: any) => {
         this.isLogged = false;
         this.uname = "";
         this.role = "";
+        this.uid = "";
         Promise.resolve();
       });
   }
