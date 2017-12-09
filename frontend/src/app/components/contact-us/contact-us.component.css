@@ -1,3 +1,21 @@
 .contact-us-page .content-section {
   padding: 80px 60px;
 }
+
+.contact-us-page .content-section .page-title {
+  font-size: 28px;
+  line-height: 2;
+  border-bottom: 3px solid #668226;
+}
+
+.contact-us-page .content-section .page-title p {
+  margin: 0px;
+}
+
+.contact-us-page .content-section .data-container {
+
+}
+
+.contact-us-page .content-section .data-container p {
+  margin: 30px 0px;
+}
