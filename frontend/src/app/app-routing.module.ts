@@ -10,12 +10,16 @@ import { ContactUsComponent } from "./components/contact-us/contact-us.component
 import { MyFarmsComponent } from "./components/my-farms/my-farms.component";
 import { MyProposalsComponent } from "./components/my-proposals/my-proposals.component";
 import { ProposalComponent } from "./components/proposal/proposal.component";
+import {ForumsComponent} from "./components/forums/forums.component";
+import {ForumDetailsComponent} from "./components/forum-details/forum-details.component";
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
   { path: 'my-farms', component: MyFarmsComponent, canActivate: [AuthGuard], data: { role: 'OWNER' } },
   { path: 'my-proposals', component: MyProposalsComponent, canActivate: [AuthGuard], data: { role: 'FARMER' } },
   { path: 'proposal/:id', component: ProposalComponent, canActivate: [AuthGuard] },
+  { path: 'forums', component: ForumsComponent },
+  { path: 'forums/:id', component: ForumDetailsComponent },
   { path: 'how-it-works', component: HowItWorksComponent },
   { path: 'aboutus', component: AboutUsComponent },
   { path: 'contactus', component: ContactUsComponent }

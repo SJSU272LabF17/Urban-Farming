@@ -34,8 +34,8 @@ module.exports = function(router,passport) {
 
     router.post('/forums', isAuthenticated, forum.createForumTopic);
     router.get('/forums', forum.getAllForumTopics);
-    router.post('/forums/:id/comments', isAuthenticated, forum.addForumComment);
-    router.get('/forums/:id/comments', forum.getForumComments);
+    router.post('/forums/:id/messages', isAuthenticated, forum.addForumComment);
+    router.get('/forums/:id/messages', forum.getForumComments);
 
 	function isAuthenticated(req, res, next) {
 	    if(req.session.passport && req.session.passport.user.id) {

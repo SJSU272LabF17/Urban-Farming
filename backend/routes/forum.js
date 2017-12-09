@@ -29,7 +29,7 @@ function getAllForumTopics(req,res){
         path: 'createdBy',
         model: 'users',
         select: 'firstName lastName -_id'
-    }).sort('-createdDate').exec(function(err, topics) {
+    }).sort('createdDate').exec(function(err, topics) {
         if (err) {
             return res.status(500).json({status: 500, statusText: err.message});
         } else {
@@ -72,7 +72,13 @@ function getForumComments(req,res){
         if (err) {
             return res.status(500).json({status: 500, statusText: err.message});
         } else {
-            return res.status(200).json({status: 200, statusText: "Success", data:messages});
+            ForumTopic.findById(req.params.id, function(err, forum){
+                if(err){
+                    return res.status(500).json({status: 500, statusText: err.message});
+                } else {
+                    return res.status(200).json({status: 200, statusText: "Success", data:{messages:messages,topicTitle:forum.title}});
+                }
+            });
         }
     });
 }

@@ -1,0 +1,32 @@
+<div class="forum-details-page">
+  <div class="content-section">
+    <div class="page-title">
+      <p>{{topicTitle}}</p>
+    </div>
+    <div class="data-container">
+      <div class="row">
+        <div class="col-xs-12 compose-message">
+          <div class="row">
+            <div class="col-xs-10">
+              <textarea placeholder="Write a comment..." rows="2" class="form-control" [(ngModel)]="newMessageText"></textarea>
+            </div>
+            <div class="col-xs-2">
+              <button class="btn btn-primary btn-uf" (click)="sendMessage()">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="message-list" *ngIf="messages.length > 0">
+        <div class="message-item" *ngFor="let m of messages">
+          <p class="user-name">
+            {{m.createdBy.firstName}}
+            {{m.createdBy.lastName}}
+            <span class="timestamp">{{m.createdDate | date: 'MM/dd/yyyy HH:mm:ss'}}</span>
+          </p>
+          <p class="message-text">{{m.message}}</p>
+        </div>
+      </div>
+      <p *ngIf="messages.length === 0" class="empty-message">There are no comments in this topic</p>
+    </div>
+  </div>
+</div>

@@ -28,7 +28,7 @@ export class CustomInterceptor implements HttpInterceptor {
         //authService.removeTokens();
         //redirect to the signin page or show login modal here
         //this.authService.setIsLogged(false);
-        this.router.navigate(['/']);
+        //this.router.navigate(['/']);
         return Observable.throw(error);
       } else {
         return Observable.throw(error);

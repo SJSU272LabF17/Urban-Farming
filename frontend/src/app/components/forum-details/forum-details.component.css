@@ -1,0 +1,49 @@
+.forum-details-page .content-section {
+  padding: 80px 60px;
+}
+
+.forum-details-page .content-section .page-title {
+  font-size: 28px;
+  line-height: 2;
+  border-bottom: 1px solid #ccc;
+}
+
+.forum-details-page .content-section .page-title p {
+  margin: 0px;
+}
+
+.forum-details-page .content-section .data-container {
+
+}
+
+.forum-details-page .content-section .data-container .message-list .message-item .user-name {
+  font-weight: bold;
+}
+
+.forum-details-page .content-section .data-container .message-list .message-item .user-name .timestamp {
+  font-size: 12px;
+  font-weight: lighter;
+  margin-left: 15px;
+}
+
+.forum-details-page .content-section .data-container .message-list .message-item {
+  margin-top: 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+.forum-details-page .content-section .data-container .message-list .message-item .message-text {
+
+}
+
+.forum-details-page .content-section .data-container .compose-message {
+  margin-top: 15px;
+}
+
+.forum-details-page .content-section .data-container .compose-message textarea {
+  resize: none;
+}
+
+.forum-details-page .content-section .data-container .compose-message .btn-uf {
+  width: 100%;
+  height: 54px;
+}

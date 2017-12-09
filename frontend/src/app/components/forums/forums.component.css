@@ -1,0 +1,57 @@
+.forums-page .content-section {
+  padding: 80px 60px;
+}
+
+.forums-page .content-section .page-title {
+  font-size: 28px;
+  line-height: 2;
+  border-bottom: 1px solid #ccc;
+}
+
+.forums-page .content-section .page-title p {
+  margin: 0px;
+  float: left;
+}
+
+.forums-page .content-section .page-title a {
+  float: right;
+}
+
+.forums-page .content-section .data-container {
+
+}
+
+.forums-page .content-section .data-container .card {
+  padding: 15px 0px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.forums-page .content-section .data-container .card p {
+  margin: 0px;
+}
+
+.new-topic ::ng-deep .modal {
+  width: 50%;
+  height: fit-content;
+}
+
+.new-topic ::ng-deep .modal .body {
+  padding: 60px 60px 30px 60px !important;
+}
+
+.new-topic ::ng-deep .modal .body .close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #7b7b7b;
+  cursor: pointer;
+}
+
+.new-topic ::ng-deep .modal .body .form-body {
+
+}
+
+.new-topic ::ng-deep .modal .body .form-footer {
+  text-align: right;
+}

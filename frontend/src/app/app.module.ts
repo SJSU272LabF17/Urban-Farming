@@ -33,6 +33,8 @@ import {FarmService} from "./services/farm.service";
 import { ProposalService } from './services/proposal.service';
 import { ForumService } from './services/forum.service';
 import { UserService } from './services/user.service';
+import { ForumsComponent } from './components/forums/forums.component';
+import { ForumDetailsComponent } from './components/forum-details/forum-details.component';
 
 export function authServiceFactory(authService: AuthService): Function {
   return () => authService.checkSession();
@@ -50,7 +52,9 @@ export function authServiceFactory(authService: AuthService): Function {
     OwnerComponent,
     FarmerComponent,
     MyProposalsComponent,
-    ProposalComponent
+    ProposalComponent,
+    ForumsComponent,
+    ForumDetailsComponent
   ],
   imports: [
     BrowserModule,

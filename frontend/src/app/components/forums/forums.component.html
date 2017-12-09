@@ -1,0 +1,32 @@
+<div class="forums-page">
+  <div class="content-section">
+    <div class="page-title">
+      <p>All topics</p>
+      <a href="javascript:void(0)" (click)="openNewTopic()">+</a>
+      <div class="clearfix"></div>
+    </div>
+    <div class="data-container">
+      <div *ngIf="topics.length > 0">
+        <div *ngFor="let t of topics" class="card" (click)="router.navigate(['/forums',t._id])">
+          <p>{{t.title}}</p>
+        </div>
+      </div>
+      <p *ngIf="topics.length === 0" class="empty-message">There are no topics created in forums</p>
+    </div>
+  </div>
+</div>
+
+<app-modal [blocking]='true' modalId="new-topic" class="new-topic">
+  <span class="close-button" (click)="closeNewTopic()"><i class="fa fa-times" aria-hidden="true"></i></span>
+  <div class="form-body">
+    <div class="row form-group">
+      <div class="col-xs-12">
+        <input type="text" class="form-control" placeholder="Title" [(ngModel)]="newTopicText">
+      </div>
+    </div>
+  </div>
+  <div class="form-footer">
+    <button class="btn btn-default btn-uf btn-uf-default" (click)="closeNewTopic()">Cancel</button>
+    <button class="btn btn-primary btn-uf" (click)="createNewTopic()">Create</button>
+  </div>
+</app-modal>
