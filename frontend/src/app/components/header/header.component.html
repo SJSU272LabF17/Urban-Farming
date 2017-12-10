@@ -17,6 +17,9 @@
           <a routerLink="my-proposals" routerLinkActive="active">My proposals</a>
         </li>
         <li class="nav-item">
+          <a routerLink="feed" routerLinkActive="active">Feed</a>
+        </li>
+        <li class="nav-item">
           <a routerLink="forums" routerLinkActive="active">Forums</a>
         </li>
         <li class="nav-item">
@@ -41,7 +44,7 @@
           <span>{{authService.uname}}</span>
         </a>
         <ul class="dropdown-menu" dropdownMenu>
-          <li><a routerLink="profile">Profile</a></li>
+          <li *ngIf="authService.role !== 'ADMIN'"><a routerLink="profile">Profile</a></li>
           <li>
             <a (click)="logout()">Logout</a>
           </li>

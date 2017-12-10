@@ -14,14 +14,16 @@ import {ForumsComponent} from "./components/forums/forums.component";
 import {ForumDetailsComponent} from "./components/forum-details/forum-details.component";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {EditProfileComponent} from "./components/edit-profile/edit-profile.component";
+import {FeedComponent} from "./components/feed/feed.component";
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
-  { path: 'my-farms', component: MyFarmsComponent, canActivate: [AuthGuard], data: { role: 'OWNER' } },
-  { path: 'my-proposals', component: MyProposalsComponent, canActivate: [AuthGuard], data: { role: 'FARMER' } },
-  { path: 'proposal/:id', component: ProposalComponent, canActivate: [AuthGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard] },
+  { path: 'my-farms', component: MyFarmsComponent, canActivate: [AuthGuard], data: { role: ['OWNER'] } },
+  { path: 'my-proposals', component: MyProposalsComponent, canActivate: [AuthGuard], data: { role: ['FARMER'] } },
+  { path: 'proposal/:id', component: ProposalComponent, canActivate: [AuthGuard], data: { role: ['FARMER','OWNER'] } },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { role: ['FARMER','OWNER'] } },
+  { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard], data: { role: ['FARMER','OWNER'] } },
+  { path: 'feed', component: FeedComponent },
   { path: 'forums', component: ForumsComponent },
   { path: 'forums/:id', component: ForumDetailsComponent },
   { path: 'how-it-works', component: HowItWorksComponent },

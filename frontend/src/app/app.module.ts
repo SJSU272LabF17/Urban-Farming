@@ -39,6 +39,8 @@ import { ForumsComponent } from './components/forums/forums.component';
 import { ForumDetailsComponent } from './components/forum-details/forum-details.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { AdminComponent } from './components/landing/admin/admin.component';
+import { FeedComponent } from './components/feed/feed.component';
 
 export function authServiceFactory(authService: AuthService): Function {
   return () => authService.checkSession();
@@ -60,7 +62,9 @@ export function authServiceFactory(authService: AuthService): Function {
     ForumsComponent,
     ForumDetailsComponent,
     ProfileComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    AdminComponent,
+    FeedComponent
   ],
   imports: [
     BrowserModule,

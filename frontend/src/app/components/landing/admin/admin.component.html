@@ -1,0 +1,165 @@
+
+<div class="btn-container text-right">
+  <button class="btn btn-primary btn-uf" (click)="openAddNewFarm()">Add new</button>
+</div>
+<div class="data-container">
+  <div *ngIf="farms.length > 0" >
+    <div class="card" *ngFor="let f of farms; let i = index">
+      <div class="location-info">
+        <div class="row">
+          <div class="col-xs-12">
+            <p>
+              {{f.streetAddress}}
+              {{f.city}}
+              {{f.state}}
+              {{f.zipCode}}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="general-info">
+        <div class="row">
+          <div class="col-xs-6">
+            <label>Surface area</label>
+            <p>{{f.size}} Sqft.</p>
+          </div>
+          <div class="col-xs-6">
+            <label>Water connection?</label>
+            <p>{{f.waterConn}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6">
+            <label>Existing structures</label>
+            <p>{{f.existingStructures}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="owner-info">
+        <div class="row">
+          <div class="col-xs-6">
+            <label>Contact name</label>
+            <p>{{f.ownerInfo.ownerContactName}}</p>
+          </div>
+          <div class="col-xs-6">
+            <label>Phone number</label>
+            <p>{{f.ownerInfo.ownerContactPhoneNumber}}</p>
+          </div>
+          <div class="col-xs-6">
+            <label>Email</label>
+            <p>{{f.ownerInfo.ownerContactEmail}}</p>
+          </div>
+          <div class="col-xs-6">
+            <label>Redirect URL</label>
+            <p>{{f.ownerInfo.redirectURL}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="action-info">
+        <button class="btn btn-primary btn-uf" (click)="openEditFarm(i)">Edit</button>
+        <button class="btn btn-uf btn-default btn-uf-default" (click)="openDeleteFarm(i)">Delete</button>
+      </div>
+    </div>
+  </div>
+  <p *ngIf="farms.length === 0" class="empty-message">No farms added</p>
+</div>
+
+<app-modal [blocking]='true' modalId="farm-form" class="farm-form">
+  <span class="close-button" (click)="closeFarmForm()"><i class="fa fa-times" aria-hidden="true"></i></span>
+  <div class="form-body">
+    <p class="section-title">Owner information</p>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 form-group">
+        <label>Contact name</label>
+        <input type="text" class="form-control" [(ngModel)]="farmData.ownerInfo.ownerContactName">
+      </div>
+      <div class="col-xs-12 col-sm-6 form-group">
+        <label>Phone number</label>
+        <input type="text" class="form-control" [(ngModel)]="farmData.ownerInfo.ownerContactPhoneNumber">
+      </div>
+      <div class="col-xs-12 col-sm-6 form-group">
+        <label>Email</label>
+        <input type="text" class="form-control" [(ngModel)]="farmData.ownerInfo.ownerContactEmail">
+      </div>
+      <div class="col-xs-12 col-sm-6 form-group">
+        <label>Redirect URL</label>
+        <input type="text" class="form-control" [(ngModel)]="farmData.ownerInfo.redirectURL">
+      </div>
+    </div>
+    <hr>
+    <p class="section-title">Location information</p>
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="row">
+          <div class=" col-xs-12 form-group">
+            <input type="text" placeholder="Street address" class="form-control" [(ngModel)]="farmData.streetAddress" disabled>
+          </div>
+          <div class=" col-xs-12 form-group">
+            <input type="text" placeholder="City" class="form-control" [(ngModel)]="farmData.city" disabled>
+          </div>
+          <div class=" col-xs-6 form-group">
+            <input type="text" placeholder="State" class="form-control" [(ngModel)]="farmData.state" disabled>
+          </div>
+          <div class=" col-xs-6 form-group">
+            <input type="text" placeholder="Zip code" class="form-control" [(ngModel)]="farmData.zipCode" disabled>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6 form-group">
+        <agm-map #farmMap [latitude]="farmData.lat" [longitude]="farmData.lng" (mapClick)="getLocation($event)" [zoom]="zoom">
+          <agm-marker [latitude]="markerLat" [longitude]="markerLng"></agm-marker>
+        </agm-map>
+      </div>
+    </div>
+    <hr>
+    <p class="section-title">Other information</p>
+    <div class="row form-group">
+      <label class="col-xs-6 control-label">Size of the farm in square feet</label>
+      <div class="col-xs-6">
+        <input type="text" class="form-control" [(ngModel)]="farmData.size">
+      </div>
+    </div>
+    <div class="row form-group">
+      <label class="col-xs-6 control-label">Does the farm have a metered water connection or approved alternative?</label>
+      <div class="col-xs-6 radio-buttons">
+        <label><input type="radio" value="YES" name="waterConn" [(ngModel)]="farmData.waterConn">Yes</label>
+        <label><input type="radio" value="NO" name="waterConn" [(ngModel)]="farmData.waterConn">No</label>
+      </div>
+    </div>
+    <div class="row form-group">
+      <label class="col-xs-6 control-label">If an alternative, please describe</label>
+      <div class="col-xs-6">
+        <input type="text" class="form-control" [(ngModel)]="farmData.waterAlternative">
+      </div>
+    </div>
+    <div class="row form-group">
+      <label class="col-xs-6 control-label">If no metered connection, have you applied for metered water service and paid the fee?</label>
+      <div class="col-xs-6 radio-buttons">
+        <label><input type="radio" value="YES" name="appliedWaterConn" [(ngModel)]="farmData.appliedWaterConn">Yes</label>
+        <label><input type="radio" value="NO" name="appliedWaterConn" [(ngModel)]="farmData.appliedWaterConn">No</label>
+      </div>
+    </div>
+    <div class="row form-group">
+      <label class="col-xs-6 control-label">Existing structures</label>
+      <div class="col-xs-6">
+        <textarea class="form-control" rows="3" [(ngModel)]="farmData.existingStructures"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="form-footer">
+    <button class="btn btn-default btn-uf btn-uf-default" (click)="closeFarmForm()">Cancel</button>
+    <button class="btn btn-primary btn-uf" (click)="saveFarm()">Save</button>
+  </div>
+</app-modal>
+
+
+<app-modal [blocking]='true' modalId="delete-farm" class="delete-farm">
+  <span class="close-button" (click)="closeDeleteFarm()"><i class="fa fa-times" aria-hidden="true"></i></span>
+  <div class="form-body">
+    <p>Are you sure, you want to delete this farm?</p>
+  </div>
+  <div class="form-footer">
+    <button class="btn btn-default btn-uf btn-uf-default" (click)="closeDeleteFarm()">No</button>
+    <button class="btn btn-primary btn-uf" (click)="deleteFarm()">Yes</button>
+  </div>
+</app-modal>

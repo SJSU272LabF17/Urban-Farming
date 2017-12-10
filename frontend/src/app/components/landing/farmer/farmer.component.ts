@@ -39,6 +39,8 @@ export class FarmerComponent implements OnInit {
   viewMapLat: number;
   viewMapLng: number;
 
+  contactDetails: any = {};
+
   proposalData: any = {
     coverLetter: '',
     proposedUses: '',
@@ -106,19 +108,25 @@ export class FarmerComponent implements OnInit {
   }
 
   openSubmitProposal(index: any): void {
-    if(this.authService.isLogged){
-      this.proposalData = {
-        coverLetter: '',
-        proposedUses: '',
-        plannedOperations: '',
-        invitedUsers: []
-      };
-      this.selectedFarmer = null;
-      this.selectedFarm = this.farms[index];
-      this.modalService.open('new-proposal');
-      this.map2.triggerResize();
+    if(this.farms[index].type === 'OWNER') {
+      if (this.authService.isLogged) {
+        this.proposalData = {
+          coverLetter: '',
+          proposedUses: '',
+          plannedOperations: '',
+          invitedUsers: []
+        };
+        this.selectedFarmer = null;
+        this.selectedFarm = this.farms[index];
+        this.modalService.open('new-proposal');
+        this.map2.triggerResize();
+      } else {
+        this.sharedService.openAuthModal();
+      }
     } else {
-      this.sharedService.openAuthModal();
+      this.contactDetails = this.farms[index].ownerInfo;
+      console.log(this.contactDetails);
+      this.modalService.open('contact-details');
     }
   }
 

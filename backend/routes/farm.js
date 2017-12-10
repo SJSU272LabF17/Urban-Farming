@@ -83,6 +83,90 @@ function deleteFarm(req, res){
     });
 }
 
+function addNewAdminFarm(req, res){
+    var farmModel = new Farm();
+    farmModel.streetAddress = req.body.streetAddress;
+    farmModel.city = req.body.city;
+    farmModel.state = req.body.state;
+    farmModel.zipCode = req.body.zipCode;
+    farmModel.location = [ req.body.lng, req.body.lat ];
+    farmModel.size = req.body.size;
+    farmModel.waterConn = req.body.waterConn;
+    farmModel.waterAlternative = req.body.waterAlternative;
+    farmModel.appliedWaterConn = req.body.appliedWaterConn;
+    farmModel.existingStructures = req.body.existingStructures;
+    farmModel.status = 'ACTIVE';
+    farmModel.type = 'ADMIN';
+    farmModel.ownerInfo = req.body.ownerInfo;
+    farmModel.isDeleted = false;
+    var date = new Date();
+    farmModel.createdDate = date;
+    farmModel.updatedDate = date;
+    farmModel.save(function(err) {
+        if (err) {
+            return res.status(500).json({status: 500, statusText: err.message});
+        } else {
+            return res.status(200).json({status: 200, statusText: "Success"});
+        }
+    });
+}
+
+function updateAdminFarm(req, res){
+    var updateObj = {
+        streetAddress : req.body.streetAddress,
+        city : req.body.city,
+        state : req.body.state,
+        zipCode : req.body.zipCode,
+        location : [req.body.lng, req.body.lat],
+        size : req.body.size,
+        waterConn : req.body.waterConn,
+        waterAlternative : req.body.waterAlternative,
+        appliedWaterConn : req.body.appliedWaterConn,
+        existingStructures : req.body.existingStructures,
+        ownerInfo : req.body.ownerInfo,
+        updatedDate : new Date()
+    }
+    Farm.update({
+        _id: req.params.id,
+        type:'ADMIN',
+    }, updateObj, function(err, result){
+        if (err) {
+            return res.status(500).json({status: 500, statusText: err.message});
+        } else {
+            return res.status(200).json({status: 200, statusText: "Success"});
+        }
+    });
+}
+
+function getAdminFarms(req, res){
+    Farm.find({
+        type:'ADMIN',
+        isDeleted:false
+    }).exec(function(err, farms){
+        if (err) {
+            return res.status(500).json({status: 500, statusText: err.message});
+        } else {
+            return res.status(200).json({status: 200, statusText: "Success", data: farms});
+        }
+    });
+}
+
+function deleteAdminFarm(req, res){
+    Farm.update({
+        _id: req.params.id,
+        type:'ADMIN'
+    }, {
+        isDeleted: true,
+        updatedDate : new Date()
+    }, function(err, result){
+        if (err) {
+            return res.status(500).json({status: 500, statusText: err.message});
+        } else {
+            return res.status(200).json({status: 200, statusText: "Success"});
+        }
+    });
+}
+
 function searchFarms(req, res){
     if(req.query.lat && !isNaN(parseFloat(req.query.lat))
         && req.query.lng && !isNaN(parseFloat(req.query.lng))) {
@@ -110,4 +194,8 @@ exports.addNewFarm = addNewFarm;
 exports.updateFarm = updateFarm;
 exports.getMyFarms = getMyFarms;
 exports.deleteFarm = deleteFarm;
+exports.addNewAdminFarm = addNewAdminFarm;
+exports.updateAdminFarm = updateAdminFarm;
+exports.getAdminFarms = getAdminFarms;
+exports.deleteAdminFarm = deleteAdminFarm;
 exports.searchFarms = searchFarms;

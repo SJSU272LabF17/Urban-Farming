@@ -25,6 +25,22 @@ export class FarmService {
     return this.http.delete<T>(this.host+'/farms/'+id);
   }
 
+  addNewAdminFarm<T>(payload: any): Observable<T> {
+    return this.http.post<T>(this.host+'/adminfarms', JSON.stringify(payload));
+  }
+
+  updateAdminFarm<T>(payload: any, id: any): Observable<T> {
+    return this.http.put<T>(this.host+'/adminfarms/'+id, JSON.stringify(payload));
+  }
+
+  getAdminFarms<T>(): Observable<T> {
+    return this.http.get<T>(this.host+'/adminfarms');
+  }
+
+  deleteAdminFarm<T>(id: any): Observable<T> {
+    return this.http.delete<T>(this.host+'/adminfarms/'+id);
+  }
+
   searchFarms<T>(lat: number, lng: number): Observable<T> {
     return this.http.get<T>(this.host+'/farms?lat='+lat+'&lng='+lng);
   }

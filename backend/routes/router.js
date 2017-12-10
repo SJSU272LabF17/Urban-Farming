@@ -17,6 +17,10 @@ module.exports = function(router,passport) {
     router.delete('/farms/:id', isOwnerAuthenticated, farm.deleteFarm);
     router.get('/myfarms', isOwnerAuthenticated, farm.getMyFarms);
     router.get('/farms', farm.searchFarms);
+    router.post('/adminfarms', isAdminAuthenticated, farm.addNewAdminFarm);
+    router.get('/adminfarms', isAdminAuthenticated, farm.getAdminFarms);
+    router.put('/adminfarms/:id', isAdminAuthenticated, farm.updateAdminFarm);
+    router.delete('/adminfarms/:id', isAdminAuthenticated, farm.deleteAdminFarm);
 
     router.get('/profile', isAuthenticated, user.getProfile);
     router.put('/profile', isAuthenticated, user.updateProfile);
@@ -44,6 +48,14 @@ module.exports = function(router,passport) {
 			res.status(403).send();
 		}
 	}
+
+    function isAdminAuthenticated(req, res, next) {
+        if(req.session.passport && req.session.passport.user.id && req.session.passport.user.role === 'ADMIN') {
+            next();
+        } else {
+            res.status(403).send();
+        }
+    }
 
     function isOwnerAuthenticated(req, res, next) {
         if(req.session.passport && req.session.passport.user.id && req.session.passport.user.role === 'OWNER') {

@@ -116,3 +116,23 @@
   text-align: right;
   flex: none;
 }
+
+.contact-details ::ng-deep .modal {
+  width: 75%;
+  height: fit-content;
+}
+
+.contact-details ::ng-deep .modal .body {
+  padding: 60px !important;
+}
+
+.contact-details ::ng-deep .modal .body .form-body .section-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.contact-details ::ng-deep .modal .body .form-body a {
+  width: 100%;
+  float: left;
+}
