@@ -33,7 +33,7 @@ export class MyFeedComponent implements OnInit {
       contactViaEmail: true
     };
     this.feedData.photoFiles = [];
-    document.getElementById("fileUploads").value = "";
+    (<HTMLInputElement>document.getElementById("fileUploads")).value = "";
     this.modalService.open('feed-form');
   }
 
@@ -46,7 +46,7 @@ export class MyFeedComponent implements OnInit {
       photos: this.feeds[index].photos
     };
     this.feedData.photoFiles = [];
-    document.getElementById("fileUploads").value = "";
+    (<HTMLInputElement>document.getElementById("fileUploads")).value = "";
     this.modalService.open('feed-form');
   }
 

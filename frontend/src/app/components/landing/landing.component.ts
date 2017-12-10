@@ -11,7 +11,7 @@ export class LandingComponent implements OnInit {
 
   @ViewChild('content') private farmListings: ElementRef;
 
-  constructor(private authService:AuthService, private sharedService:SharedService) { }
+  constructor(public authService:AuthService, private sharedService:SharedService) { }
 
   ngOnInit() {
   }

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class FeedService {
 
-  private host: String = "http://localhost:3001/api/v1";
+  private host: String = environment.apiHost;
 
   constructor(private http: HttpClient) { }
 
@@ -14,9 +15,9 @@ export class FeedService {
     formData.append("content", payload.content);
     formData.append("contactViaPhone", payload.contactViaPhone);
     formData.append("contactViaEmail", payload.contactViaEmail);
-    Array.from(payload.photoFiles).forEach(function(file,index){
-      formData.append("file"+index,  file);
-    });
+    for(var i=0;i<payload.photoFiles.length;i++){
+      formData.append(payload.photoFiles[i].name,  payload.photoFiles[i]);
+    }
     return this.http.post(this.host+'/feeds', formData);
   }
 
@@ -26,9 +27,9 @@ export class FeedService {
     formData.append("contactViaPhone", payload.contactViaPhone);
     formData.append("contactViaEmail", payload.contactViaEmail);
     formData.append("photos", payload.photos);
-    Array.from(payload.photoFiles).forEach(function(file,index){
-      formData.append("file"+index,  file);
-    });
+    for(var i=0;i<payload.photoFiles.length;i++){
+      formData.append(payload.photoFiles[i].name,  payload.photoFiles[i]);
+    }
     return this.http.put(this.host+'/feeds/'+id, formData);
   }
 

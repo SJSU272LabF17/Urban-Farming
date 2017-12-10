@@ -28,7 +28,7 @@ export class ProposalComponent implements OnInit {
 
   newMessageText: string = '';
 
-  constructor(private router:Router, private route:ActivatedRoute, private modalService:ModalService, private userService:UserService, private proposalService:ProposalService, private authService:AuthService) { }
+  constructor(private router:Router, private route:ActivatedRoute, private modalService:ModalService, private userService:UserService, private proposalService:ProposalService, public authService:AuthService) { }
 
   ngOnInit() {
     this.getProposalDetails();
