@@ -41,6 +41,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { AdminComponent } from './components/landing/admin/admin.component';
 import { FeedComponent } from './components/feed/feed.component';
+import { MyFeedComponent } from './components/my-feed/my-feed.component';
+import { FeedService } from './services/feed.service';
 
 export function authServiceFactory(authService: AuthService): Function {
   return () => authService.checkSession();
@@ -64,7 +66,8 @@ export function authServiceFactory(authService: AuthService): Function {
     ProfileComponent,
     EditProfileComponent,
     AdminComponent,
-    FeedComponent
+    FeedComponent,
+    MyFeedComponent
   ],
   imports: [
     BrowserModule,
@@ -100,7 +103,8 @@ export function authServiceFactory(authService: AuthService): Function {
     FarmService,
     ProposalService,
     ForumService,
-    UserService
+    UserService,
+    FeedService
   ],
   bootstrap: [AppComponent]
 })

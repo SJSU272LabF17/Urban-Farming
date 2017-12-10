@@ -2,9 +2,20 @@
   padding: 80px 60px;
 }
 
-.my-farms-page .content-section .btn-container {
-  padding-bottom: 30px;
+.my-farms-page .content-section .page-title {
+  font-size: 28px;
+  line-height: 2;
   border-bottom: 3px solid #668226;
+}
+
+.my-farms-page .content-section .page-title p {
+  margin: 0px;
+  float: left;
+}
+
+.my-farms-page .content-section .page-title a {
+  float: right;
+  margin-top: 11px;
 }
 
 .my-farms-page .content-section .data-container .card {
@@ -77,6 +88,7 @@
 .farm-form ::ng-deep .modal .body .form-footer {
   text-align: right;
   flex: none;
+  padding: 0px 15px;
 }
 
 .delete-farm ::ng-deep .modal {

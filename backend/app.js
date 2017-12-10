@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var http = require('http');
 
+var upload = require('express-fileupload');
+
 var config = require('config');
 
 var passport = require('passport');
@@ -20,6 +22,8 @@ var mongo = require('./routes/mongo');
 var cors = require('cors');
 
 require('./routes/passport')(passport);
+
+app.use(upload());
 
 var router = express.Router();
 require('./routes/router')(router,passport);
@@ -37,8 +41,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser("CMPE272_urban_farming"));
 app.use(express.static(path.join(__dirname, 'public')));
 

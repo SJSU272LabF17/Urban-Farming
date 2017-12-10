@@ -73,6 +73,7 @@
 .farm-form ::ng-deep .modal .body .form-footer {
   text-align: right;
   flex: none;
+  padding: 0px 15px;
 }
 
 .delete-farm ::ng-deep .modal {

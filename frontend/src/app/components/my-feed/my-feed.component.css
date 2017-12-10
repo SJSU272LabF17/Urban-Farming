@@ -1,0 +1,124 @@
+.my-feeds-page .content-section {
+  padding: 80px 60px;
+}
+
+.my-feeds-page .content-section .page-title {
+  font-size: 28px;
+  line-height: 2;
+  border-bottom: 3px solid #668226;
+}
+
+.my-feeds-page .content-section .page-title p {
+  margin: 0px;
+  float: left;
+}
+
+.my-feeds-page .content-section .page-title a {
+  float: right;
+  margin-top: 11px;
+}
+
+.my-feeds-page .content-section .data-container .card {
+  background: #fff;
+  padding: 30px;
+  border-bottom: 1px solid #ccc;
+}
+
+.my-feeds-page .content-section .data-container .card .content p {
+  font-weight: bold;
+}
+
+.my-feeds-page .content-section .data-container .card .img-group {
+
+}
+
+.my-feeds-page .content-section .data-container .card .img-group img {
+  max-width: 150px;
+  float: left;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.my-feeds-page .content-section .data-container .card:last-child {
+  margin-bottom: 0px;
+}
+
+.feed-form ::ng-deep .modal {
+  width: 75%;
+  min-width: 767px;
+}
+
+.feed-form ::ng-deep .modal .body {
+  padding: 60px 60px 30px 60px !important;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.feed-form ::ng-deep .modal .body .close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #7b7b7b;
+  cursor: pointer;
+}
+
+.feed-form ::ng-deep .modal .body .form-body {
+  margin-bottom: 60px;
+  flex: 1;
+  overflow-y: auto;
+  padding: 0px 15px;
+}
+
+.feed-form ::ng-deep .modal .body .form-body .section-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.feed-form ::ng-deep .modal .body .form-body agm-map {
+  height: 300px;
+}
+
+.feed-form ::ng-deep .modal .body .form-body .checkbox-group {
+
+}
+
+.feed-form ::ng-deep .modal .body .form-body .checkbox-group label {
+  margin-right: 10px;
+  font-weight: normal;
+}
+
+.feed-form ::ng-deep .modal .body .form-body .checkbox-group label input[type=checkbox] {
+  margin-right: 5px;
+}
+
+.feed-form ::ng-deep .modal .body .form-footer {
+  text-align: right;
+  flex: none;
+  padding: 0px 15px;
+}
+
+.delete-feed ::ng-deep .modal {
+  width: 50%;
+  height: fit-content;
+}
+
+.delete-feed ::ng-deep .modal .body {
+  padding: 60px 60px 30px 60px !important;
+}
+
+.delete-feed ::ng-deep .modal .body .close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #7b7b7b;
+  cursor: pointer;
+}
+
+.delete-feed ::ng-deep .modal .body .form-body {
+
+}
+
+.delete-feed ::ng-deep .modal .body .form-footer {
+  text-align: right;
+}

@@ -25,8 +25,6 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
-  pad(n){return n<10 ? '0'+n : n}
-
   updateProfile(): void {
     //TODO: validations
     this.userService.updateProfile(this.userData).subscribe((data: any) => {
@@ -34,6 +32,10 @@ export class EditProfileComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+
+  onFileUpload(e: any): void {
+    this.userData.photoFile = e.target.files[0];
   }
 
 }

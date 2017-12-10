@@ -1,0 +1,43 @@
+.feeds-page .content-section {
+  padding: 80px 60px;
+}
+
+.feeds-page .content-section .page-title {
+  font-size: 28px;
+  line-height: 2;
+  border-bottom: 3px solid #668226;
+}
+
+.feeds-page .content-section .page-title p {
+  margin: 0px;
+}
+
+.feeds-page .content-section .data-container .card {
+  background: #fff;
+  padding: 30px;
+  border-bottom: 1px solid #ccc;
+}
+
+.feeds-page .content-section .data-container .card:last-child {
+  margin-bottom: 0px;
+}
+
+.feeds-page .content-section .data-container .card .content p {
+  font-weight: bold;
+}
+
+.feeds-page .content-section .data-container .card .img-group {
+
+}
+
+.feeds-page .content-section .data-container .card .img-group img {
+  max-width: 150px;
+  float: left;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.feeds-page .content-section .data-container .card .timestamp {
+  font-weight: lighter;
+  font-size: 12px;
+}

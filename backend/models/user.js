@@ -19,6 +19,7 @@ var userSchema = new mongoose.Schema({
     occupation: String,
     education: String,
     pastExperience: String,
+    photo: String,
     createdDate: Date,
     updatedDate: Date
 });

@@ -18,7 +18,21 @@ export class UserService {
   }
 
   updateProfile(payload: any): any {
-    return this.http.put(this.host+'/profile', JSON.stringify(payload));
+    var formData = new FormData();
+    formData.append("firstName", payload.firstName);
+    formData.append("lastName", payload.lastName);
+    formData.append("streetAddress", payload.streetAddress);
+    formData.append("city", payload.city);
+    formData.append("state", payload.state);
+    formData.append("zipCode", payload.zipCode);
+    formData.append("phoneNumber", payload.phoneNumber);
+    formData.append("ssn", payload.ssn);
+    formData.append("occupation", payload.occupation);
+    formData.append("education", payload.education);
+    formData.append("pastExperience", payload.pastExperience);
+    formData.append("dateOfBirth", payload.dateOfBirth);
+    formData.append("file",  payload.photoFile);
+    return this.http.put(this.host+'/profile', formData);
   }
 
 }

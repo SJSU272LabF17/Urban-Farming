@@ -19,7 +19,7 @@ export class CustomInterceptor implements HttpInterceptor {
     req = req.clone({withCredentials: true});
     req = req.clone({ headers: req.headers.set('credentials', 'include') });
     if (!req.headers.has('Content-Type')) {
-      req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
+      //req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
     }
     req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
     return next.handle(req).catch((error, caught) => {

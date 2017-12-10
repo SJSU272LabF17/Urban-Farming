@@ -8,7 +8,9 @@
     <div class="data-container">
       <div class="row">
         <div class="col-xs-12 col-sm-3 col-md-4">
-          <img src="assets/user.png" class="img-circle img-responsive usr-img">
+          <img *ngIf="userData.photo === undefined || userData.photo === null" src="assets/user.png" class="img-circle img-responsive usr-img">
+          <img *ngIf="userData.photo !== undefined && userData.photo !== null" src="{{userData.photo}}" class="img-circle img-responsive usr-img">
+          <input type="file" class="form-control" (change)="onFileUpload($event)" accept="image/png, image/jpeg, image/gif">
         </div>
         <div class="col-xs-12 col-sm-9 col-md-8">
           <div class="section">

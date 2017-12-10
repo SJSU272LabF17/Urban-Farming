@@ -3,6 +3,7 @@ module.exports = function(router,passport) {
 
 	var auth = require('./auth')(passport);
     var farm = require('./farm');
+    var feed = require('./feed');
     var user = require('./user');
     var proposal = require('./proposal');
     var forum = require('./forum');
@@ -21,6 +22,12 @@ module.exports = function(router,passport) {
     router.get('/adminfarms', isAdminAuthenticated, farm.getAdminFarms);
     router.put('/adminfarms/:id', isAdminAuthenticated, farm.updateAdminFarm);
     router.delete('/adminfarms/:id', isAdminAuthenticated, farm.deleteAdminFarm);
+
+    router.post('/feeds', isFarmerAuthenticated, feed.addNewFeed);
+    router.put('/feeds/:id', isFarmerAuthenticated, feed.updateFeed);
+    router.delete('/feeds/:id', isFarmerAuthenticated, feed.deleteFeed);
+    router.get('/myfeeds', isFarmerAuthenticated, feed.getMyFeeds);
+    router.get('/feeds', feed.searchFeeds);
 
     router.get('/profile', isAuthenticated, user.getProfile);
     router.put('/profile', isAuthenticated, user.updateProfile);

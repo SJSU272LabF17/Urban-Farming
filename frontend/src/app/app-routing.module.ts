@@ -15,10 +15,12 @@ import {ForumDetailsComponent} from "./components/forum-details/forum-details.co
 import {ProfileComponent} from "./components/profile/profile.component";
 import {EditProfileComponent} from "./components/edit-profile/edit-profile.component";
 import {FeedComponent} from "./components/feed/feed.component";
+import {MyFeedComponent} from "./components/my-feed/my-feed.component";
 
 const appRoutes: Routes = [
   { path: '', component: LandingComponent, pathMatch: 'full' },
   { path: 'my-farms', component: MyFarmsComponent, canActivate: [AuthGuard], data: { role: ['OWNER'] } },
+  { path: 'my-feed', component: MyFeedComponent, canActivate: [AuthGuard], data: { role: ['FARMER'] } },
   { path: 'my-proposals', component: MyProposalsComponent, canActivate: [AuthGuard], data: { role: ['FARMER'] } },
   { path: 'proposal/:id', component: ProposalComponent, canActivate: [AuthGuard], data: { role: ['FARMER','OWNER'] } },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { role: ['FARMER','OWNER'] } },

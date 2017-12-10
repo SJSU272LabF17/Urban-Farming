@@ -31,7 +31,7 @@ module.exports = function(passport) {
                                     if(result) {
                                         res.code = 200;
                                         res.message = "Success";
-                                        res.data = {id:user._id,uname:user.firstName+" "+user.lastName,role:user.role};
+                                        res.data = {id:user._id,uname:user.firstName+" "+user.lastName,role:user.role,photo:user.photo};
                                     } else {
                                         res.code = 401;
                                         res.message = "Invalid password";

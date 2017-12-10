@@ -1,5 +1,7 @@
 var User = require('../models/user');
 
+var s3 = require('./s3');
+
 function getProfile(req,res){
     User.findById(req.session.passport.user.id,{
         _id:false,
@@ -22,27 +24,46 @@ function updateProfile(req,res){
     var updateObj = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        streetAddress : req.body.streetAddress,
-        city : req.body.city,
-        state : req.body.state,
-        zipCode : req.body.zipCode,
-        phoneNumber : req.body.phoneNumber,
-        ssn: req.body.ssn,
-        occupation: req.body.occupation,
-        education: req.body.education,
-        pastExperience: req.body.pastExperience,
-        dateOfBirth: req.body.dateOfBirth,
+        streetAddress : req.body.streetAddress === 'null' || req.body.streetAddress === 'undefined' ? null:req.body.streetAddress,
+        city : req.body.city === 'null' || req.body.city === 'undefined' ? null:req.body.city,
+        state : req.body.state === 'null' || req.body.state === 'undefined' ? null:req.body.state,
+        zipCode : req.body.zipCode === 'null' || req.body.zipCode === 'undefined' ? null:req.body.zipCode,
+        phoneNumber : req.body.phoneNumber === 'null' || req.body.phoneNumber === 'undefined' ? null:req.body.phoneNumber,
+        ssn: req.body.ssn === 'null' || req.body.ssn === 'undefined' ? null:req.body.ssn,
+        occupation: req.body.occupation === 'null' || req.body.occupation === 'undefined' ? null:req.body.occupation,
+        education: req.body.education === 'null' || req.body.education === 'undefined' ? null:req.body.education,
+        pastExperience: req.body.pastExperience === 'null' || req.body.pastExperience === 'undefined' ? null:req.body.pastExperience,
+        dateOfBirth: req.body.dateOfBirth === 'null' || req.body.dateOfBirth === 'undefined' ?  null:req.body.dateOfBirth,
         updatedDate : new Date()
     }
-    User.update({
-        _id: req.session.passport.user.id
-    }, updateObj, function(err, result){
-        if (err) {
-            return res.status(500).json({status: 500, statusText: err.message});
-        } else {
-            return res.status(200).json({status: 200, statusText: "Success"});
-        }
-    });
+    if(req.files === null) {
+        User.update({
+            _id: req.session.passport.user.id
+        }, updateObj, function (err, result) {
+            if (err) {
+                return res.status(500).json({status: 500, statusText: err.message});
+            } else {
+                return res.status(200).json({status: 200, statusText: "Success"});
+            }
+        });
+    } else {
+        s3.upload(req.files, function(err, result) {
+            if(err) {
+                return res.status(500).json({status: 500, statusText: "Failed to upload images to S3 storage"});
+            } else {
+                updateObj.photo = result[0];
+                User.update({
+                    _id: req.session.passport.user.id
+                }, updateObj, function (err, result) {
+                    if (err) {
+                        return res.status(500).json({status: 500, statusText: err.message});
+                    } else {
+                        return res.status(200).json({status: 200, statusText: "Success"});
+                    }
+                });
+            }
+        });
+    }
 }
 
 function searchFarmers(req,res){

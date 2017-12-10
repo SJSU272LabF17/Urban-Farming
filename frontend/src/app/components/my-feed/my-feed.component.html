@@ -1,0 +1,83 @@
+<div class="my-feeds-page">
+  <div class="content-section">
+    <div class="page-title">
+      <p>My Feeds</p>
+      <a href="javascript:void(0)" (click)="openAddNewFeed()" class="btn btn-primary btn-uf">Add new</a>
+      <div class="clearfix"></div>
+    </div>
+    <div class="data-container">
+      <div *ngIf="feeds.length > 0" >
+        <div class="card" *ngFor="let f of feeds; let i = index">
+          <div class="row">
+            <div class="col-xs-12 content">
+              <p>
+                {{f.content}}
+              </p>
+            </div>
+            <div class="col-xs-12 img-group">
+              <img *ngFor="let p of f.photos" src="{{p}}">
+            </div>
+            <div class="col-xs-12">
+              <p>
+                Contact via phone:
+                <i *ngIf="f.contactViaPhone" class="fa fa-check" aria-hidden="true"></i>
+                <i *ngIf="!f.contactViaPhone" class="fa fa-close" aria-hidden="true"></i>
+              </p>
+              <p>
+                Contact via email:
+                <i *ngIf="f.contactViaEmail" class="fa fa-check" aria-hidden="true"></i>
+                <i *ngIf="!f.contactViaEmail" class="fa fa-close" aria-hidden="true"></i>
+              </p>
+            </div>
+          </div>
+          <div class="action-info">
+            <button class="btn btn-primary btn-uf" (click)="openEditFeed(i)">Edit</button>
+            <button class="btn btn-uf btn-default btn-uf-default" (click)="openDeleteFeed(i)">Delete</button>
+          </div>
+        </div>
+      </div>
+      <p *ngIf="feeds.length === 0" class="empty-message">You don't have any feeds</p>
+    </div>
+  </div>
+</div>
+
+<app-modal [blocking]='true' modalId="feed-form" class="feed-form">
+  <span class="close-button" (click)="closeFeedForm()"><i class="fa fa-times" aria-hidden="true"></i></span>
+  <div class="form-body">
+    <div class="row">
+      <div class=" col-xs-12 form-group">
+        <label>Content</label>
+        <textarea class="form-control" rows="3" [(ngModel)]="feedData.content"></textarea>
+      </div>
+      <div class=" col-xs-12 form-group">
+        <input type="file" class="form-control" (change)="onFileUpload($event)" id="fileUploads" multiple accept="image/png, image/jpeg, image/gif">
+      </div>
+      <div *ngIf="feedData._id !== null" class="col-xs-12 form-group">
+        <p *ngFor="let p of feedData.photos; let i = index">
+          {{p}}
+          <a href="javascrip:void(0)" (click)="removeImage(i)"><i class="fa fa-close" aria-hidden="true"></i></a>
+        </p>
+      </div>
+      <div class="col-xs-6 checkbox-group">
+        <label><input type="checkbox" name="contactViaPhone" [(ngModel)]="feedData.contactViaPhone">Contact via phone</label>
+        <label><input type="checkbox" name="contactViaEmail" [(ngModel)]="feedData.contactViaEmail">Contact via email</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-footer">
+    <button class="btn btn-default btn-uf btn-uf-default" (click)="closeFeedForm()">Cancel</button>
+    <button class="btn btn-primary btn-uf" (click)="saveFeed()">Save</button>
+  </div>
+</app-modal>
+
+
+<app-modal [blocking]='true' modalId="delete-feed" class="delete-feed">
+  <span class="close-button" (click)="closeDeleteFeed()"><i class="fa fa-times" aria-hidden="true"></i></span>
+  <div class="form-body">
+    <p>Are you sure, you want to delete this feed?</p>
+  </div>
+  <div class="form-footer">
+    <button class="btn btn-default btn-uf btn-uf-default" (click)="closeDeleteFeed()">No</button>
+    <button class="btn btn-primary btn-uf" (click)="deleteFeed()">Yes</button>
+  </div>
+</app-modal>

@@ -11,6 +11,7 @@ export class AuthService {
   public role: String = "";
   public uname: String = "";
   public uid: String = "";
+  public photo: String;
   private host: String = "http://localhost:3001/api/v1";
 
   constructor(private http: HttpClient) { }
@@ -20,18 +21,19 @@ export class AuthService {
     this.uname = "";
     this.role = "";
     this.uid = "";
+    this.photo = null;
   }
 
   signin<T>(payload: any): Observable<T> {
-    return this.http.post<T>(this.host+'/signin', JSON.stringify(payload));
+    return this.http.post<T>(this.host+'/signin', JSON.stringify(payload),{ headers: {'Content-Type' : 'application/json'} });
   }
 
   signup<T>(payload: any): Observable<T> {
-    return this.http.post<T>(this.host+'/signup', JSON.stringify(payload));
+    return this.http.post<T>(this.host+'/signup', JSON.stringify(payload),{ headers: {'Content-Type' : 'application/json'} });
   }
 
   logout<T>(): Observable<T> {
-    return this.http.post<T>(this.host+'/logout', null);
+    return this.http.post<T>(this.host+'/logout', null,{ headers: {'Content-Type' : 'application/json'} });
   }
 
   checkSession(): Promise<any> {
@@ -44,12 +46,14 @@ export class AuthService {
         this.uname = data.data.uname;
         this.role = data.data.role;
         this.uid = data.data.uid;
+        this.photo = data.data.photo;
       })
       .catch((err: any) => {
         this.isLogged = false;
         this.uname = "";
         this.role = "";
         this.uid = "";
+        this.photo = null;
         Promise.resolve();
       });
   }

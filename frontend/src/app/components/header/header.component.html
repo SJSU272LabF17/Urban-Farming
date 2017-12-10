@@ -40,11 +40,13 @@
       </a>
       <div *ngIf="authService.isLogged" class="dropdown" dropdown>
         <a class="usr-container dropdown-toggle" dropdownToggle>
-          <img src="assets/user.png" class="img-circle img-responsive usr-img">
+          <img *ngIf="authService.photo === undefined || authService.photo === null" src="assets/user.png" class="img-circle img-responsive usr-img">
+          <img *ngIf="authService.photo !== undefined && authService.photo !== null" src="{{authService.photo}}" class="img-circle img-responsive usr-img">
           <span>{{authService.uname}}</span>
         </a>
         <ul class="dropdown-menu" dropdownMenu>
           <li *ngIf="authService.role !== 'ADMIN'"><a routerLink="profile">Profile</a></li>
+          <li *ngIf="authService.role === 'FARMER'"><a routerLink="my-feed">My feeds</a></li>
           <li>
             <a (click)="logout()">Logout</a>
           </li>

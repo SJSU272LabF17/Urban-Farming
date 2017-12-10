@@ -10,11 +10,11 @@ export class FarmService {
   constructor(private http: HttpClient) { }
 
   addNewFarm<T>(payload: any): Observable<T> {
-    return this.http.post<T>(this.host+'/farms', JSON.stringify(payload));
+    return this.http.post<T>(this.host+'/farms', JSON.stringify(payload),{ headers: {'Content-Type' : 'application/json'} });
   }
 
   updateFarm<T>(payload: any, id: any): Observable<T> {
-    return this.http.put<T>(this.host+'/farms/'+id, JSON.stringify(payload));
+    return this.http.put<T>(this.host+'/farms/'+id, JSON.stringify(payload),{ headers: {'Content-Type' : 'application/json'} });
   }
 
   getMyFarms<T>(): Observable<T> {
@@ -26,11 +26,11 @@ export class FarmService {
   }
 
   addNewAdminFarm<T>(payload: any): Observable<T> {
-    return this.http.post<T>(this.host+'/adminfarms', JSON.stringify(payload));
+    return this.http.post<T>(this.host+'/adminfarms', JSON.stringify(payload),{ headers: {'Content-Type' : 'application/json'} });
   }
 
   updateAdminFarm<T>(payload: any, id: any): Observable<T> {
-    return this.http.put<T>(this.host+'/adminfarms/'+id, JSON.stringify(payload));
+    return this.http.put<T>(this.host+'/adminfarms/'+id, JSON.stringify(payload),{ headers: {'Content-Type' : 'application/json'} });
   }
 
   getAdminFarms<T>(): Observable<T> {

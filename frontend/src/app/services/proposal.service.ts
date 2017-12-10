@@ -10,11 +10,11 @@ export class ProposalService {
   constructor(private http: HttpClient) { }
 
   createProposal<T>(payload: any): Observable<T> {
-    return this.http.post<T>(this.host+'/proposals', JSON.stringify(payload));
+    return this.http.post<T>(this.host+'/proposals', JSON.stringify(payload),{ headers: {'Content-Type' : 'application/json'} });
   }
 
   updateProposal<T>(payload: any, id: any): Observable<T> {
-    return this.http.put<T>(this.host+'/proposals/'+id, JSON.stringify(payload));
+    return this.http.put<T>(this.host+'/proposals/'+id, JSON.stringify(payload),{ headers: {'Content-Type' : 'application/json'} });
   }
 
   getMyProposals<T>(): Observable<T> {
@@ -34,11 +34,11 @@ export class ProposalService {
   }
 
   takeAction<T>(payload: any, id: any): Observable<T> {
-    return this.http.post<T>(this.host+'/proposals/'+id+'/action', JSON.stringify(payload));
+    return this.http.post<T>(this.host+'/proposals/'+id+'/action', JSON.stringify(payload),{ headers: {'Content-Type' : 'application/json'} });
   }
 
   sendMessageToProposal<T>(payload: any, id: any): Observable<T> {
-    return this.http.post<T>(this.host+'/proposals/'+id+'/messages', JSON.stringify(payload));
+    return this.http.post<T>(this.host+'/proposals/'+id+'/messages', JSON.stringify(payload),{ headers: {'Content-Type' : 'application/json'} });
   }
 
   getMessagesForProposals<T>(id: any): Observable<T> {

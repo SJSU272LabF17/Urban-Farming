@@ -1,3 +1,44 @@
-<p>
-  feed works!
-</p>
+<div class="feeds-page">
+  <div class="content-section">
+    <div class="page-title">
+      <p>Feeds</p>
+    </div>
+    <div class="data-container">
+      <div *ngIf="feeds.length > 0" >
+        <div class="card" *ngFor="let f of feeds; let i = index">
+          <div class="row">
+            <div class="col-xs-12 content">
+              <p>
+                {{f.content}}
+              </p>
+            </div>
+            <div class="col-xs-12 img-group">
+              <img *ngFor="let p of f.photos" src="{{p}}">
+            </div>
+            <div class="col-xs-12">
+              <p>
+                Feed by:
+                {{f.createdBy.firstName}}
+                {{f.createdBy.lastName}}
+              </p>
+              <p *ngIf="f.contactViaPhone">
+                Contact via phone:
+                {{f.createdBy.phoneNumber}}
+              </p>
+              <p *ngIf="f.contactViaEmail">
+                Contact via email:
+                {{f.createdBy.email}}
+              </p>
+            </div>
+            <div class="col-xs-12 timestamp">
+              <p>
+                {{f.createdDate | date: 'MM/dd/yyyy HH:mm:ss'}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p *ngIf="feeds.length === 0" class="empty-message">There are no feeds</p>
+    </div>
+  </div>
+</div>
