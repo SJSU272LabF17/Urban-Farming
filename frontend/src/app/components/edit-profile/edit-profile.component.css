@@ -1,0 +1,39 @@
+.edit-profile-page .content-section {
+  padding: 80px 60px;
+}
+
+.edit-profile-page .content-section .page-title {
+  font-size: 28px;
+  line-height: 2;
+  border-bottom: 3px solid #668226;
+}
+
+.edit-profile-page .content-section .page-title p {
+  margin: 0px;
+  float: left;
+}
+
+.edit-profile-page .content-section .page-title a {
+  float: right;
+  margin-top: 11px;
+}
+
+.edit-profile-page .content-section .data-container {
+
+}
+
+.edit-profile-page .content-section .data-container .usr-img {
+  width: 200px;
+  margin: 50px auto;
+}
+
+.edit-profile-page .content-section .data-container .section {
+  margin-top: 30px;
+  border-bottom: 1px solid #ccc;
+}
+
+.edit-profile-page .content-section .data-container .section .section-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 15px 0px;
+}

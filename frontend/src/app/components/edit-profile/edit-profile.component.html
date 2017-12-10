@@ -1,0 +1,85 @@
+<div class="edit-profile-page">
+  <div class="content-section">
+    <div class="page-title">
+      <p>Profile</p>
+      <a href="javascript:void(0)" (click)="updateProfile()" class="btn btn-primary btn-uf">Save</a>
+      <div class="clearfix"></div>
+    </div>
+    <div class="data-container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-3 col-md-4">
+          <img src="assets/user.png" class="img-circle img-responsive usr-img">
+        </div>
+        <div class="col-xs-12 col-sm-9 col-md-8">
+          <div class="section">
+            <p class="section-title">Personal details</p>
+            <div class="row">
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>First name</label>
+                <input type="text" class="form-control" [(ngModel)]="userData.firstName">
+              </div>
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>Last name</label>
+                <input type="text" class="form-control" [(ngModel)]="userData.lastName">
+              </div>
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>Date of birth</label>
+                <input type="date" class="form-control" [(ngModel)]="userData.dateOfBirth">
+              </div>
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>SSN</label>
+                <input type="text" class="form-control" [(ngModel)]="userData.ssn">
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <p class="section-title">Contact details</p>
+            <div class="row">
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>Street address</label>
+                <input type="text" class="form-control" [(ngModel)]="userData.streetAddress">
+              </div>
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>City</label>
+                <input type="text" class="form-control" [(ngModel)]="userData.city">
+              </div>
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>State</label>
+                <input type="text" class="form-control" [(ngModel)]="userData.state">
+              </div>
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>Zip code</label>
+                <input type="text" class="form-control" [(ngModel)]="userData.zipCode">
+              </div>
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>Phone number</label>
+                <input type="text" class="form-control" [(ngModel)]="userData.phoneNumber">
+              </div>
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>Email id</label>
+                <p>{{userData.email}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="section" *ngIf="authService.role === 'FARMER'">
+            <p class="section-title">Other details</p>
+            <div class="row">
+              <div class="col-xs-12 form-group">
+                <label>Education</label>
+                <textarea class="form-control" [(ngModel)]="userData.education" rows="3"></textarea>
+              </div>
+              <div class="col-xs-12 form-group">
+                <label>Occupation</label>
+                <textarea class="form-control" [(ngModel)]="userData.occupation" rows="3"></textarea>
+              </div>
+              <div class="col-xs-12 form-group">
+                <label>Past experience</label>
+                <textarea class="form-control" [(ngModel)]="userData.pastExperience" rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

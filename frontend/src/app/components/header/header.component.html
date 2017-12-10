@@ -31,13 +31,22 @@
       </ul>
     </div>
     <div class="menu-container">
-      <a *ngIf="!authService.isLogged" (click)="sharedService.openAuthModal()" >
-        <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
+      <a *ngIf="!authService.isLogged" (click)="sharedService.openAuthModal()" class="usr-container">
+        <img src="assets/user.png" class="img-circle img-responsive usr-img">
         <span>My account</span>
       </a>
-      <a *ngIf="authService.isLogged" (click)="logout()" >
-        <span>Logout</span>
-      </a>
+      <div *ngIf="authService.isLogged" class="dropdown" dropdown>
+        <a class="usr-container dropdown-toggle" dropdownToggle>
+          <img src="assets/user.png" class="img-circle img-responsive usr-img">
+          <span>{{authService.uname}}</span>
+        </a>
+        <ul class="dropdown-menu" dropdownMenu>
+          <li><a routerLink="profile">Profile</a></li>
+          <li>
+            <a (click)="logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

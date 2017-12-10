@@ -9,6 +9,7 @@ var userSchema = new mongoose.Schema({
     password: String,
     role: String,
     //
+    dateOfBirth: Date,
     ssn: String,
     streetAddress: String,
     city: String,

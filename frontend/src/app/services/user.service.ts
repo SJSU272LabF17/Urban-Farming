@@ -13,4 +13,12 @@ export class UserService {
     return this.http.get(this.host+'/farmers?q='+q);
   }
 
+  getProfile(): any {
+    return this.http.get(this.host+'/profile');
+  }
+
+  updateProfile(payload: any): any {
+    return this.http.put(this.host+'/profile', JSON.stringify(payload));
+  }
+
 }

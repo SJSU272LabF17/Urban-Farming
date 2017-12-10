@@ -31,6 +31,7 @@ function updateProfile(req,res){
         occupation: req.body.occupation,
         education: req.body.education,
         pastExperience: req.body.pastExperience,
+        dateOfBirth: req.body.dateOfBirth,
         updatedDate : new Date()
     }
     User.update({

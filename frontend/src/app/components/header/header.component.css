@@ -89,6 +89,32 @@
   outline: none;
   text-decoration: none;
   font-weight: bold;
+  line-height: 50px;
+}
+
+.header-wrapper .header-inner-wrapper .menu-container .usr-container {
+  float: left;
+}
+
+.header-wrapper .header-inner-wrapper .menu-container .usr-container.dropdown-toggle {
+  float: none;
+}
+
+.header-wrapper .header-inner-wrapper .menu-container .usr-container .usr-img {
+  height: 25px;
+  width: 25px;
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.header-wrapper .header-inner-wrapper .menu-container .usr-container span {
+  display: inline-block;
+}
+
+.header-wrapper .header-inner-wrapper .menu-container .dropdown-menu {
+  right: 0px;
+  left: auto;
+  text-align: right;
 }
 
 .header-wrapper .header-inner-wrapper .menu-container a:hover, .header-wrapper .menu-container a:focus {

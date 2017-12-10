@@ -1,0 +1,85 @@
+<div class="profile-page">
+  <div class="content-section">
+    <div class="page-title">
+      <p>Profile</p>
+      <a href="javascript:void(0)" (click)="router.navigate(['edit-profile'])" class="btn btn-primary btn-uf">Edit</a>
+      <div class="clearfix"></div>
+    </div>
+    <div class="data-container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-3 col-md-4">
+          <img src="assets/user.png" class="img-circle img-responsive usr-img">
+        </div>
+        <div class="col-xs-12 col-sm-9 col-md-8">
+          <div class="section">
+            <p class="section-title">Personal details</p>
+            <div class="row">
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>First name</label>
+                <p>{{userData.firstName}}</p>
+              </div>
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>Last name</label>
+                <p>{{userData.lastName}}</p>
+              </div>
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>Date of birth</label>
+                <p>{{userData.dateOfBirth}}</p>
+              </div>
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>SSN</label>
+                <p>{{userData.ssn}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <p class="section-title">Contact details</p>
+            <div class="row">
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>Street address</label>
+                <p>{{userData.streetAddress}}</p>
+              </div>
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>City</label>
+                <p>{{userData.city}}</p>
+              </div>
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>State</label>
+                <p>{{userData.state}}</p>
+              </div>
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>Zip code</label>
+                <p>{{userData.zipCode}}</p>
+              </div>
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>Phone number</label>
+                <p>{{userData.phoneNumber}}</p>
+              </div>
+              <div class="col-xs-12 col-sm-6 form-group">
+                <label>Email id</label>
+                <p>{{userData.email}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="section" *ngIf="authService.role === 'FARMER'">
+            <p class="section-title">Other details</p>
+            <div class="row">
+              <div class="col-xs-12 form-group">
+                <label>Education</label>
+                <p>{{userData.education}}</p>
+              </div>
+              <div class="col-xs-12 form-group">
+                <label>Occupation</label>
+                <p>{{userData.occupation}}</p>
+              </div>
+              <div class="col-xs-12 form-group">
+                <label>Past experience</label>
+                <p>{{userData.pastExperience}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

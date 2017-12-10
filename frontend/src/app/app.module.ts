@@ -8,6 +8,8 @@ import { AgmCoreModule } from '@agm/core';
 
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 
+import {DropdownModule} from "angular-custom-dropdown";
+
 import { ModalModule } from './modal/modal.module';
 
 import { AppComponent } from './app.component';
@@ -35,6 +37,8 @@ import { ForumService } from './services/forum.service';
 import { UserService } from './services/user.service';
 import { ForumsComponent } from './components/forums/forums.component';
 import { ForumDetailsComponent } from './components/forum-details/forum-details.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 export function authServiceFactory(authService: AuthService): Function {
   return () => authService.checkSession();
@@ -54,7 +58,9 @@ export function authServiceFactory(authService: AuthService): Function {
     MyProposalsComponent,
     ProposalComponent,
     ForumsComponent,
-    ForumDetailsComponent
+    ForumDetailsComponent,
+    ProfileComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +73,8 @@ export function authServiceFactory(authService: AuthService): Function {
       libraries: ["places"]
     }),
     ModalModule,
-    NguiAutoCompleteModule
+    NguiAutoCompleteModule,
+    DropdownModule
   ],
   providers: [
     AuthGuard,

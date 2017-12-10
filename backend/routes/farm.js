@@ -13,7 +13,8 @@ function addNewFarm(req, res){
     farmModel.appliedWaterConn = req.body.appliedWaterConn;
     farmModel.existingStructures = req.body.existingStructures;
     farmModel.owner = req.session.passport.user.id;
-    farmModel.status = 'ACTVIE';
+    farmModel.status = 'ACTIVE';
+    farmModel.type = 'OWNER';
     farmModel.isDeleted = false;
     var date = new Date();
     farmModel.createdDate = date;

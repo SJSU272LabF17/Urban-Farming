@@ -17,6 +17,7 @@ var farmSchema = new mongoose.Schema({
     appliedWaterConn : String,
     existingStructures : String,
     status: String, //ACTIVE-IN CONTRACT
+    type: String, //OWNER-ADMIN
     createdDate: Date,
     updatedDate: Date
 });
