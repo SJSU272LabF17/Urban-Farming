@@ -15,3 +15,28 @@
 .how-it-works-page .content-section .data-container {
 
 }
+
+.how-it-works-page .content-section .data-container .section {
+  margin-top: 30px;
+  border-bottom: 1px solid #ccc;
+}
+
+.how-it-works-page .content-section .data-container .section .section-title {
+
+}
+
+.how-it-works-page .content-section .data-container .btn-container {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.how-it-works-page .content-section .data-container .btn-container p {
+  font-size: 28px;
+  line-height: 2;
+}
+
+.how-it-works-page .content-section .data-container .btn-container .btn-uf {
+  font-size: 28px;
+  height: auto;
+  padding: 15px 60px;
+}

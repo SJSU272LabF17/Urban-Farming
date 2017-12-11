@@ -12,4 +12,8 @@ export class HowItWorksComponent implements OnInit {
   ngOnInit() {
   }
 
+  scrollToFarmListings(el): void {
+    el.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
 }

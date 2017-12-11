@@ -17,7 +17,7 @@
 }
 
 .header-wrapper .header-inner-wrapper .logo-container {
-  padding: 10px 0px;
+  padding: 5px 0px;
   float: left;
 }
 
@@ -29,7 +29,7 @@
 }
 
 .header-wrapper .header-inner-wrapper .logo-container a img {
-  height: 30px;
+  height: 40px;
 }
 
 .header-wrapper .header-inner-wrapper .nav-container {
