@@ -13,7 +13,6 @@ function addNewFeed(req, res){
     var date = new Date();
     feedModel.createdDate = date;
     feedModel.updatedDate = date;
-    console.log(req.files);
     if(req.files === null) {
         feedModel.save(function (err) {
             if (err) {
@@ -48,7 +47,6 @@ function updateFeed(req, res){
         photos:req.body.photos.length > 0 ? req.body.photos.split(',').length:[],
         updatedDate : new Date()
     }
-    console.log(req);
     if(req.files === null) {
         Feed.update({
             _id: req.params.id,

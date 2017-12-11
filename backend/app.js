@@ -29,10 +29,22 @@ var router = express.Router();
 require('./routes/router')(router,passport);
 
 var corsOptions = {
-    origin: 'http://localhost:4200',
+    origin: 'http://www.urbanfarmingnetwork.com',
     credentials: true
 }
-app.use(cors(corsOptions))
+
+var whitelist = ['http://localhost:4200', 'http://www.urbanfarmingnetwork.com', 'http://urbanfarmingnetwork.com'];
+var corsOptions = {
+    origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    },
+    credentials: true
+}
+app.use(cors(corsOptions));
 
 app.set('port', process.env.PORT || 3001);
 
