@@ -3,6 +3,7 @@ import {ForumService} from "../../services/forum.service";
 import {SharedService} from "../../services/shared.service";
 import {AuthService} from "../../services/auth.service";
 import {ActivatedRoute} from "@angular/router";
+import {AlertsService} from "@jaspero/ng2-alerts/dist";
 
 @Component({
   selector: 'app-forum-details',
@@ -16,7 +17,7 @@ export class ForumDetailsComponent implements OnInit {
 
   newMessageText: string = '';
 
-  constructor(private forumService:ForumService, private sharedService:SharedService, private authService:AuthService, private route:ActivatedRoute) { }
+  constructor(private forumService:ForumService, private sharedService:SharedService, private authService:AuthService, private route:ActivatedRoute, private _alert:AlertsService) { }
 
   ngOnInit() {
     this.getMessagesForForum();
@@ -27,7 +28,7 @@ export class ForumDetailsComponent implements OnInit {
       this.topicTitle = data.data.topicTitle;
       this.messages = data.data.messages;
     }, error => {
-      console.log(error);
+      this._alert.create('error', 'There was some error in fetching forum comments');
     })
   }
 
@@ -35,12 +36,11 @@ export class ForumDetailsComponent implements OnInit {
     if(this.authService.isLogged){
       if(this.newMessageText.length > 0) {
         this.forumService.sendMessageToForum({message: this.newMessageText}, this.route.snapshot.paramMap.get('id')).subscribe((data: any) => {
-          //TODO: show success notification
+          this._alert.create('success', 'Successfully posted the comment');
           this.newMessageText = "";
           this.getMessagesForForum();
         }, error => {
-          //TODO: show error notification
-          console.log(error);
+          this._alert.create('error', 'There was some error in posting the comment');
         });
       }
     } else {

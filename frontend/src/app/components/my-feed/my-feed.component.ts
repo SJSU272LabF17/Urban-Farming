@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ModalService} from "../../modal/modal.service";
 import {FeedService} from "../../services/feed.service";
+import {AlertsService} from "@jaspero/ng2-alerts/dist";
 
 @Component({
   selector: 'app-my-feed',
@@ -20,7 +21,7 @@ export class MyFeedComponent implements OnInit {
   deleteId: any;
   editId: any;
 
-  constructor(private modalService:ModalService, private feedService:FeedService) { }
+  constructor(private modalService:ModalService, private feedService:FeedService, private _alert:AlertsService) { }
 
   ngOnInit() {
     this.getMyFeeds();
@@ -59,29 +60,30 @@ export class MyFeedComponent implements OnInit {
     this.feedService.getMyFeeds().subscribe((data: any) => {
       this.feeds = data.data;
     }, error => {
-      console.log(error);
+      this._alert.create('error', 'There was some error in fetching your feeds');
     });
   }
 
   saveFeed() : void {
-    //TODO: validation
+    if(this.feedData.content.length === 0){
+      this._alert.create('warning', 'Content for the feed cannot be empty');
+      return;
+    }
     if(this.editId){
       this.feedService.updateFeed(this.feedData,this.editId).subscribe((data: any) => {
-        //TODO: show success notification
+        this._alert.create('success', 'Successfully updated feed details');
         this.getMyFeeds();
         this.modalService.close('feed-form');
       }, error => {
-        //TODO: show error notification
-        console.log(error);
+        this._alert.create('error', 'There was some error in updating feed');
       });
     } else {
       this.feedService.addNewFeed(this.feedData).subscribe((data: any) => {
-        //TODO: show success notification
+        this._alert.create('success', 'Successfully created new feed');
         this.getMyFeeds();
         this.modalService.close('feed-form');
       }, error => {
-        //TODO: show error notification
-        console.log(error);
+        this._alert.create('error', 'There was some error in creating new feed');
       });
     }
   }
@@ -99,12 +101,11 @@ export class MyFeedComponent implements OnInit {
   deleteFeed() : void {
     if(this.deleteId){
       this.feedService.deleteFeed(this.deleteId).subscribe((data: any) => {
-        //TODO: show success notification
+        this._alert.create('success', 'Successfully deleted the feed');
         this.getMyFeeds();
         this.modalService.close('delete-feed');
       }, error => {
-        //TODO: show error notification
-        console.log(error);
+        this._alert.create('error', 'There was some error in deleting the feed');
       });
     }
   }

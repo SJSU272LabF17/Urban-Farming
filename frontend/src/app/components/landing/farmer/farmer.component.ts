@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import {UserService} from "../../../services/user.service";
+import {AlertsService, AlertType} from "@jaspero/ng2-alerts/dist";
 
 declare var google: any;
 
@@ -51,7 +52,7 @@ export class FarmerComponent implements OnInit {
 
   selectedFarm: any = {location:[],owner:{}};
 
-  constructor(private router:Router, private modalService:ModalService, private authService:AuthService, private sharedService:SharedService, private farmService:FarmService, private proposalService:ProposalService, private userService:UserService, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone) { }
+  constructor(private router:Router, private modalService:ModalService, private authService:AuthService, private sharedService:SharedService, private farmService:FarmService, private proposalService:ProposalService, private userService:UserService, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone, private _alert: AlertsService) { }
 
   ngOnInit() {
     if(navigator.geolocation){
@@ -60,7 +61,7 @@ export class FarmerComponent implements OnInit {
         this.lng = position.coords.longitude;
         this.searchNearByFarms();
       }, error => {
-        console.log(error);
+        this._alert.create('info', 'Your current location could not be determined. We are showing you farms near San Jose');
       });
     }
 
@@ -92,7 +93,7 @@ export class FarmerComponent implements OnInit {
     this.farmService.searchFarms(this.lat,this.lng).subscribe((data: any) => {
       this.farms = data.data;
     }, error => {
-      console.log(error);
+      this._alert.create('error', 'There was some error in fetching farms near you');
     })
   }
 
@@ -125,7 +126,6 @@ export class FarmerComponent implements OnInit {
       }
     } else {
       this.contactDetails = this.farms[index].ownerInfo;
-      console.log(this.contactDetails);
       this.modalService.open('contact-details');
     }
   }
@@ -142,12 +142,15 @@ export class FarmerComponent implements OnInit {
     payload.farmOwner = this.selectedFarm.owner._id;
     payload.asDraft = asDraft;
     this.proposalService.createProposal(payload).subscribe((data: any) => {
-      //TODO: show success notification
+      if(asDraft) {
+        this._alert.create('success', 'New proposal created and saved as a draft');
+      } else {
+        this._alert.create('success', 'Congratulations! You have submitted the proposal to the farm owner');
+      }
       this.modalService.close('new-proposal');
       this.router.navigate(['/proposal',data.data._id]);
     }, error => {
-      //TODO: show error notification
-      console.log(error);
+      this._alert.create('error', 'There was some error in creating the proposal');
     });
   }
 

@@ -43,3 +43,19 @@
 .auth-modal ::ng-deep .modal .body .form-footer {
   text-align: center;
 }
+
+jaspero-alerts ::ng-deep {
+  z-index:1099 !important;
+}
+
+jaspero-alerts ::ng-deep jaspero-alert {
+  z-index: 1099 !important;
+}
+
+jaspero-alerts ::ng-deep jaspero-alert .jaspero__alert_overlay {
+  z-index: 1099 !important;
+}
+
+jaspero-alerts ::ng-deep jaspero-alert .jaspero__alert_wrapper {
+  z-index: 1100 !important;
+}

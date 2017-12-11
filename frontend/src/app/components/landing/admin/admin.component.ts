@@ -3,6 +3,7 @@ import {AgmMap} from "@agm/core";
 import {ModalService} from "../../../modal/modal.service";
 import {GoogleMapsService} from "../../../services/google-maps.service";
 import {FarmService} from "../../../services/farm.service";
+import {AlertSettings, AlertsService} from "@jaspero/ng2-alerts/dist";
 
 @Component({
   selector: 'app-admin',
@@ -45,7 +46,7 @@ export class AdminComponent implements OnInit {
   deleteId: any;
   editId: any;
 
-  constructor(private modalService:ModalService, private gMapsService:GoogleMapsService, private __zone: NgZone, private farmService:FarmService) { }
+  constructor(private modalService:ModalService, private gMapsService:GoogleMapsService, private __zone: NgZone, private farmService:FarmService, private _alert: AlertsService) { }
 
   ngOnInit() {
     this.getAdminFarms();
@@ -115,35 +116,47 @@ export class AdminComponent implements OnInit {
     this.farmService.getAdminFarms().subscribe((data: any) => {
       this.farms = data.data;
     }, error => {
-      console.log(error);
+      this._alert.create('error', 'There was some error in fetching farms');
     });
   }
 
   saveFarm() : void {
     if(this.currentCountry === 'US'){
-      //TODO: validation
+      if(this.farmData.streetAddress.length === 0 || this.farmData.city.length === 0 || this.farmData.state.length === 0 || this.farmData.zipCode.length === 0){
+        this._alert.create('warning', 'Select valid location');
+        return;
+      }
+      if(this.farmData.size.length === 0){
+        this._alert.create('warning', 'Size of the farm is required');
+        return;
+      }
+      if(isNaN(this.farmData.size)){
+        this._alert.create('warning', 'Size of the farm is invalid');
+        return;
+      }
+      if(parseInt(this.farmData.size) < 4356 || parseInt(this.farmData.size) < 43560){
+        this._alert.create('warning', 'Farm size cannot be less than 4356 sqft (0.1 acre) or more than 43560 sqft (1 acre)');
+        return;
+      }
       if(this.editId){
         this.farmService.updateAdminFarm(this.farmData,this.editId).subscribe((data: any) => {
-          //TODO: show success notification
+          this._alert.create('success', 'Successfully updated farm details');
           this.getAdminFarms();
           this.modalService.close('farm-form');
         }, error => {
-          //TODO: show error notification
-          console.log(error);
+          this._alert.create('error', 'There was some error in updating farm details');
         });
       } else {
         this.farmService.addNewAdminFarm(this.farmData).subscribe((data: any) => {
-          //TODO: show success notification
+          this._alert.create('success', 'Successfully created new farm');
           this.getAdminFarms();
           this.modalService.close('farm-form');
         }, error => {
-          //TODO: show error notification
-          console.log(error);
+          this._alert.create('error', 'There was some error in creating new farm');
         });
       }
     } else {
-      //TODO: show error
-      console.log("Not in USA");
+      this._alert.create('warning', 'Selected location should be in USA');
     }
   }
 
@@ -201,12 +214,11 @@ export class AdminComponent implements OnInit {
   deleteFarm() : void {
     if(this.deleteId){
       this.farmService.deleteAdminFarm(this.deleteId).subscribe((data: any) => {
-        //TODO: show success notification
+        this._alert.create('success', 'Successfully deleted the farm');
         this.getAdminFarms();
         this.modalService.close('delete-farm');
       }, error => {
-        //TODO: show error notification
-        console.log(error);
+        this._alert.create('error', 'There was some error in deleting the farm');
       });
     }
   }

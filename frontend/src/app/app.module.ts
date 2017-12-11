@@ -43,6 +43,8 @@ import { AdminComponent } from './components/landing/admin/admin.component';
 import { FeedComponent } from './components/feed/feed.component';
 import { MyFeedComponent } from './components/my-feed/my-feed.component';
 import { FeedService } from './services/feed.service';
+import {JasperoAlertsModule} from "@jaspero/ng2-alerts/dist";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 export function authServiceFactory(authService: AuthService): Function {
   return () => authService.checkSession();
@@ -81,7 +83,9 @@ export function authServiceFactory(authService: AuthService): Function {
     }),
     ModalModule,
     NguiAutoCompleteModule,
-    DropdownModule
+    DropdownModule,
+    BrowserAnimationsModule,
+    JasperoAlertsModule
   ],
   providers: [
     AuthGuard,

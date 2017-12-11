@@ -4,6 +4,7 @@ import {SharedService} from "../../services/shared.service";
 import {ModalService} from "../../modal/modal.service";
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
+import {AlertsService} from "@jaspero/ng2-alerts/dist";
 
 @Component({
   selector: 'app-forums',
@@ -16,7 +17,7 @@ export class ForumsComponent implements OnInit {
 
   newTopicText: string = '';
 
-  constructor(private forumService:ForumService, private sharedService:SharedService, private modalService:ModalService, private authService:AuthService, private router:Router) { }
+  constructor(private forumService:ForumService, private sharedService:SharedService, private modalService:ModalService, private authService:AuthService, private router:Router, private _alert:AlertsService) { }
 
   ngOnInit() {
     this.getAllForumTopics();
@@ -26,7 +27,7 @@ export class ForumsComponent implements OnInit {
     this.forumService.getAllForumTopics().subscribe((data: any) => {
       this.topics = data.data;
     }, error => {
-      console.log(error);
+      this._alert.create('error', 'There was some error in fetching topics');
     })
   }
 
@@ -45,10 +46,11 @@ export class ForumsComponent implements OnInit {
 
   createNewTopic(): void {
     this.forumService.createForumTopic({title:this.newTopicText}).subscribe((data: any) => {
+      this._alert.create('success', 'Successfully created new topic');
       this.modalService.close('new-topic');
       this.router.navigate(['/forums',data.data._id]);
     }, error => {
-      console.log(error);
+      this._alert.create('error', 'There was some error in creating new topic');
     })
   }
 

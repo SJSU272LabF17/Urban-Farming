@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
 import {Observable} from "rxjs/Observable";
 import {UserService} from "../../services/user.service";
+import {AlertsService} from "@jaspero/ng2-alerts/dist";
 
 @Component({
   selector: 'app-proposal',
@@ -28,7 +29,7 @@ export class ProposalComponent implements OnInit {
 
   newMessageText: string = '';
 
-  constructor(private router:Router, private route:ActivatedRoute, private modalService:ModalService, private userService:UserService, private proposalService:ProposalService, public authService:AuthService) { }
+  constructor(private router:Router, private route:ActivatedRoute, private modalService:ModalService, private userService:UserService, private proposalService:ProposalService, public authService:AuthService, private _alert: AlertsService) { }
 
   ngOnInit() {
     this.getProposalDetails();
@@ -39,7 +40,7 @@ export class ProposalComponent implements OnInit {
     this.proposalService.getProposalById(this.route.snapshot.paramMap.get('id')).subscribe((data: any) => {
       this.proposalData = data.data;
     }, error => {
-      console.log(error);
+      this._alert.create('error', 'There was some error in fetching the proposal details');
     });
   }
 
@@ -53,24 +54,25 @@ export class ProposalComponent implements OnInit {
 
   deleteProposal(): void {
     this.proposalService.deleteProposal(this.route.snapshot.paramMap.get('id')).subscribe((data: any) => {
-      //TODO: show success notification
+      this._alert.create('success', 'Successfully deleted the proposal');
       this.router.navigate(['/']);
     }, error => {
-      //TODO: show error notification
-      console.log(error);
+      this._alert.create('error', 'There was some error in deleting the proposal');
     });
   }
 
   saveProposal(asDraft: boolean): void {
-    //TODO: validation
     var payload = this.proposalData;
     payload.asDraft = asDraft;
     this.proposalService.updateProposal(payload,this.route.snapshot.paramMap.get('id')).subscribe((data: any) => {
-      //TODO: show success notification
+      if(asDraft){
+        this._alert.create('success', 'Proposal saved as a draft');
+      } else {
+        this._alert.create('success', 'Congratulations! You have submitted the proposal to the farm owner');
+      }
       this.getProposalDetails();
     }, error => {
-      //TODO: show error notification
-      console.log(error);
+      this._alert.create('error', 'There was some error in saving the proposal');
     });
   }
 
@@ -86,12 +88,15 @@ export class ProposalComponent implements OnInit {
 
   takeAction(): void {
     this.proposalService.takeAction({status:this.confirmStatus,farmId:this.proposalData.farm._id},this.route.snapshot.paramMap.get('id')).subscribe((data: any) => {
-      //TODO: show success notification
+      if(this.confirmStatus === 'ACCEPTED') {
+        this._alert.create('success', 'Congratulations! You have accepted this proposal');
+      } else {
+        this._alert.create('success', 'You have rejected this proposal');
+      }
       this.modalService.close('confirm-proposal');
       this.getProposalDetails();
     }, error => {
-      //TODO: show error notification
-      console.log(error);
+      this._alert.create('error', 'There was some error in performing the action');
     });
   }
 
@@ -106,13 +111,14 @@ export class ProposalComponent implements OnInit {
   sendMessage(): void {
     if(this.newMessageText.length > 0) {
       this.proposalService.sendMessageToProposal({message:this.newMessageText},this.route.snapshot.paramMap.get('id')).subscribe((data: any) => {
-        //TODO: show success notification
+        this._alert.create('success', 'Successfully posted the comment');
         this.newMessageText = "";
         this.getProposalMessages();
       }, error => {
-        //TODO: show error notification
-        console.log(error);
+        this._alert.create('error', 'There was some error in posting the comment');
       });
+    } else {
+      this._alert.create('warning', 'Comment text cannot be empty');
     }
   }
 
