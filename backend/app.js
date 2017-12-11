@@ -33,7 +33,7 @@ var corsOptions = {
     credentials: true
 }
 
-var whitelist = ['http://localhost:4200', 'http://www.urbanfarmingnetwork.com', 'http://urbanfarmingnetwork.com'];
+var whitelist = ['http://localhost:4200', 'https://www.urbanfarmingnetwork.com', 'https://urbanfarmingnetwork.com'];
 var corsOptions = {
     origin: function (origin, callback) {
         if (whitelist.indexOf(origin) !== -1) {
