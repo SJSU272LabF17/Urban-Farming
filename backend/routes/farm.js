@@ -174,7 +174,7 @@ function searchFarms(req, res){
         Farm.find({
             location: {
                 $near: coords,
-                $maxDistance: 100/6371 //in radians
+                $maxDistance: 5000/6371 //in radians
             },
             status:"ACTIVE",
             isDeleted:false
