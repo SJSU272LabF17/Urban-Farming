@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiHost: 'http://api.urabnfarmingnetwork.com/api/v1'
+  apiHost: 'http://api.urbanfarmingnetwork.com/api/v1'
 };
