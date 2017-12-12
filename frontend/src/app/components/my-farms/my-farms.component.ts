@@ -116,7 +116,7 @@ export class MyFarmsComponent implements OnInit {
         this._alert.create('warning', 'Size of the farm is invalid');
         return;
       }
-      if(parseInt(this.farmData.size) < 4356 || parseInt(this.farmData.size) < 43560){
+      if(parseInt(this.farmData.size) < 4356 || parseInt(this.farmData.size) > 43560){
         this._alert.create('warning', 'Farm size cannot be less than 4356 sqft (0.1 acre) or more than 43560 sqft (1 acre)');
         return;
       }
