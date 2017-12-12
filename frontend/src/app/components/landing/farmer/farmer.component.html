@@ -33,9 +33,9 @@
           </div>
         </div>
       </div>
-      <div class="general-info">
+      <div *ngIf="f.type === 'OWNER'" class="general-info">
         <div class="row">
-          <div class="col-xs-6" *ngIf="f.type === 'OWNER'">
+          <div class="col-xs-6">
             <label>Owner</label>
             <p>
               {{f.owner.firstName}}
@@ -56,9 +56,31 @@
           </div>
         </div>
       </div>
+        <div *ngIf="f.type === 'ADMIN'" class="general-info">
+          <div class="row">
+            <div class="col-xs-6">
+              <label>Contact name</label>
+              <p>
+                {{f.ownerInfo.ownerContactName}}
+              </p>
+            </div>
+            <div class="col-xs-6">
+              <label>Phone number</label>
+              <p>{{f.ownerInfo.ownerContactPhoneNumber}}</p>
+            </div>
+            <div class="col-xs-6">
+              <label>Email</label>
+              <p>{{f.ownerInfo.ownerContactEmail}}</p>
+            </div>
+            <div class="col-xs-6">
+              <label>Redirect URL</label>
+              <p>{{f.ownerInfo.redirectURL}}</p>
+            </div>
+          </div>
+        </div>
       <div class="action-info">
         <button *ngIf="f.type === 'OWNER'" class="btn btn-primary btn-uf" (click)="openSubmitProposal(i)">New proposal</button>
-        <button *ngIf="f.type === 'ADMIN'" class="btn btn-primary btn-uf" (click)="openSubmitProposal(i)">View contact details</button>
+        <!--<button *ngIf="f.type === 'ADMIN'" class="btn btn-primary btn-uf" (click)="openSubmitProposal(i)">View contact details</button>-->
       </div>
     </div>
     </div>
