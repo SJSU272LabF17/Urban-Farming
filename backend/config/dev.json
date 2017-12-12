@@ -1,8 +1,8 @@
 {
 	"dbUrl" : "mongodb://localhost:27017/urban_farming", // looks like mongodb://<user>:<pass>@mongo.onmodulus.net:27017/Mikha4ot
 	//AWS S3
-	"accessKeyId" : "",
-	"secretAccessKey" : "",
+	"accessKeyId" : "AKIAJV3WJ4QYOGBH2DVA",
+	"secretAccessKey" : "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",
 	"region" : "us-west-2",
 	"bucketName" : "urbanfarming-assets"
 }
