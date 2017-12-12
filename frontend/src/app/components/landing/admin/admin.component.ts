@@ -126,18 +126,18 @@ export class AdminComponent implements OnInit {
         this._alert.create('warning', 'Select valid location');
         return;
       }
-      if(this.farmData.size.length === 0){
-        this._alert.create('warning', 'Size of the farm is required');
-        return;
-      }
-      if(isNaN(this.farmData.size)){
-        this._alert.create('warning', 'Size of the farm is invalid');
-        return;
-      }
-      if(parseInt(this.farmData.size) < 4356 || parseInt(this.farmData.size) < 43560){
-        this._alert.create('warning', 'Farm size cannot be less than 4356 sqft (0.1 acre) or more than 43560 sqft (1 acre)');
-        return;
-      }
+      // if(this.farmData.size.length === 0){
+      //   this._alert.create('warning', 'Size of the farm is required');
+      //   return;
+      // }
+      // if(isNaN(this.farmData.size)){
+      //   this._alert.create('warning', 'Size of the farm is invalid');
+      //   return;
+      // }
+      // if(parseInt(this.farmData.size) < 4356 || parseInt(this.farmData.size) < 43560){
+      //   this._alert.create('warning', 'Farm size cannot be less than 4356 sqft (0.1 acre) or more than 43560 sqft (1 acre)');
+      //   return;
+      // }
       if(this.editId){
         this.farmService.updateAdminFarm(this.farmData,this.editId).subscribe((data: any) => {
           this._alert.create('success', 'Successfully updated farm details');

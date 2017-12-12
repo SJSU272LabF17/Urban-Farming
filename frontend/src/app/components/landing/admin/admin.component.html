@@ -112,39 +112,39 @@
       </div>
     </div>
     <hr>
-    <p class="section-title">Other information</p>
-    <div class="row form-group">
-      <label class="col-xs-6 control-label">Size of the farm in square feet</label>
-      <div class="col-xs-6">
-        <input type="text" class="form-control" [(ngModel)]="farmData.size">
-      </div>
-    </div>
-    <div class="row form-group">
-      <label class="col-xs-6 control-label">Does the farm have a metered water connection or approved alternative?</label>
-      <div class="col-xs-6 radio-buttons">
-        <label><input type="radio" value="YES" name="waterConn" [(ngModel)]="farmData.waterConn">Yes</label>
-        <label><input type="radio" value="NO" name="waterConn" [(ngModel)]="farmData.waterConn">No</label>
-      </div>
-    </div>
-    <div class="row form-group">
-      <label class="col-xs-6 control-label">If an alternative, please describe</label>
-      <div class="col-xs-6">
-        <input type="text" class="form-control" [(ngModel)]="farmData.waterAlternative">
-      </div>
-    </div>
-    <div class="row form-group">
-      <label class="col-xs-6 control-label">If no metered connection, have you applied for metered water service and paid the fee?</label>
-      <div class="col-xs-6 radio-buttons">
-        <label><input type="radio" value="YES" name="appliedWaterConn" [(ngModel)]="farmData.appliedWaterConn">Yes</label>
-        <label><input type="radio" value="NO" name="appliedWaterConn" [(ngModel)]="farmData.appliedWaterConn">No</label>
-      </div>
-    </div>
-    <div class="row form-group">
-      <label class="col-xs-6 control-label">Existing structures</label>
-      <div class="col-xs-6">
-        <textarea class="form-control" rows="3" [(ngModel)]="farmData.existingStructures"></textarea>
-      </div>
-    </div>
+    <!--<p class="section-title">Other information</p>-->
+    <!--<div class="row form-group">-->
+      <!--<label class="col-xs-6 control-label">Size of the farm in square feet</label>-->
+      <!--<div class="col-xs-6">-->
+        <!--<input type="text" class="form-control" [(ngModel)]="farmData.size">-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row form-group">-->
+      <!--<label class="col-xs-6 control-label">Does the farm have a metered water connection or approved alternative?</label>-->
+      <!--<div class="col-xs-6 radio-buttons">-->
+        <!--<label><input type="radio" value="YES" name="waterConn" [(ngModel)]="farmData.waterConn">Yes</label>-->
+        <!--<label><input type="radio" value="NO" name="waterConn" [(ngModel)]="farmData.waterConn">No</label>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row form-group">-->
+      <!--<label class="col-xs-6 control-label">If an alternative, please describe</label>-->
+      <!--<div class="col-xs-6">-->
+        <!--<input type="text" class="form-control" [(ngModel)]="farmData.waterAlternative">-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row form-group">-->
+      <!--<label class="col-xs-6 control-label">If no metered connection, have you applied for metered water service and paid the fee?</label>-->
+      <!--<div class="col-xs-6 radio-buttons">-->
+        <!--<label><input type="radio" value="YES" name="appliedWaterConn" [(ngModel)]="farmData.appliedWaterConn">Yes</label>-->
+        <!--<label><input type="radio" value="NO" name="appliedWaterConn" [(ngModel)]="farmData.appliedWaterConn">No</label>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row form-group">-->
+      <!--<label class="col-xs-6 control-label">Existing structures</label>-->
+      <!--<div class="col-xs-6">-->
+        <!--<textarea class="form-control" rows="3" [(ngModel)]="farmData.existingStructures"></textarea>-->
+      <!--</div>-->
+    <!--</div>-->
   </div>
   <div class="form-footer">
     <button class="btn btn-default btn-uf btn-uf-default" (click)="closeFarmForm()">Cancel</button>
