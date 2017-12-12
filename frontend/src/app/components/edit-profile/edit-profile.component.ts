@@ -35,7 +35,7 @@ export class EditProfileComponent implements OnInit {
       this._alert.create('warning', 'Last name is required');
       return;
     }
-    if(this.userData.phoneNumber === null){
+    if(!this.userData.phoneNumber || this.userData.phoneNumber === null){
       this._alert.create('warning', 'Phone number is required');
       return;
     }
@@ -43,7 +43,7 @@ export class EditProfileComponent implements OnInit {
       this._alert.create('warning', 'Phone number is invalid');
       return;
     }
-    if(this.userData.ssn === null){
+    if(!this.userData.ssn || this.userData.ssn === null){
       this._alert.create('warning', 'SSN is required');
       return;
     }
